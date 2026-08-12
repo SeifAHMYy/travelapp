@@ -8,37 +8,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;400;450;500;550;600;650;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f1f5f9;
+            --bg: #f8fafc;
+            --bg-white: #ffffff;
             --bg-surface: #ffffff;
-            --bg-surface-hover: #f8fafc;
+            --bg-surface-hover: #f1f5f9;
             --bg-elevated: #ffffff;
-            --bg-glass: rgba(255, 255, 255, 0.88);
-            --bg-glass-solid: #fafbfc;
-            --border: rgba(0, 0, 0, 0.07);
-            --border-subtle: rgba(0, 0, 0, 0.035);
-            --border-active: rgba(0, 0, 0, 0.12);
+            --bg-icon-surface: #e0f2f1;
+            --bg-icon-surface2: #e8f5f9;
+            --bg-highlight-card: #f0f7f6;
+            --border: rgba(0, 0, 0, 0.06);
+            --border-subtle: rgba(0, 0, 0, 0.04);
+            --border-active: rgba(0, 0, 0, 0.10);
             --text-primary: #0f172a;
-            --text-secondary: #475569;
+            --text-secondary: #334155;
             --text-muted: #94a3b8;
             --text-inverse: #ffffff;
             --accent: #0d9488;
-            --accent-light: #0f766e;
-            --accent-glow: rgba(13, 148, 136, 0.16);
+            --accent-light: #14b8a6;
+            --accent-pale: #e0f2f1;
             --accent-subtle: rgba(13, 148, 136, 0.06);
-            --accent-strong: rgba(13, 148, 136, 0.22);
+            --accent-glow: rgba(13, 148, 136, 0.14);
+            --accent-strong: rgba(13, 148, 136, 0.20);
             --danger: #e05858;
             --success: #0d9488;
             --info: #3b82f6;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.07);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.09);
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-2xl: 24px;
-            --blur: blur(28px);
-            --blur-light: blur(14px);
             --transition-fast: 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
             --font-xs: 0.7rem;
@@ -57,13 +61,16 @@
             --nav-height: 68px;
             --sidebar-width: 230px;
         }
+
         [data-theme="dark"] {
             --bg: #0f172a;
+            --bg-white: #1e293b;
             --bg-surface: #1e293b;
             --bg-surface-hover: #273449;
             --bg-elevated: #1e293b;
-            --bg-glass: rgba(15, 23, 42, 0.82);
-            --bg-glass-solid: #1a2332;
+            --bg-icon-surface: #1e3a3a;
+            --bg-icon-surface2: #1e3540;
+            --bg-highlight-card: #1a2a2e;
             --border: rgba(255, 255, 255, 0.08);
             --border-subtle: rgba(255, 255, 255, 0.04);
             --border-active: rgba(255, 255, 255, 0.13);
@@ -73,13 +80,18 @@
             --text-inverse: #0f172a;
             --accent: #2dd4bf;
             --accent-light: #5eead4;
-            --accent-glow: rgba(45, 212, 191, 0.18);
+            --accent-pale: #134e4a;
             --accent-subtle: rgba(45, 212, 191, 0.07);
-            --accent-strong: rgba(45, 212, 191, 0.25);
+            --accent-glow: rgba(45, 212, 191, 0.16);
+            --accent-strong: rgba(45, 212, 191, 0.22);
+            --navy: #f1f5f9;
+            --navy-light: #cbd5e1;
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
             --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.45);
             --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
         }
+
         *,
         *::before,
         *::after {
@@ -87,6 +99,7 @@
             margin: 0;
             padding: 0;
         }
+
         html {
             font-size: 16px;
             -webkit-font-smoothing: antialiased;
@@ -95,6 +108,7 @@
             background: var(--bg);
             color: var(--text-primary);
         }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
             background: var(--bg);
@@ -109,6 +123,7 @@
             user-select: none;
             transition: background var(--transition), color var(--transition);
         }
+
         ::selection {
             background: var(--accent);
             color: #fff;
@@ -134,12 +149,14 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
         #app {
             display: flex;
             min-height: 100vh;
             min-height: 100dvh;
             position: relative;
         }
+
         .main-content {
             flex: 1;
             margin-left: 0;
@@ -148,6 +165,7 @@
             min-height: 100vh;
             overflow-y: auto;
         }
+
         .sidebar {
             display: none;
             position: fixed;
@@ -155,9 +173,7 @@
             top: 0;
             bottom: 0;
             width: var(--sidebar-width);
-            background: var(--bg-glass);
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
+            background: var(--bg-white);
             border-right: 1px solid var(--border);
             z-index: 100;
             flex-direction: column;
@@ -165,6 +181,7 @@
             gap: 4px;
             transition: transform var(--transition), background var(--transition);
         }
+
         .sidebar-brand {
             display: flex;
             align-items: center;
@@ -230,7 +247,7 @@
         }
         .sidebar-nav a.active {
             background: var(--accent-subtle);
-            color: var(--accent-light);
+            color: var(--accent);
             font-weight: 550;
         }
         .sidebar-nav a.active i {
@@ -288,6 +305,7 @@
             font-size: 0.66rem;
             color: var(--text-muted);
         }
+
         .bottom-nav {
             display: flex;
             position: fixed;
@@ -295,15 +313,14 @@
             left: 0;
             right: 0;
             z-index: 100;
-            background: var(--bg-glass);
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            border-top: 1px solid var(--border);
+            background: #ffffff;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
             padding: 6px 8px calc(6px + var(--safe-bottom));
             justify-content: space-around;
             align-items: center;
             height: var(--nav-height);
             transition: all var(--transition);
+            box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.03);
         }
         .bottom-nav a {
             display: flex;
@@ -311,9 +328,9 @@
             align-items: center;
             gap: 3px;
             text-decoration: none;
-            color: var(--text-muted);
+            color: #94a3b8;
             font-size: 0.6rem;
-            font-weight: 450;
+            font-weight: 500;
             letter-spacing: 0.02em;
             padding: 4px 10px;
             border-radius: var(--radius-lg);
@@ -327,20 +344,23 @@
             transition: all var(--transition-fast);
         }
         .bottom-nav a.active {
-            color: var(--accent-light);
+            color: var(--accent);
         }
         .bottom-nav a.active i {
             color: var(--accent);
         }
-        .bottom-nav a.active::after {
-            content: '';
+        .bottom-nav-indicator {
             position: absolute;
-            top: -7px;
-            width: 16px;
-            height: 2px;
-            background: var(--accent);
-            border-radius: 0 0 2px 2px;
+            bottom: calc(var(--safe-bottom) + 2px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 5px;
+            background: #0f172a;
+            border-radius: 3px;
+            z-index: 101;
         }
+
         .page {
             display: none;
             animation: pageIn var(--transition) ease forwards;
@@ -358,6 +378,7 @@
                 transform: translateY(0);
             }
         }
+
         .page-content {
             max-width: 1120px;
             margin: 0 auto;
@@ -373,6 +394,7 @@
                 padding: 30px 36px 52px;
             }
         }
+
         .eyebrow {
             font-size: var(--font-xs);
             font-weight: 550;
@@ -412,6 +434,7 @@
             color: var(--text-muted);
             letter-spacing: 0.02em;
         }
+
         .btn {
             display: inline-flex;
             align-items: center;
@@ -463,10 +486,8 @@
             border-radius: var(--radius-sm);
         }
         .btn-bookmark {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: var(--blur-light);
-            -webkit-backdrop-filter: var(--blur-light);
-            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.10);
             color: #475569;
             border-radius: 50%;
             width: 36px;
@@ -478,6 +499,7 @@
             align-items: center;
             justify-content: center;
             font-size: 0.85rem;
+            box-shadow: var(--shadow-sm);
         }
         .btn-bookmark:hover {
             border-color: var(--accent);
@@ -504,6 +526,7 @@
             color: #0f172a;
             border-color: var(--accent);
         }
+
         .card {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -516,7 +539,7 @@
             border-color: var(--border-active);
             background: var(--bg-surface-hover);
             transform: translateY(-2px);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
         }
         .card-image {
             width: 100%;
@@ -553,6 +576,7 @@
             color: var(--text-secondary);
             margin-top: 2px;
         }
+
         .hero-destination {
             position: relative;
             border-radius: var(--radius-xl);
@@ -604,6 +628,7 @@
             margin-top: 4px;
             max-width: 420px;
         }
+
         .scroll-row {
             display: flex;
             gap: 14px;
@@ -622,6 +647,7 @@
         .scroll-card-sm {
             width: 150px;
         }
+
         .pill-row {
             display: flex;
             flex-wrap: wrap;
@@ -652,6 +678,7 @@
             border-color: var(--accent);
             font-weight: 500;
         }
+
         .search-bar {
             display: flex;
             align-items: center;
@@ -751,13 +778,12 @@
             color: var(--text-muted);
             font-weight: 550;
         }
+
         .modal-overlay {
             position: fixed;
             inset: 0;
             z-index: 200;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -848,6 +874,7 @@
             margin-bottom: 4px;
             text-transform: uppercase;
         }
+
         .toast-container {
             position: fixed;
             bottom: calc(var(--nav-height) + var(--safe-bottom) + 20px);
@@ -861,9 +888,8 @@
             align-items: center;
         }
         .toast {
-            background: var(--bg-elevated);
-            border: 1px solid var(--border-active);
-            color: var(--text-primary);
+            background: var(--navy);
+            color: #fff;
             padding: 11px 20px;
             border-radius: var(--radius-lg);
             font-size: var(--font-sm);
@@ -893,6 +919,7 @@
                 transform: translateY(-12px);
             }
         }
+
         .skeleton {
             background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-surface-hover) 50%, var(--bg-surface) 75%);
             background-size: 200% 100%;
@@ -907,6 +934,7 @@
                 background-position: 200% 0;
             }
         }
+
         .flex-between {
             display: flex;
             justify-content: space-between;
@@ -926,6 +954,9 @@
         .text-muted {
             color: var(--text-muted);
         }
+        .text-navy {
+            color: var(--navy);
+        }
         .mt-2 {
             margin-top: 8px;
         }
@@ -944,6 +975,7 @@
         .gap-3 {
             gap: 14px;
         }
+
         .flag-icon {
             width: 20px;
             height: 14px;
@@ -967,8 +999,12 @@
             object-fit: cover;
             flex-shrink: 0;
         }
+
         @media(min-width:769px) {
             .bottom-nav {
+                display: none;
+            }
+            .bottom-nav-indicator {
                 display: none;
             }
             .sidebar {
@@ -1014,6 +1050,7 @@
                 min-height: 220px;
             }
         }
+
         .post-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -1098,6 +1135,7 @@
         .post-action.saved-post {
             color: var(--accent);
         }
+
         .friend-card {
             display: flex;
             align-items: center;
@@ -1139,6 +1177,7 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
+
         .bl-country {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -1234,6 +1273,7 @@
         .bl-status-dot.custom {
             background: #8b5cf6;
         }
+
         .notif-item {
             display: flex;
             align-items: flex-start;
@@ -1269,67 +1309,375 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
-        .profile-header {
-            text-align: center;
-            padding: 20px 0;
+
+        .profile-hero {
+            position: relative;
+            width: 100%;
+            height: 260px;
+            overflow: hidden;
+        }
+        .profile-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .profile-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(to bottom, transparent, #ffffff);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .profile-hero .settings-gear {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 3;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #64748b;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+            box-shadow: var(--shadow-sm);
+        }
+        .profile-hero .settings-gear:hover {
+            background: #fff;
+            color: #334155;
+        }
+
+        .profile-avatar-section {
+            display: flex;
+            justify-content: center;
+            margin-top: -100px;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 4px;
+        }
+        .profile-avatar-wrapper {
+            position: relative;
+            display: inline-block;
         }
         .profile-avatar-lg {
-            width: 90px;
-            height: 90px;
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--border-active);
+            border: 6px solid #ffffff;
+            box-shadow: var(--shadow-md);
+            display: block;
+        }
+        .profile-avatar-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 4px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-identity {
+            text-align: center;
+            padding: 0 20px;
         }
         .profile-display-name {
-            font-size: var(--font-xl);
+            font-size: 1.6rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--navy);
             letter-spacing: var(--letter-spacing-tight);
-            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .profile-verified {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.6rem;
+            flex-shrink: 0;
         }
         .profile-username {
-            font-size: var(--font-sm);
+            font-size: 0.9rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
-        .profile-stats {
+        .profile-bio {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            line-height: 1.45;
+        }
+        .profile-location {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+        }
+        .profile-location i {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .profile-stats-row {
             display: flex;
             justify-content: center;
-            gap: 28px;
-            margin-top: 16px;
+            align-items: center;
+            gap: 0;
+            margin-top: 20px;
+            padding: 0 20px;
         }
-        .profile-stat {
+        .profile-stat-item {
+            flex: 1;
             text-align: center;
+            position: relative;
+            max-width: 110px;
+        }
+        .profile-stat-divider {
+            width: 1px;
+            height: 36px;
+            background: rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+        }
+        .profile-stat-icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-icon-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            color: var(--accent);
+            font-size: 1rem;
         }
         .profile-stat-num {
-            font-size: var(--font-lg);
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--navy);
+            letter-spacing: var(--letter-spacing-tight);
         }
         .profile-stat-label {
-            font-size: var(--font-xs);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-top: 1px;
+        }
+
+        .profile-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4px;
+            margin-bottom: 12px;
+        }
+        .profile-section-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+        .profile-section-link {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+        .profile-section-link:hover {
+            color: var(--accent-light);
+        }
+
+        .bl-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .bl-country-card {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+        .bl-country-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        .bl-country-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .bl-country-card:hover img {
+            transform: scale(1.04);
+        }
+        .bl-country-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.08) 55%, rgba(0, 0, 0, 0) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 14px;
+            pointer-events: none;
+        }
+        .bl-country-card-flag {
+            width: 22px;
+            height: 15px;
+            border-radius: 2px;
+            object-fit: cover;
+            margin-bottom: 4px;
+        }
+        .bl-country-card-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.1;
+        }
+        .bl-country-card-count {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 2px;
+        }
+        .bl-country-card-arrow {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-size: 0.75rem;
+            z-index: 2;
+            pointer-events: auto;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .bl-country-card-arrow:hover {
+            background: #fff;
+            color: var(--accent);
+        }
+
+        .highlights-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 4px 0 10px;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x proximity;
+        }
+        .highlights-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .highlight-card {
+            flex-shrink: 0;
+            width: 135px;
+            min-height: 170px;
+            background: var(--bg-highlight-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .highlight-card:hover {
+            border-color: var(--border-active);
+            box-shadow: var(--shadow);
+            transform: translateY(-1px);
+        }
+        .highlight-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-icon-surface2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+        .highlight-card-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1;
+        }
+        .highlight-card-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+        }
+        .highlight-card-sub {
+            font-size: 0.65rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.04em;
         }
-        .swipe-container {
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            display: flex;
-            gap: 0;
+
+        .profile-content-wrapper {
+            background: #ffffff;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            position: relative;
+            z-index: 2;
+            margin-top: -16px;
+            padding: 0 16px 30px;
         }
-        .swipe-container::-webkit-scrollbar {
-            display: none;
+        @media(min-width:769px) {
+            .profile-content-wrapper {
+                border-radius: var(--radius-2xl);
+                margin: -16px 20px 0;
+                padding: 0 24px 40px;
+            }
         }
-        .swipe-panel {
-            min-width: 100%;
-            scroll-snap-align: start;
-            flex-shrink: 0;
-            padding: 0 2px;
-            max-width: 100%;
-            overflow: hidden;
-        }
+
         .swipe-tabs {
             display: flex;
             gap: 0;
@@ -1360,9 +1708,10 @@
             white-space: nowrap;
         }
         .swipe-tab.active {
-            color: var(--accent-light);
+            color: var(--accent);
             border-bottom-color: var(--accent);
         }
+
         .shared-bl-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
@@ -1421,6 +1770,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .group-feed-msg {
             display: flex;
             gap: 10px;
@@ -1454,6 +1804,7 @@
             color: var(--text-muted);
             margin-top: 2px;
         }
+
         .chip-row {
             display: flex;
             flex-wrap: wrap;
@@ -1466,9 +1817,10 @@
             font-size: 0.66rem;
             font-weight: 450;
             background: var(--accent-subtle);
-            color: var(--accent-light);
+            color: var(--accent);
             letter-spacing: 0.01em;
         }
+
         .aos-item {
             opacity: 0;
             transform: translateY(18px);
@@ -1490,6 +1842,7 @@
         .aos-item.aos-delay-4 {
             transition-delay: 0.24s;
         }
+
         .friend-select-section {
             margin-top: 4px;
         }
@@ -1650,6 +2003,7 @@
             color: var(--text-muted);
             font-size: 0.82rem;
         }
+
         .desire-level-container {
             display: flex;
             align-items: center;
@@ -1687,6 +2041,7 @@
             color: #e05858;
             font-weight: 500;
         }
+
         .theme-toggle-pill {
             display: inline-flex;
             align-items: center;
@@ -1711,6 +2066,7 @@
         .theme-toggle-pill i {
             font-size: 1rem;
         }
+
         .add-post-fab {
             position: sticky;
             bottom: 16px;
@@ -1734,6 +2090,38 @@
             transform: scale(1.08);
             background: var(--accent-light);
         }
+
+        .profile-header-legacy {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .profile-avatar-lg-legacy {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border-active);
+        }
+        .profile-stats-legacy {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 16px;
+        }
+        .profile-stat-legacy {
+            text-align: center;
+        }
+        .profile-stat-num-legacy {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .profile-stat-label-legacy {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
     </style>
 </head>
 <body>
@@ -1754,11 +2142,12 @@
             </div>
         </nav>
         <nav class="bottom-nav" id="bottomNav">
-            <a data-nav="home" class="active" onclick="navigate('home')"><i class="bi-house"></i>Home</a>
+            <a data-nav="home" onclick="navigate('home')"><i class="bi-house"></i>Home</a>
             <a data-nav="explore" onclick="navigate('explore')"><i class="bi-compass"></i>Explore</a>
             <a data-nav="bucketlist" onclick="navigate('bucketlist')"><i class="bi-bookmark"></i>Bucket</a>
             <a data-nav="friends" onclick="navigate('friends')"><i class="bi-people"></i>Friends</a>
-            <a data-nav="profile" onclick="navigate('profile')"><i class="bi-person"></i>Profile</a>
+            <a data-nav="profile" class="active" onclick="navigate('profile')"><i class="bi-person"></i>Profile</a>
+            <div class="bottom-nav-indicator"></div>
         </nav>
         <main class="main-content" id="mainContent"></main>
     </div>
@@ -1791,6 +2180,7 @@
             if (code) return `https://flagcdn.com/w${size}/${code}.png`;
             return null;
         }
+
         function flagImgTag(countryName, size = 40, className = 'flag-icon') {
             const url = getFlagUrl(countryName, size);
             if (!url) return '';
@@ -1798,6 +2188,7 @@
             const h = size >= 40 ? 14 : size >= 26 ? 12 : 11;
             return `<img src="${url}" alt="${countryName}" class="${className}" loading="lazy" style="width:${w}px;height:${h}px;border-radius:2px;object-fit:cover;flex-shrink:0;">`;
         }
+
         const destinationsData = [
             { id: 'granada', name: 'Granada', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=800&h=500&fit=crop',
@@ -1884,6 +2275,7 @@
                 image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&h=500&fit=crop',
                 desc: 'Stunning coastline beneath Table Mountain.', bestPlaces: [], restaurants: [] },
         ];
+
         const usersData = [
             { id: 'user1', displayName: 'Sarah Ahmed', username: '@sarahtravels',
                 avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
@@ -1918,6 +2310,7 @@
                 bio: 'Adventure travel photographer.', location: 'Denver, USA', stats: { places: 61, countries: 28,
                     friends: 95 } },
         ];
+
         const postsData = [
             { id: 'p1', userId: 'user4', destinationId: 'kyoto', location: 'Kyoto, Japan',
                 image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',
@@ -2096,6 +2489,10 @@
                     .nav === 'explore') || (page === 'bucketlist-detail' && el.dataset.nav === 'bucketlist') ||
                     (page === 'friend-profile' && el.dataset.nav === 'friends') || (page === 'shared-bl-feed' && el
                         .dataset.nav === 'bucketlist') || (page === 'settings' && el.dataset.nav === 'profile'));
+            });
+            const profileNavs = document.querySelectorAll('[data-nav="profile"]');
+            profileNavs.forEach(el => {
+                el.classList.toggle('active', page === 'profile' || page === 'settings');
             });
         }
 
@@ -2684,8 +3081,8 @@
             const reqStatus = getFriendRequestStatus(userId);
             main.innerHTML = `
             <div class="page active"><div class="page-content">
-              <div class="profile-header"><img class="profile-avatar-lg" src="${user.avatar}" alt="${user.displayName}" loading="lazy"><div class="profile-display-name">${user.displayName}</div><div class="profile-username">${user.username}</div><p class="text-body mt-2">${user.bio}</p><p class="text-meta mt-2"><i class="bi bi-geo-alt"></i> ${user.location}</p>
-                <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
+              <div class="profile-header-legacy"><img class="profile-avatar-lg-legacy" src="${user.avatar}" alt="${user.displayName}" loading="lazy"><div class="profile-display-name">${user.displayName}</div><div class="profile-username">${user.username}</div><p class="text-body mt-2">${user.bio}</p><p class="text-meta mt-2"><i class="bi bi-geo-alt"></i> ${user.location}</p>
+                <div class="profile-stats-legacy"><div class="profile-stat-legacy"><div class="profile-stat-num-legacy">${user.stats.places}</div><div class="profile-stat-label-legacy">Places</div></div><div class="profile-stat-legacy"><div class="profile-stat-num-legacy">${user.stats.countries}</div><div class="profile-stat-label-legacy">Countries</div></div><div class="profile-stat-legacy"><div class="profile-stat-num-legacy">${user.stats.friends}</div><div class="profile-stat-label-legacy">Friends</div></div></div>
                 <div class="mt-3">${isF?`<button class="btn btn-ghost" onclick="removeFriend('${userId}')">Following</button>`:reqStatus==='sent'?`<button class="btn btn-ghost" onclick="cancelFriendRequest('${userId}')">Pending</button>`:reqStatus==='received'?`<button class="btn btn-accent" onclick="acceptFriend('${userId}')">Accept Request</button>`:`<button class="btn btn-accent" onclick="sendFriendRequest('${userId}')">Add Friend</button>`}</div>
               </div>
             </div></div>`;
@@ -2695,14 +3092,160 @@
             const user = state.currentUser;
             const blGrouped = getBucketListByCountry();
             const totalDests = state.bucketList.length;
+            const countryEntries = Object.entries(blGrouped).sort((a, b) => b[1].length - a[1].length);
+            const top4Countries = countryEntries.slice(0, 4);
+            const blGridCountries = [];
+            const preferredOrder = ['Spain', 'Japan', 'Greece', 'Morocco'];
+            preferredOrder.forEach(cn => {
+                if (blGrouped[cn] && !blGridCountries.find(c => c[0] === cn)) {
+                    blGridCountries.push([cn, blGrouped[cn]]);
+                }
+            });
+            countryEntries.forEach(([cn, dests]) => {
+                if (!blGridCountries.find(c => c[0] === cn) && blGridCountries.length < 4) {
+                    blGridCountries.push([cn, dests]);
+                }
+            });
+            while (blGridCountries.length < 4 && countryEntries.length > blGridCountries.length) {
+                const next = countryEntries[blGridCountries.length];
+                if (next && !blGridCountries.find(c => c[0] === next[0])) {
+                    blGridCountries.push(next);
+                } else break;
+            }
+            const gridCountryImages = {
+                'Spain': 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&h=600&fit=crop',
+                'Japan': 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=600&h=600&fit=crop',
+                'Greece': 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&h=600&fit=crop',
+                'Morocco': 'https://images.unsplash.com/photo-1489749798305-4fea3ae63d43?w=600&h=600&fit=crop',
+            };
+            const visitedCountries = new Set();
+            state.bucketList.forEach(e => {
+                if (e.status === 'Visited') {
+                    const d = getDestination(e.destinationId);
+                    if (d) visitedCountries.add(d.country);
+                }
+            });
+            const highlightedCountries = 37;
+            const savedPlaces = user.stats.places;
+            const bucketListsCount = state.sharedBucketLists.length + 1;
+            const regionCounts = {};
+            state.bucketList.forEach(e => {
+                const d = getDestination(e.destinationId);
+                if (d) { regionCounts[d.continent] = (regionCounts[d.continent] || 0) + 1; }
+            });
+            let mostVisitedRegion = 'Europe';
+            let maxCount = 0;
+            Object.entries(regionCounts).forEach(([region, count]) => { if (count > maxCount) { maxCount =
+                        count;
+                    mostVisitedRegion = region; } });
+            const planningEntries = state.bucketList.filter(e => e.status === 'Planning' || e.status === 'Booked');
+            let nextAdventure = 'Japan';
+            if (planningEntries.length > 0) {
+                const d = getDestination(planningEntries[0].destinationId);
+                if (d) nextAdventure = d.country;
+            }
+
             main.innerHTML = `
-            <div class="page active"><div class="page-content">
-              <div class="profile-header"><img class="profile-avatar-lg" src="${user.avatar}" alt="${user.displayName}" loading="lazy"><div class="profile-display-name">${user.displayName}</div><div class="profile-username">${user.username}</div><p class="text-body mt-2">${user.bio}</p><p class="text-meta mt-2"><i class="bi bi-geo-alt"></i> ${user.location}</p>
-                <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
-                <button class="btn btn-ghost mt-3" onclick="navigate('settings')"><i class="bi bi-gear"></i>Settings</button>
+            <div class="page active" style="background:#ffffff;">
+              <div class="profile-hero">
+                <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&h=600&fit=crop" alt="Santorini" loading="lazy">
+                <div class="settings-gear" onclick="navigate('settings')" title="Settings"><i class="bi bi-gear"></i></div>
               </div>
-              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>{const fHtml=flagImgTag(cn,40,'flag-icon');return`<div class="card aos-item" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${fHtml} ${cn}</strong> — ${blGrouped[cn].length} saved</div>`;}).join('')}</div>
-            </div></div>`;
+              <div class="profile-avatar-section">
+                <div class="profile-avatar-wrapper">
+                  <img class="profile-avatar-lg" src="${user.avatar}" alt="${user.displayName}" loading="lazy">
+                  <div class="profile-avatar-badge"><i class="bi bi-airplane"></i></div>
+                </div>
+              </div>
+              <div class="profile-content-wrapper">
+                <div class="profile-identity">
+                  <div class="profile-display-name">${user.displayName}<span class="profile-verified"><i class="bi bi-check-lg"></i></span></div>
+                  <div class="profile-username">${user.username}</div>
+                  <div class="profile-bio">Wanderer, photographer, food lover.<br>37 countries and counting.</div>
+                  <div class="profile-location"><i class="bi bi-geo-alt-fill"></i>London, UK</div>
+                </div>
+                <div class="profile-stats-row">
+                  <div class="profile-stat-item">
+                    <div class="profile-stat-icon-circle"><i class="bi bi-geo-alt-fill"></i></div>
+                    <div class="profile-stat-num">${savedPlaces}</div>
+                    <div class="profile-stat-label">Places explored</div>
+                  </div>
+                  <div class="profile-stat-divider"></div>
+                  <div class="profile-stat-item">
+                    <div class="profile-stat-icon-circle"><i class="bi bi-globe2"></i></div>
+                    <div class="profile-stat-num">${user.stats.countries}</div>
+                    <div class="profile-stat-label">Countries</div>
+                  </div>
+                  <div class="profile-stat-divider"></div>
+                  <div class="profile-stat-item">
+                    <div class="profile-stat-icon-circle"><i class="bi bi-people-fill"></i></div>
+                    <div class="profile-stat-num">${user.stats.friends}</div>
+                    <div class="profile-stat-label">Friends</div>
+                  </div>
+                </div>
+                <div class="section-gap">
+                  <div class="profile-section-header">
+                    <span class="profile-section-title">My Bucket List</span>
+                    <span class="profile-section-link" onclick="navigate('bucketlist')">View all →</span>
+                  </div>
+                  ${blGridCountries.length>0?`
+                  <div class="bl-grid-2x2">
+                    ${blGridCountries.map(([cn,dests])=>{
+                      const imgUrl=gridCountryImages[cn]||(dests[0]?.destination?.image||'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&h=600&fit=crop');
+                      const flagUrl=getFlagUrl(cn,80);
+                      return`
+                    <div class="bl-country-card aos-item" onclick="navigate('bucketlist')">
+                      <img src="${imgUrl}" alt="${cn}" loading="lazy">
+                      <div class="bl-country-card-overlay">
+                        ${flagUrl?`<img class="bl-country-card-flag" src="${flagUrl}" alt="${cn}" loading="lazy">`:''}
+                        <div class="bl-country-card-name">${cn}</div>
+                        <div class="bl-country-card-count">${dests.length} place${dests.length!==1?'s':''} saved</div>
+                      </div>
+                      <div class="bl-country-card-arrow" onclick="event.stopPropagation();navigate('bucketlist')"><i class="bi bi-arrow-right"></i></div>
+                    </div>`;
+                    }).join('')}
+                  </div>`:`<div style="text-align:center;padding:30px;color:var(--text-muted);"><i class="bi bi-bookmark" style="font-size:2rem;display:block;margin-bottom:8px;"></i><p>Start adding destinations to your bucket list.</p></div>`}
+                </div>
+                <div class="section-gap">
+                  <div class="profile-section-header">
+                    <span class="profile-section-title">Travel Highlights</span>
+                    <span class="profile-section-link" onclick="navigate('explore')">See all →</span>
+                  </div>
+                  <div class="highlights-scroll">
+                    <div class="highlight-card">
+                      <div class="highlight-card-icon"><i class="bi bi-globe2"></i></div>
+                      <div class="highlight-card-num">${highlightedCountries}</div>
+                      <div class="highlight-card-sub">Countries</div>
+                      <div class="highlight-card-label">visited</div>
+                    </div>
+                    <div class="highlight-card">
+                      <div class="highlight-card-icon"><i class="bi bi-compass"></i></div>
+                      <div class="highlight-card-num">${savedPlaces}</div>
+                      <div class="highlight-card-sub">Places</div>
+                      <div class="highlight-card-label">saved</div>
+                    </div>
+                    <div class="highlight-card">
+                      <div class="highlight-card-icon"><i class="bi bi-journal-bookmark-fill"></i></div>
+                      <div class="highlight-card-num">${bucketListsCount}</div>
+                      <div class="highlight-card-sub">Bucket</div>
+                      <div class="highlight-card-label">lists</div>
+                    </div>
+                    <div class="highlight-card">
+                      <div class="highlight-card-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                      <div class="highlight-card-num">${mostVisitedRegion}</div>
+                      <div class="highlight-card-sub">Most visited</div>
+                      <div class="highlight-card-label">region</div>
+                    </div>
+                    <div class="highlight-card">
+                      <div class="highlight-card-icon"><i class="bi bi-airplane"></i></div>
+                      <div class="highlight-card-num">${nextAdventure}</div>
+                      <div class="highlight-card-sub">Next</div>
+                      <div class="highlight-card-label">adventure</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
         }
 
         function renderSearch(main) {
@@ -3052,6 +3595,7 @@
 
         function init() {
             applyTheme();
+            state.currentPage = 'profile';
             renderPage();
             window.navigate = navigate;
             window.toggleBucketList = toggleBucketList;
@@ -3116,7 +3660,7 @@
             }
         }
         init();
-        console.log('Veyra — Travel Beyond. Fresh teal design, light mode default, fixed AOS, explore swipe, and searchable shared BL destinations.');
+        console.log('Veyra — Travel Beyond. Profile page redesigned with clean editorial aesthetic.');
     </script>
 </body>
 </html>
