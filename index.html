@@ -1,624 +1,2421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101111">
-<title>Veyra — Travel App</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<style>
-:root{
-  --bg:#101111;--surface:#171918;--surface2:#1d201f;--surface3:#242725;
-  --border:rgba(255,255,255,.09);--text:#f3f1e9;--muted:#a6aaa4;--faint:#6f746f;
-  --accent:#d8bd82;--accent2:#efe0b4;--danger:#e88989;--shadow:0 18px 50px rgba(0,0,0,.3);
-  --radius:20px;--ease:cubic-bezier(.2,.8,.2,1);--nav:76px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:#0d0e0e;color:var(--text);font-family:"DM Sans",sans-serif}
-body{min-height:100vh;overflow-x:hidden}
-button,input,textarea,select{font:inherit}
-button{border:0;color:inherit;background:none;cursor:pointer}
-img{display:block;max-width:100%}
-a{color:inherit;text-decoration:none}
-.app{min-height:100vh;background:var(--bg)}
-.shell{width:100%;max-width:1560px;margin:auto;min-height:100vh;display:flex}
-.sidebar{display:none}
-.main{width:100%;min-width:0}
-.topbar{height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:20;background:rgba(16,17,17,.86);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.brand{font:800 22px Manrope;letter-spacing:-.05em}
-.top-actions{display:flex;align-items:center;gap:6px}
-.icon-btn{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;color:#d8dad4;font-size:20px;transition:.2s var(--ease)}
-.icon-btn:hover,.icon-btn:active{background:var(--surface3);transform:scale(.97)}
-.avatar{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.12)}
-.content{padding:24px 18px calc(100px + env(safe-area-inset-bottom));max-width:1160px;margin:auto}
-.screen{animation:screenIn .32s var(--ease)}
-@keyframes screenIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:700}
-h1,h2,h3{font-family:Manrope;margin:0;letter-spacing:-.045em}
-h1{font-size:34px;line-height:1.04;margin-top:7px}
-h2{font-size:22px}
-h3{font-size:16px}
-.sub{color:var(--muted);font-size:14px;line-height:1.55}
-.section{margin-top:30px}
-.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:13px}
-.section-head button{color:var(--accent);font-size:13px}
-.search{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:15px;padding:0 14px;height:48px;margin-top:20px}
-.search i{color:var(--faint)}
-.search input{width:100%;border:0;outline:0;background:none;color:var(--text);font-size:14px}
-.search input::placeholder{color:#737873}
-.hero-feature{position:relative;height:410px;border-radius:26px;overflow:hidden;margin-top:22px;background:#222}
-.hero-feature img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
-.hero-feature:hover img{transform:scale(1.025)}
-.hero-feature:after,.destination-hero:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.82))}
-.hero-copy{position:absolute;z-index:2;left:20px;right:20px;bottom:22px}
-.hero-copy h2{font-size:30px;margin:5px 0}
-.hero-copy p{max-width:480px;color:#d8d8d2;margin:0;font-size:14px;line-height:1.5}
-.chips{display:flex;gap:8px;overflow:auto;padding-bottom:3px;scrollbar-width:none}
-.chips::-webkit-scrollbar,.rail::-webkit-scrollbar{display:none}
-.chip{white-space:nowrap;padding:9px 13px;border:1px solid var(--border);background:var(--surface);border-radius:999px;font-size:12px;color:#c8cbc4}
-.chip.active{background:var(--accent);color:#161616;border-color:var(--accent)}
-.rail{display:flex;gap:12px;overflow:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-.dest-card{min-width:205px;scroll-snap-align:start}
-.dest-img{height:245px;border-radius:18px;overflow:hidden;background:#222;position:relative}
-.dest-img img{width:100%;height:100%;object-fit:cover}
-.save-float{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;background:rgba(15,16,16,.72);backdrop-filter:blur(10px);display:grid;place-items:center;font-size:17px}
-.save-float.saved{color:var(--accent)}
-.meta{margin-top:9px}
-.meta .place{font-size:12px;color:var(--muted)}
-.meta strong{display:block;font:700 16px Manrope;margin-top:2px}
-.meta .tiny{font-size:11px;color:var(--faint);margin-top:4px}
-.friend-rail .friend{min-width:118px}
-.friend-img{width:78px;height:78px;border-radius:50%;object-fit:cover;margin-bottom:8px}
-.friend strong{font-size:13px;display:block}
-.friend span{font-size:11px;color:var(--muted)}
-.activity-list{border-top:1px solid var(--border)}
-.activity{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
-.activity img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-.activity p{margin:0;color:#d1d3cd;font-size:13px;line-height:1.45}
-.activity time{display:block;color:var(--faint);font-size:11px;margin-top:4px}
-.post{border-bottom:1px solid var(--border);padding-bottom:22px;margin-bottom:24px}
-.post-head{display:flex;align-items:center;gap:10px;margin-bottom:11px}
-.post-head img{width:38px;height:38px;border-radius:50%;object-fit:cover}
-.post-head strong{font-size:13px}.post-head span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
-.post-menu{margin-left:auto}
-.post-media{border-radius:21px;overflow:hidden;background:#222;position:relative}
-.post-media img{width:100%;aspect-ratio:4/4.4;object-fit:cover}
-.post-caption{font-size:14px;line-height:1.55;color:#d8dad4;margin:11px 2px}
-.post-actions{display:flex;align-items:center;gap:4px}
-.post-actions button{padding:7px 8px;color:#c4c7c0;font-size:19px}
-.post-actions button.active{color:var(--accent)}
-.post-actions .count{font-size:12px;color:var(--muted);margin-right:7px;margin-left:-3px}
-.page-title{display:flex;align-items:center;gap:10px}
-.back{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid var(--border)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.explore-card{position:relative;height:255px;border-radius:19px;overflow:hidden}
-.explore-card img{width:100%;height:100%;object-fit:cover}
-.explore-card:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.8))}
-.explore-card .label{position:absolute;z-index:1;left:13px;right:13px;bottom:13px}
-.label small{color:#d1d1cc;font-size:11px}.label strong{display:block;font:700 16px Manrope;margin-top:2px}
-.destination-hero{height:430px;border-radius:25px;overflow:hidden;position:relative}
-.destination-hero img{width:100%;height:100%;object-fit:cover}
-.dest-detail-copy{position:absolute;left:20px;right:20px;bottom:20px;z-index:2}
-.dest-detail-copy h1{font-size:38px}
-.action-row{display:flex;gap:9px;margin-top:15px}
-.primary,.secondary{min-height:45px;border-radius:13px;padding:0 16px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;gap:7px}
-.primary{background:var(--accent);color:#151515}.secondary{background:rgba(255,255,255,.09);border:1px solid var(--border)}
-.info-list{display:grid;gap:0;border-top:1px solid var(--border)}
-.info-row{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--border);font-size:13px}
-.info-row span{color:var(--muted)}
-.place-row{display:grid;grid-template-columns:90px 1fr;gap:12px;padding:13px 0;border-bottom:1px solid var(--border)}
-.place-row img{width:90px;height:76px;object-fit:cover;border-radius:13px}
-.place-row strong{font-size:14px}.place-row p{font-size:12px;color:var(--muted);line-height:1.4;margin:5px 0}
-.country-row{border:1px solid var(--border);background:var(--surface);border-radius:17px;overflow:hidden;margin-bottom:10px}
-.country-head{padding:14px;display:flex;align-items:center;gap:12px}
-.country-head img{width:64px;height:55px;border-radius:12px;object-fit:cover}
-.country-head .grow{flex:1}.country-head strong{font:700 15px Manrope}.country-head small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.country-body{padding:0 14px 14px;display:grid;gap:8px}
-.bucket-dest{display:flex;align-items:center;gap:10px;padding:10px;background:var(--surface2);border-radius:13px}
-.bucket-dest img{width:48px;height:48px;border-radius:10px;object-fit:cover}
-.bucket-dest .grow{flex:1}.bucket-dest strong{font-size:13px}.bucket-dest small{color:var(--muted);font-size:11px}
-.status{font-size:10px;padding:5px 7px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}
-.profile-cover{height:155px;border-radius:24px;overflow:hidden;position:relative;margin-bottom:-35px}
-.profile-cover img{width:100%;height:100%;object-fit:cover}
-.profile-header{padding:0 17px 0;position:relative}
-.profile-avatar{width:78px;height:78px;border-radius:50%;border:4px solid var(--bg);object-fit:cover}
-.profile-header h1{font-size:26px;margin-top:8px}.username{color:var(--accent);font-size:13px;margin-top:2px}
-.stats{display:flex;gap:22px;margin:16px 0}.stat strong{font:700 17px Manrope;display:block}.stat span{font-size:10px;color:var(--muted)}
-.profile-tabs{display:flex;border-bottom:1px solid var(--border);margin:22px -18px 18px;padding:0 18px;gap:22px}
-.profile-tabs button{padding:12px 0;font-size:12px;color:var(--muted);border-bottom:2px solid transparent}.profile-tabs button.active{color:var(--text);border-color:var(--accent)}
-.settings-group{margin-top:24px}.settings-group h3{font-size:11px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.setting{display:flex;align-items:center;gap:12px;padding:15px 2px;border-bottom:1px solid var(--border)}
-.setting i{font-size:18px;width:25px;color:#c7c9c2}.setting .grow{flex:1}.setting strong{font-size:13px}.setting small{display:block;color:var(--muted);font-size:11px;margin-top:3px}
-.switch{width:43px;height:25px;border-radius:20px;background:#343735;padding:3px}.switch:after{content:"";display:block;width:19px;height:19px;border-radius:50%;background:#aeb2ab;transition:.2s}.switch.on{background:var(--accent)}.switch.on:after{background:#151515;transform:translateX(18px)}
-.search-results{display:grid;gap:5px;margin-top:12px}
-.result{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--border)}
-.result img{width:50px;height:50px;border-radius:12px;object-fit:cover}.result .grow{flex:1}.result strong{font-size:13px}.result small{color:var(--muted);display:block;margin-top:3px;font-size:11px}
-.notification{display:flex;gap:11px;padding:14px 0;border-bottom:1px solid var(--border)}
-.notification img{width:38px;height:38px;border-radius:50%;object-fit:cover}.notification p{font-size:13px;line-height:1.4;margin:0}.notification time{font-size:10px;color:var(--faint)}
-.next-stop{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:19px;padding:13px}
-.next-stop img{width:92px;height:92px;object-fit:cover;border-radius:14px}.next-stop .grow{flex:1}
-.route{display:flex;gap:0;overflow:auto;padding:8px 0}.route-item{min-width:105px;position:relative;padding-right:25px}.route-item:after{content:"";position:absolute;right:8px;top:8px;width:17px;border-top:1px solid var(--accent)}.route-item:last-child:after{display:none}.route-item span{font-size:10px;color:var(--muted)}.route-item strong{display:block;margin-top:4px;font-size:12px}
-.bottom-nav{position:fixed;z-index:50;left:0;right:0;bottom:0;height:calc(var(--nav) + env(safe-area-inset-bottom));padding:7px 8px env(safe-area-inset-bottom);background:rgba(18,19,19,.9);backdrop-filter:blur(22px);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(5,1fr)}
-.nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#7e837e;font-size:10px;position:relative}.nav-item i{font-size:19px}.nav-item.active{color:var(--text)}.nav-item.active:before{content:"";position:absolute;top:1px;width:22px;height:2px;border-radius:4px;background:var(--accent)}
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.62);z-index:80;opacity:0;pointer-events:none;transition:.25s}.overlay.show{opacity:1;pointer-events:auto}
-.sheet{position:fixed;z-index:90;left:0;right:0;bottom:0;max-height:92vh;background:#1a1c1b;border:1px solid var(--border);border-radius:25px 25px 0 0;transform:translateY(105%);transition:.35s var(--ease);padding:10px 18px calc(18px + env(safe-area-inset-bottom));overflow:auto;box-shadow:0 -25px 70px rgba(0,0,0,.45)}
-.sheet.show{transform:none}.grab{width:38px;height:4px;border-radius:5px;background:#555b56;margin:2px auto 18px}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-.field{margin:12px 0}.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;background:#111312;border:1px solid var(--border);border-radius:12px;color:var(--text);outline:0;padding:12px}.field textarea{min-height:100px;resize:vertical}
-.modal{position:fixed;z-index:100;inset:0;display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:.25s}.modal.show{opacity:1;pointer-events:auto}.modal-box{width:min(520px,100%);max-height:88vh;overflow:auto;background:#1a1c1b;border:1px solid var(--border);border-radius:23px;padding:20px;transform:translateY(12px) scale(.98);transition:.25s var(--ease)}.modal.show .modal-box{transform:none}
-.toast{position:fixed;z-index:120;left:50%;bottom:calc(90px + env(safe-area-inset-bottom));transform:translate(-50%,18px);opacity:0;pointer-events:none;background:#f0eee5;color:#171817;padding:11px 15px;border-radius:12px;font-size:12px;box-shadow:var(--shadow);transition:.28s var(--ease);white-space:nowrap}.toast.show{opacity:1;transform:translate(-50%,0)}
-.empty{padding:35px 10px;text-align:center;color:var(--muted)}.empty i{font-size:25px;display:block;margin-bottom:10px;color:var(--faint)}
-.mapfake{height:180px;border-radius:20px;border:1px solid var(--border);overflow:hidden;position:relative;background:radial-gradient(circle at 30% 35%,#343a35 0 2px,transparent 3px),radial-gradient(circle at 70% 62%,#343a35 0 2px,transparent 3px),linear-gradient(125deg,#171a18,#232823)}
-.mapfake:before{content:"";position:absolute;inset:25px 35px;border:1px dashed #687067;transform:rotate(-9deg);border-radius:40% 60% 50% 30%}
-.map-dot{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px rgba(216,189,130,.14)}
-.dot1{left:25%;top:38%}.dot2{left:52%;top:52%}.dot3{left:73%;top:31%}
-.skeleton{background:linear-gradient(90deg,#1a1c1b,#242725,#1a1c1b);background-size:200% 100%;animation:sk 1.2s infinite}.skeleton-img{height:200px;border-radius:18px}@keyframes sk{to{background-position:-200% 0}}
-.desktop-only{display:none}
-@media(min-width:700px){
-  .content{padding:34px 28px 50px}.bottom-nav{display:none}.topbar{display:none}
-  .sidebar{display:flex;flex-direction:column;width:230px;flex:0 0 230px;padding:28px 16px;border-right:1px solid var(--border);position:sticky;top:0;height:100vh}
-  .sidebar .brand{padding:0 12px 32px}.side-nav{display:grid;gap:4px}.side-nav button{height:44px;border-radius:11px;display:flex;align-items:center;gap:12px;padding:0 12px;color:var(--muted);font-size:13px;text-align:left}.side-nav button i{font-size:17px}.side-nav button.active{background:var(--surface);color:var(--text)}
-  .side-user{margin-top:auto;display:flex;gap:10px;align-items:center;padding:12px;border-top:1px solid var(--border);font-size:12px}.side-user img{width:34px;height:34px;border-radius:50%;object-fit:cover}.side-user span{color:var(--muted);display:block;font-size:10px}
-  .desktop-only{display:block}.content{max-width:1120px}
-  .home-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(260px,.7fr);gap:28px}.hero-feature{height:440px}.grid{grid-template-columns:repeat(3,1fr)}
-  .dest-card{min-width:230px}.dest-img{height:280px}.post{max-width:720px;margin-left:auto;margin-right:auto}
-}
-@media(min-width:1100px){
-  .sidebar{width:245px;flex-basis:245px}.content{padding-left:42px;padding-right:42px}
-  .grid{grid-template-columns:repeat(4,1fr)}.explore-card{height:280px}
-}
-@media(max-width:360px){.content{padding-left:14px;padding-right:14px}.hero-feature{height:370px}h1{font-size:30px}.dest-card{min-width:185px}.dest-img{height:220px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Veyra — Travel Beyond</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;400;450;500;550;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d0f;
+            --bg-surface: #141418;
+            --bg-surface-hover: #1a1a1f;
+            --bg-elevated: #1c1c22;
+            --bg-glass: rgba(22, 22, 28, 0.7);
+            --border: rgba(255, 255, 255, 0.06);
+            --border-subtle: rgba(255, 255, 255, 0.04);
+            --border-active: rgba(255, 255, 255, 0.12);
+            --text-primary: #f0f0f2;
+            --text-secondary: #b0b0b8;
+            --text-muted: #6b6b75;
+            --text-inverse: #0d0d0f;
+            --accent: #c8a97e;
+            --accent-glow: rgba(200, 169, 126, 0.15);
+            --accent-subtle: rgba(200, 169, 126, 0.08);
+            --radius-sm: 6px;
+            --radius: 10px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+            --radius-2xl: 24px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+            --blur: blur(24px);
+            --blur-light: blur(12px);
+            --transition-fast: 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            --transition: 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            --font-xs: 0.72rem;
+            --font-sm: 0.82rem;
+            --font-base: 0.94rem;
+            --font-md: 1.05rem;
+            --font-lg: 1.2rem;
+            --font-xl: 1.5rem;
+            --font-2xl: 1.9rem;
+            --font-3xl: 2.5rem;
+            --font-4xl: 3.2rem;
+            --letter-spacing-tight: -0.03em;
+            --letter-spacing-normal: -0.01em;
+            --letter-spacing-wide: 0.04em;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --nav-height: 68px;
+            --sidebar-width: 220px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            scroll-behavior: smooth;
+            background: var(--bg);
+            color: var(--text-primary);
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.55;
+            letter-spacing: var(--letter-spacing-normal);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        ::selection {
+            background: var(--accent);
+            color: var(--text-inverse);
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.14);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        #app {
+            display: flex;
+            min-height: 100vh;
+            min-height: 100dvh;
+            position: relative;
+        }
+        .main-content {
+            flex: 1;
+            margin-left: 0;
+            padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 24px);
+            transition: margin-left var(--transition);
+            min-height: 100vh;
+        }
+        .sidebar {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--bg-glass);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-right: 1px solid var(--border);
+            z-index: 100;
+            flex-direction: column;
+            padding: 20px 14px;
+            gap: 6px;
+            transition: transform var(--transition);
+        }
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            font-size: var(--font-lg);
+            letter-spacing: var(--letter-spacing-tight);
+            color: var(--text-primary);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .sidebar-brand span {
+            color: var(--accent);
+            font-weight: 800;
+            font-size: 1.35rem;
+            letter-spacing: -0.04em;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+        }
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius);
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-sm);
+            font-weight: 450;
+            letter-spacing: var(--letter-spacing-normal);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+        }
+        .sidebar-nav a i {
+            font-size: 1.15rem;
+            width: 22px;
+            text-align: center;
+            opacity: 0.7;
+            transition: opacity var(--transition-fast);
+        }
+        .sidebar-nav a:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+        }
+        .sidebar-nav a:hover i {
+            opacity: 1;
+        }
+        .sidebar-nav a.active {
+            background: var(--accent-subtle);
+            color: var(--accent);
+            font-weight: 500;
+        }
+        .sidebar-nav a.active i {
+            opacity: 1;
+            color: var(--accent);
+        }
+        .sidebar-nav a.active::before {
+            content: '';
+            position: absolute;
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 0 3px 3px 0;
+        }
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            margin-top: auto;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 14px;
+        }
+        .sidebar-user:hover {
+            background: var(--bg-surface-hover);
+        }
+        .sidebar-user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .sidebar-user-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .sidebar-user-name {
+            font-size: var(--font-xs);
+            font-weight: 550;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .sidebar-user-username {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+        }
+        .bottom-nav {
+            display: flex;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: var(--bg-glass);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            border-top: 1px solid var(--border);
+            padding: 6px 8px calc(6px + var(--safe-bottom));
+            justify-content: space-around;
+            align-items: center;
+            height: var(--nav-height);
+            transition: all var(--transition);
+        }
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.62rem;
+            font-weight: 450;
+            letter-spacing: 0.02em;
+            padding: 4px 10px;
+            border-radius: var(--radius-lg);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            position: relative;
+            min-width: 48px;
+        }
+        .bottom-nav a i {
+            font-size: 1.3rem;
+            transition: all var(--transition-fast);
+        }
+        .bottom-nav a.active {
+            color: var(--accent);
+        }
+        .bottom-nav a.active i {
+            color: var(--accent);
+        }
+        .bottom-nav a.active::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            width: 18px;
+            height: 2.5px;
+            background: var(--accent);
+            border-radius: 0 0 3px 3px;
+        }
+        .page {
+            display: none;
+            animation: pageIn var(--transition) ease forwards;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .page-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 16px 40px;
+        }
+        @media(min-width:769px) {
+            .page-content {
+                padding: 28px 28px 48px;
+            }
+        }
+        @media(min-width:1200px) {
+            .page-content {
+                padding: 32px 40px 56px;
+            }
+        }
+        .eyebrow {
+            font-size: var(--font-xs);
+            font-weight: 550;
+            letter-spacing: var(--letter-spacing-wide);
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .heading-xl {
+            font-size: var(--font-3xl);
+            font-weight: 700;
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.12;
+            color: var(--text-primary);
+        }
+        .heading-lg {
+            font-size: var(--font-2xl);
+            font-weight: 650;
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.18;
+            color: var(--text-primary);
+        }
+        .heading-md {
+            font-size: var(--font-xl);
+            font-weight: 600;
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.22;
+            color: var(--text-primary);
+        }
+        .text-body {
+            font-size: var(--font-base);
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .text-meta {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            font-size: var(--font-sm);
+            font-weight: 500;
+            letter-spacing: var(--letter-spacing-normal);
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            font-family: inherit;
+            text-decoration: none;
+            outline: none;
+        }
+        .btn:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .btn-accent {
+            background: var(--accent);
+            color: var(--text-inverse);
+        }
+        .btn-accent:hover {
+            background: #d4b68a;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+        .btn-accent:active {
+            transform: scale(0.97);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .btn-ghost:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+            border-color: var(--border-active);
+        }
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: var(--font-xs);
+            border-radius: var(--radius-sm);
+        }
+        .btn-bookmark {
+            background: var(--bg-glass);
+            backdrop-filter: var(--blur-light);
+            -webkit-backdrop-filter: var(--blur-light);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            padding: 0;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-bookmark:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .btn-bookmark.saved {
+            background: var(--accent);
+            color: var(--text-inverse);
+            border-color: var(--accent);
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+        .card:hover {
+            border-color: var(--border-active);
+            background: var(--bg-surface-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        .card-image {
+            width: 100%;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 4/3;
+            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .card:hover .card-image {
+            transform: scale(1.04);
+        }
+        .card-body {
+            padding: 14px 16px;
+        }
+        .card-eyebrow {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+        .card-title {
+            font-size: var(--font-md);
+            font-weight: 600;
+            color: var(--text-primary);
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.2;
+        }
+        .card-subtitle {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        .hero-destination {
+            position: relative;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            min-height: 280px;
+            cursor: pointer;
+        }
+        .hero-destination img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .hero-destination:hover img {
+            transform: scale(1.05);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.05) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 24px;
+            pointer-events: none;
+        }
+        .hero-overlay .hero-country {
+            font-size: var(--font-xs);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 4px;
+        }
+        .hero-overlay .hero-name {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: var(--letter-spacing-tight);
+            line-height: 1.1;
+        }
+        .hero-overlay .hero-desc {
+            font-size: var(--font-sm);
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+            max-width: 400px;
+        }
+        .scroll-row {
+            display: flex;
+            gap: 14px;
+            overflow-x: auto;
+            scroll-snap-type: x proximity;
+            padding: 4px 0 16px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scroll-row>* {
+            flex-shrink: 0;
+            scroll-snap-align: start;
+        }
+        .scroll-card {
+            width: 200px;
+        }
+        .scroll-card-sm {
+            width: 150px;
+        }
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .pill {
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: var(--font-xs);
+            font-weight: 450;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .pill:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            background: var(--bg-surface-hover);
+        }
+        .pill.active {
+            background: var(--accent);
+            color: var(--text-inverse);
+            border-color: var(--accent);
+            font-weight: 500;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 11px 16px;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+        .search-bar:focus-within {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-subtle);
+            background: var(--bg-elevated);
+        }
+        .search-bar i {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-primary);
+            font-size: var(--font-base);
+            font-family: inherit;
+            letter-spacing: var(--letter-spacing-normal);
+        }
+        .search-bar input::placeholder {
+            color: var(--text-muted);
+        }
+        .search-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-lg);
+            margin-top: 6px;
+            z-index: 50;
+            max-height: 360px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            display: none;
+            animation: fadeIn 150ms ease;
+        }
+        .search-dropdown.visible {
+            display: block;
+        }
+        .search-dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 16px;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .search-dropdown-item:hover {
+            background: var(--bg-surface-hover);
+        }
+        .search-dropdown-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .search-dropdown-item .sdi-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .search-dropdown-item .sdi-name {
+            font-size: var(--font-sm);
+            font-weight: 550;
+            color: var(--text-primary);
+        }
+        .search-dropdown-item .sdi-sub {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+        }
+        .search-dropdown-empty {
+            padding: 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: var(--font-sm);
+        }
+        .search-dropdown-section {
+            padding: 8px 16px 4px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            font-weight: 550;
+        }
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            animation: fadeIn 200ms ease;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .modal-sheet {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            width: 100%;
+            max-width: 560px;
+            max-height: 85vh;
+            max-height: 85dvh;
+            overflow-y: auto;
+            padding: 20px 20px 28px;
+            animation: slideUp 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            box-shadow: var(--shadow-lg);
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(40px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @media(min-width:769px) {
+            .modal-overlay {
+                align-items: center;
+            }
+            .modal-sheet {
+                border-radius: var(--radius-xl);
+                max-height: 80vh;
+                margin: 20px;
+            }
+        }
+        .modal-handle {
+            width: 36px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            margin: 0 auto 16px;
+        }
+        .modal-sheet h3 {
+            font-size: var(--font-lg);
+            font-weight: 650;
+            letter-spacing: var(--letter-spacing-tight);
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .modal-sheet input,
+        .modal-sheet textarea,
+        .modal-sheet select {
+            width: 100%;
+            padding: 10px 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: var(--font-sm);
+            margin-bottom: 10px;
+            outline: none;
+            transition: border var(--transition-fast);
+            resize: vertical;
+        }
+        .modal-sheet input:focus,
+        .modal-sheet textarea:focus,
+        .modal-sheet select:focus {
+            border-color: var(--accent);
+        }
+        .modal-sheet label {
+            font-size: var(--font-xs);
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            color: var(--text-secondary);
+            display: block;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .toast-container {
+            position: fixed;
+            bottom: calc(var(--nav-height) + var(--safe-bottom) + 20px);
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 300;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+            align-items: center;
+        }
+        .toast {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-active);
+            color: var(--text-primary);
+            padding: 11px 20px;
+            border-radius: var(--radius-lg);
+            font-size: var(--font-sm);
+            font-weight: 450;
+            box-shadow: var(--shadow-lg);
+            pointer-events: auto;
+            animation: toastIn 350ms cubic-bezier(0.22, 0.61, 0.36, 1), toastOut 300ms 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            white-space: nowrap;
+        }
+        @keyframes toastIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes toastOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+        }
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-surface) 25%, var(--bg-surface-hover) 50%, var(--bg-surface) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.4s infinite;
+            border-radius: var(--radius);
+        }
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+        .flex-between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .section-gap {
+            margin-top: 32px;
+        }
+        .section-gap-lg {
+            margin-top: 44px;
+        }
+        .text-accent {
+            color: var(--accent);
+        }
+        .text-muted {
+            color: var(--text-muted);
+        }
+        .mt-2 {
+            margin-top: 8px;
+        }
+        .mt-3 {
+            margin-top: 14px;
+        }
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+        .mb-3 {
+            margin-bottom: 14px;
+        }
+        .gap-2 {
+            gap: 8px;
+        }
+        .gap-3 {
+            gap: 14px;
+        }
+        @media(min-width:769px) {
+            .bottom-nav {
+                display: none;
+            }
+            .sidebar {
+                display: flex;
+            }
+            .main-content {
+                margin-left: var(--sidebar-width);
+                padding-bottom: 40px;
+            }
+            .hero-destination {
+                aspect-ratio: 21/9;
+                min-height: 360px;
+            }
+            .hero-overlay .hero-name {
+                font-size: var(--font-3xl);
+            }
+            .scroll-card {
+                width: 240px;
+            }
+            .heading-xl {
+                font-size: var(--font-4xl);
+            }
+        }
+        @media(min-width:1200px) {
+            .hero-destination {
+                min-height: 440px;
+            }
+            .scroll-card {
+                width: 270px;
+            }
+        }
+        @media(max-width:380px) {
+            .heading-xl {
+                font-size: 1.8rem;
+            }
+            .heading-lg {
+                font-size: 1.4rem;
+            }
+            .scroll-card {
+                width: 155px;
+            }
+            .hero-destination {
+                min-height: 220px;
+            }
+        }
+        .post-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            transition: all var(--transition);
+        }
+        .post-card:hover {
+            border-color: var(--border-active);
+        }
+        .post-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .post-card:hover .post-image {
+            transform: scale(1.03);
+        }
+        .post-body {
+            padding: 14px 16px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .post-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .post-user {
+            font-size: var(--font-sm);
+            font-weight: 550;
+            color: var(--text-primary);
+        }
+        .post-username {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+        }
+        .post-location {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+        .post-caption {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .post-actions {
+            display: flex;
+            gap: 18px;
+            margin-top: 10px;
+        }
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color var(--transition-fast);
+            background: none;
+            border: none;
+            font-family: inherit;
+            padding: 4px 0;
+        }
+        .post-action:hover {
+            color: var(--text-primary);
+        }
+        .post-action.liked {
+            color: #e85d5d;
+        }
+        .post-action.saved-post {
+            color: var(--accent);
+        }
+        .friend-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+        .friend-card:hover {
+            border-color: var(--border-active);
+            background: var(--bg-surface-hover);
+        }
+        .friend-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .friend-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .friend-name {
+            font-weight: 550;
+            font-size: var(--font-sm);
+            color: var(--text-primary);
+        }
+        .friend-username {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+        }
+        .friend-stats {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .bl-country {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 8px;
+        }
+        .bl-country:hover {
+            border-color: var(--border-active);
+            background: var(--bg-surface-hover);
+        }
+        .bl-country-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .bl-country-name {
+            font-weight: 600;
+            font-size: var(--font-md);
+            color: var(--text-primary);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+        .bl-country-count {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .bl-destinations {
+            display: none;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-subtle);
+            flex-direction: column;
+            gap: 6px;
+        }
+        .bl-country.expanded .bl-destinations {
+            display: flex;
+            animation: expandIn 250ms ease;
+        }
+        @keyframes expandIn {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+        .bl-dest-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+        .bl-dest-item:hover {
+            background: var(--bg-surface-hover);
+            color: var(--text-primary);
+        }
+        .bl-dest-item i {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .bl-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .bl-status-dot.want {
+            background: #8ab4f8;
+        }
+        .bl-status-dot.planning {
+            background: #f5c96a;
+        }
+        .bl-status-dot.booked {
+            background: #7dd3a8;
+        }
+        .bl-status-dot.visited {
+            background: #c8a97e;
+        }
+        .bl-status-dot.custom {
+            background: #b088f0;
+        }
+        .notif-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            transition: background var(--transition-fast);
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .notif-item:hover {
+            background: var(--bg-surface-hover);
+        }
+        .notif-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .notif-text {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+        .notif-text strong {
+            color: var(--text-primary);
+            font-weight: 550;
+        }
+        .notif-time {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .profile-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .profile-avatar-lg {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--border-active);
+        }
+        .profile-display-name {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: var(--letter-spacing-tight);
+            margin-top: 12px;
+        }
+        .profile-username {
+            font-size: var(--font-sm);
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .profile-stats {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 16px;
+        }
+        .profile-stat {
+            text-align: center;
+        }
+        .profile-stat-num {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .profile-stat-label {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .swipe-container {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            display: flex;
+            gap: 0;
+        }
+        .swipe-container::-webkit-scrollbar {
+            display: none;
+        }
+        .swipe-panel {
+            min-width: 100%;
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+        .swipe-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--bg);
+            padding: 4px 0;
+        }
+        .swipe-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px 8px;
+            font-size: var(--font-sm);
+            font-weight: 500;
+            letter-spacing: var(--letter-spacing-normal);
+            cursor: pointer;
+            color: var(--text-muted);
+            border-bottom: 2px solid transparent;
+            transition: all var(--transition-fast);
+            font-family: inherit;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            white-space: nowrap;
+        }
+        .swipe-tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+        .shared-bl-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .shared-bl-card:hover {
+            border-color: var(--border-active);
+            background: var(--bg-surface-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+        }
+        .shared-bl-avatar-stack {
+            display: flex;
+            flex-shrink: 0;
+            margin-right: 6px;
+        }
+        .shared-bl-avatar-stack img {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--bg-surface);
+            margin-left: -10px;
+        }
+        .shared-bl-avatar-stack img:first-child {
+            margin-left: 0;
+        }
+        .shared-bl-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .shared-bl-name {
+            font-weight: 600;
+            font-size: var(--font-sm);
+            color: var(--text-primary);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+        .shared-bl-meta {
+            font-size: var(--font-xs);
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .group-feed-msg {
+            display: flex;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-subtle);
+            align-items: flex-start;
+        }
+        .group-feed-msg img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .group-feed-msg .msg-content {
+            flex: 1;
+        }
+        .group-feed-msg .msg-author {
+            font-size: var(--font-xs);
+            font-weight: 550;
+            color: var(--text-primary);
+        }
+        .group-feed-msg .msg-text {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+        .group-feed-msg .msg-time {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .chip {
+            padding: 5px 10px;
+            border-radius: 14px;
+            font-size: 0.68rem;
+            font-weight: 450;
+            background: var(--accent-subtle);
+            color: var(--accent);
+            letter-spacing: 0.01em;
+        }
+    </style>
 </head>
 <body>
-<div class="app" id="app"></div>
+    <div id="app">
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-brand" onclick="navigate('home')"><span>V</span> Veyra</div>
+            <div class="sidebar-nav">
+                <a data-nav="home" class="active" onclick="navigate('home')"><i class="bi-house"></i> Home</a>
+                <a data-nav="explore" onclick="navigate('explore')"><i class="bi-compass"></i> Explore</a>
+                <a data-nav="bucketlist" onclick="navigate('bucketlist')"><i class="bi-bookmark"></i> Bucket List</a>
+                <a data-nav="friends" onclick="navigate('friends')"><i class="bi-people"></i> Friends</a>
+                <a data-nav="notifications" onclick="navigate('notifications')"><i class="bi-bell"></i> Notifications</a>
+                <a data-nav="search" onclick="navigate('search')"><i class="bi-search"></i> Search</a>
+            </div>
+            <div class="sidebar-user" onclick="navigate('profile')">
+                <img class="sidebar-user-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="User avatar" loading="lazy">
+                <div class="sidebar-user-info"><span class="sidebar-user-name">Sarah Ahmed</span><span class="sidebar-user-username">@sarahtravels</span></div>
+            </div>
+        </nav>
+        <nav class="bottom-nav" id="bottomNav">
+            <a data-nav="home" class="active" onclick="navigate('home')"><i class="bi-house"></i>Home</a>
+            <a data-nav="explore" onclick="navigate('explore')"><i class="bi-compass"></i>Explore</a>
+            <a data-nav="bucketlist" onclick="navigate('bucketlist')"><i class="bi-bookmark"></i>Bucket</a>
+            <a data-nav="friends" onclick="navigate('friends')"><i class="bi-people"></i>Friends</a>
+            <a data-nav="profile" onclick="navigate('profile')"><i class="bi-person"></i>Profile</a>
+        </nav>
+        <main class="main-content" id="mainContent"></main>
+    </div>
+    <div id="modalContainer"></div>
+    <div class="toast-container" id="toastContainer"></div>
 
-<div class="overlay" id="overlay" onclick="closeSheet()"></div>
-<div class="sheet" id="sheet"></div>
-<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="modal-box" id="modalBox"></div></div>
-<div class="toast" id="toast"></div>
+    <script>
+        const destinationsData = [
+            { id: 'granada', name: 'Granada', country: 'Spain', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=800&h=500&fit=crop',
+                desc: 'A mesmerizing city where Moorish palaces meet Sierra Nevada peaks.', bestPlaces: [
+                    { name: 'Alhambra', category: 'Historical',
+                        image: 'https://images.unsplash.com/photo-1591901593892-d468a85d53d5?w=400&h=300&fit=crop',
+                        desc: 'The crown jewel of Islamic architecture in Europe.', rating: 4.9 },
+                    { name: 'Sacromonte', category: 'Cultural',
+                        image: 'https://images.unsplash.com/photo-1580121444775-6e5a9b82d1b9?w=400&h=300&fit=crop',
+                        desc: 'Historic Roma quarter with cave dwellings and flamenco.', rating: 4.6 },
+                ], restaurants: [{ name: 'Restaurante Chikito', cuisine: 'Andalusian',
+                    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop',
+                    rating: 4.5 }, ] },
+            { id: 'barcelona', name: 'Barcelona', country: 'Spain', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=500&fit=crop',
+                desc: 'A sun-drenched Mediterranean city of Gaudí masterpieces.', bestPlaces: [], restaurants: [] },
+            { id: 'madrid', name: 'Madrid', country: 'Spain', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1539037116277-4d84aee60e91?w=800&h=500&fit=crop',
+                desc: 'Spain\'s vibrant capital of art, tapas, and endless energy.', bestPlaces: [], restaurants: [] },
+            { id: 'seville', name: 'Seville', country: 'Spain', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1583553327105-7c3c1b3c9a9e?w=800&h=500&fit=crop',
+                desc: 'The passionate heart of Andalusia.', bestPlaces: [], restaurants: [] },
+            { id: 'valencia', name: 'Valencia', country: 'Spain', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1549968024-eaaccd13e1a5?w=800&h=500&fit=crop',
+                desc: 'Futuristic architecture meets ancient history.', bestPlaces: [], restaurants: [] },
+            { id: 'kyoto', name: 'Kyoto', country: 'Japan', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=500&fit=crop',
+                desc: 'Japan\'s cultural soul with ancient temples and bamboo groves.', bestPlaces: [
+                    { name: 'Fushimi Inari', category: 'Shrine',
+                        image: 'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=400&h=300&fit=crop',
+                        desc: 'Thousands of vermilion torii gates.', rating: 4.9 }, ], restaurants: [] },
+            { id: 'tokyo', name: 'Tokyo', country: 'Japan', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&h=500&fit=crop',
+                desc: 'A dazzling metropolis where tradition and futurism collide.', bestPlaces: [], restaurants: [] },
+            { id: 'osaka', name: 'Osaka', country: 'Japan', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&h=500&fit=crop',
+                desc: 'Japan\'s kitchen — a food lover\'s paradise.', bestPlaces: [], restaurants: [] },
+            { id: 'rome', name: 'Rome', country: 'Italy', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=500&fit=crop',
+                desc: 'The Eternal City — layers of history spanning millennia.', bestPlaces: [], restaurants: [] },
+            { id: 'florence', name: 'Florence', country: 'Italy', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1543429257-3eb0b65d9c58?w=800&h=500&fit=crop',
+                desc: 'The cradle of the Renaissance.', bestPlaces: [], restaurants: [] },
+            { id: 'paris', name: 'Paris', country: 'France', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=800&h=500&fit=crop',
+                desc: 'The City of Light — romance, art, and culinary excellence.', bestPlaces: [], restaurants: [] },
+            { id: 'lisbon', name: 'Lisbon', country: 'Portugal', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1548707309-dcebe4b2f8e2?w=800&h=500&fit=crop',
+                desc: 'A sun-soaked city of seven hills and fado music.', bestPlaces: [], restaurants: [] },
+            { id: 'santorini', name: 'Santorini', country: 'Greece', continent: 'Europe',
+                image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=800&h=500&fit=crop',
+                desc: 'Iconic whitewashed villages on volcanic cliffs.', bestPlaces: [], restaurants: [] },
+            { id: 'cairo', name: 'Cairo', country: 'Egypt', continent: 'Africa',
+                image: 'https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&h=500&fit=crop',
+                desc: 'An ancient metropolis at the foot of the pyramids.', bestPlaces: [], restaurants: [] },
+            { id: 'marrakech', name: 'Marrakech', country: 'Morocco', continent: 'Africa',
+                image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800&h=500&fit=crop',
+                desc: 'A sensory explosion of souks, riads, and desert magic.', bestPlaces: [], restaurants: [] },
+            { id: 'istanbul', name: 'Istanbul', country: 'Turkey', continent: 'Asia/Europe',
+                image: 'https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&h=500&fit=crop',
+                desc: 'Where East meets West across the Bosphorus.', bestPlaces: [], restaurants: [] },
+            { id: 'bangkok', name: 'Bangkok', country: 'Thailand', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&h=500&fit=crop',
+                desc: 'A vibrant city of golden temples and street food.', bestPlaces: [], restaurants: [] },
+            { id: 'bali', name: 'Bali', country: 'Indonesia', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&h=500&fit=crop',
+                desc: 'The Island of Gods — lush rice terraces and serenity.', bestPlaces: [], restaurants: [] },
+            { id: 'seoul', name: 'Seoul', country: 'South Korea', continent: 'Asia',
+                image: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=800&h=500&fit=crop',
+                desc: 'Ancient palaces beside cutting-edge design.', bestPlaces: [], restaurants: [] },
+            { id: 'sydney', name: 'Sydney', country: 'Australia', continent: 'Oceania',
+                image: 'https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=800&h=500&fit=crop',
+                desc: 'Harbour city with iconic opera house.', bestPlaces: [], restaurants: [] },
+            { id: 'newyork', name: 'New York', country: 'United States', continent: 'North America',
+                image: 'https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&h=500&fit=crop',
+                desc: 'The city that never sleeps.', bestPlaces: [], restaurants: [] },
+            { id: 'vancouver', name: 'Vancouver', country: 'Canada', continent: 'North America',
+                image: 'https://images.unsplash.com/photo-1559511260-66a3e4d0f1e7?w=800&h=500&fit=crop',
+                desc: 'Where mountains meet the ocean.', bestPlaces: [], restaurants: [] },
+            { id: 'buenosaires', name: 'Buenos Aires', country: 'Argentina', continent: 'South America',
+                image: 'https://images.unsplash.com/photo-1589909202802-8f4aadce1849?w=800&h=500&fit=crop',
+                desc: 'The Paris of South America — tango and passion.', bestPlaces: [], restaurants: [] },
+            { id: 'capetown', name: 'Cape Town', country: 'South Africa', continent: 'Africa',
+                image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&h=500&fit=crop',
+                desc: 'Stunning coastline beneath Table Mountain.', bestPlaces: [], restaurants: [] },
+        ];
+        const usersData = [
+            { id: 'user1', displayName: 'Sarah Ahmed', username: '@sarahtravels', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
+                bio: 'Wanderer, photographer, food lover. 37 countries and counting.', location: 'London, UK',
+                stats: { places: 42, countries: 17, friends: 86 } },
+            { id: 'user2', displayName: 'Maya Chen', username: '@mayagoesplaces', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
+                bio: 'Slow travel advocate. Currently in Southeast Asia.', location: 'Singapore',
+                stats: { places: 28, countries: 12, friends: 54 } },
+            { id: 'user3', displayName: 'Omar Farouk', username: '@omarwanders', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
+                bio: 'Architecture enthusiast.', location: 'Cairo, Egypt', stats: { places: 55, countries: 22,
+                friends: 103 } },
+            { id: 'user4', displayName: 'Alex Rivera', username: '@alextravels', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
+                bio: 'Digital nomad. Remote work from paradise.', location: 'Bali, Indonesia',
+                stats: { places: 33, countries: 14, friends: 67 } },
+            { id: 'user5', displayName: 'Lina Johansson', username: '@linaexplores', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
+                bio: 'Nordic explorer with a passion for warm climates.', location: 'Stockholm, Sweden',
+                stats: { places: 19, countries: 9, friends: 41 } },
+            { id: 'user6', displayName: 'David Kim', username: '@davidkimtravel', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
+                bio: 'Food first, sights second.', location: 'Seoul, South Korea', stats: { places: 38, countries: 16,
+                    friends: 72 } },
+            { id: 'user7', displayName: 'Priya Sharma', username: '@priyawanders', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+                bio: 'Solo female traveler.', location: 'Mumbai, India', stats: { places: 24, countries: 10,
+                friends: 58 } },
+            { id: 'user8', displayName: 'Tom Baker', username: '@tombaker', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face',
+                bio: 'Adventure travel photographer.', location: 'Denver, USA', stats: { places: 61, countries: 28,
+                    friends: 95 } },
+        ];
+        const postsData = [
+            { id: 'p1', userId: 'user4', destinationId: 'kyoto', location: 'Kyoto, Japan',
+                image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',
+                caption: 'Morning light at Fushimi Inari. Arrive before 7am.', likes: 342, comments: 28, liked: false,
+                saved: false, timestamp: '2024-12-10T08:30:00' },
+            { id: 'p2', userId: 'user2', destinationId: 'bali',
+                image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&h=500&fit=crop',
+                caption: 'Sunrise over Tegallalang rice terraces.', likes: 218, comments: 15, liked: false, saved: false,
+                timestamp: '2024-12-08T14:00:00' },
+            { id: 'p3', userId: 'user3', destinationId: 'granada',
+                image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=700&h=500&fit=crop',
+                caption: 'The Alhambra at golden hour.', likes: 567, comments: 42, liked: false, saved: false,
+                timestamp: '2024-12-05T18:45:00' },
+            { id: 'p4', userId: 'user5', destinationId: 'santorini',
+                image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=700&h=500&fit=crop',
+                caption: 'Sunset dinners in Oia.', likes: 894, comments: 63, liked: false, saved: false,
+                timestamp: '2024-12-01T20:15:00' },
+            { id: 'p5', userId: 'user6', destinationId: 'marrakech',
+                image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=700&h=500&fit=crop',
+                caption: 'Lost in the souks of Marrakech.', likes: 156, comments: 11, liked: false, saved: false,
+                timestamp: '2024-11-28T11:20:00' },
+            { id: 'p6', userId: 'user1', destinationId: 'lisbon',
+                image: 'https://images.unsplash.com/photo-1548707309-dcebe4b2f8e2?w=700&h=500&fit=crop',
+                caption: 'Tram 28 through the hills of Lisbon.', likes: 432, comments: 35, liked: false, saved: false,
+                timestamp: '2024-11-25T16:00:00' },
+        ];
 
-<script>
-/* =========================================================
-   VEYRA — single-file frontend application
-   Data, state, navigation, rendering and interactions are
-   intentionally centralized so the file runs standalone.
-========================================================= */
+        const state = {
+            currentPage: 'home',
+            currentUser: usersData[0],
+            customStatuses: ['Want to Visit', 'Planning', 'Booked', 'Visited'],
+            bucketList: [
+                { destinationId: 'granada', status: 'Want to Visit', addedDate: '2024-11-15', notes: 'Dream trip for the Alhambra',
+                    priority: 'high', visitedDate: null, visitedDuration: null },
+                { destinationId: 'barcelona', status: 'Visited', addedDate: '2023-06-20', notes: 'Amazing architecture',
+                    priority: 'medium', visitedDate: '2024-05-10', visitedDuration: 5 },
+                { destinationId: 'kyoto', status: 'Planning', addedDate: '2024-10-01',
+                notes: 'Cherry blossom season 2025', priority: 'high', visitedDate: null, visitedDuration: null },
+                { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12', notes: 'Sunset views',
+                    priority: 'medium', visitedDate: null, visitedDuration: null },
+                { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05', notes: 'Booked for March 2025',
+                    priority: 'high', visitedDate: null, visitedDuration: null },
+            ],
+            friends: ['user2', 'user3', 'user4', 'user5'],
+            friendRequests: { sent: [], received: ['user6', 'user7', 'user8'] },
+            notifications: [
+                { id: 'n1', type: 'friend_add', userId: 'user2', text: 'added you as a friend',
+                    time: '2024-12-11T09:00:00', read: false },
+                { id: 'n2', type: 'like', userId: 'user4', text: 'liked your Kyoto recommendation',
+                    time: '2024-12-10T22:00:00', read: false },
+                { id: 'n3', type: 'comment', userId: 'user3', text: 'commented on your Granada post',
+                    time: '2024-12-09T14:30:00', read: true },
+                { id: 'n4', type: 'follow', userId: 'user8', text: 'started following you',
+                time: '2024-12-08T11:00:00', read: true },
+                { id: 'n5', type: 'bucketlist', userId: 'user2', text: 'added Bali to their bucket list',
+                    time: '2024-12-07T08:00:00', read: true },
+            ],
+            sharedBucketLists: [
+                { id: 'sbl1', name: 'Summer Europe 2025', description: 'Planning our dream European summer trip',
+                    members: ['user1', 'user2', 'user3'], destinations: ['granada', 'barcelona', 'paris'], posts: [
+                        { userId: 'user2', text: 'I can\'t wait for Granada! The Alhambra looks incredible.',
+                            timestamp: '2024-12-01T10:00:00' },
+                        { userId: 'user3', text: 'We should add Seville too — it\'s only a short train from Granada.',
+                            timestamp: '2024-12-02T14:30:00' },
+                        { userId: 'user1',
+                            text: 'Great idea! Let\'s map out the full route: Barcelona → Granada → Seville → Paris.',
+                            timestamp: '2024-12-02T16:00:00' },
+                    ], createdBy: 'user1', createdAt: '2024-11-20T08:00:00' },
+                { id: 'sbl2', name: 'Asia Adventure', description: 'Exploring Japan and Korea together',
+                    members: ['user1', 'user4', 'user5'], destinations: ['kyoto', 'tokyo', 'seoul'], posts: [
+                        { userId: 'user4',
+                            text: 'Kyoto in cherry blossom season is a must! I recommend late March.',
+                            timestamp: '2024-11-25T09:00:00' },
+                        { userId: 'user5', text: 'Can we also add Osaka? The food there is unreal.',
+                            timestamp: '2024-11-26T11:00:00' },
+                    ], createdBy: 'user4', createdAt: '2024-11-18T12:00:00' },
+            ],
+            searchQuery: '',
+            exploreFilter: null,
+            settings: { darkMode: true, reducedMotion: false, compactMode: false, notifications: true,
+                privateProfile: false },
+            blSwipeTab: 0,
+        };
 
-const img = (q,w=900,h=1100) => `https://images.unsplash.com/photo-${q}?auto=format&fit=crop&w=${w}&h=${h}&q=86`;
-const images = [
- "1500534623283-312aade485b7","1540959733332-eab4deabeeaf","1530789253388-582c481c54b0",
- "1516483638261-f4dbaf036963","1528909514045-2f3c7e7f7e0d","1524492412937-b28074a5d7da",
- "1507525428034-b723cf961d3e","1539650116574-75c0c6d73f6e","1502602898657-3e91760cbb34",
- "1499856871958-5b9627545d1a","1518548419970-6c0e9b5b4e3d","1533929736458-ca588d08c8be",
- "1528127269322-539801943592","1537996194471-e657df975ab4","1518509562904-e7ef99cdcc86",
- "1493976040374-85c8e12f0c0e","1526392060635-9d6019884377","1505008571951-5c0c9f1c8b5b",
- "1534430480872-3498386a1dbe","1500534623283-312aade485b7"
-];
-const avatarImgs = [
- "1500648767791-00dcc994a43e","1494790108377-be9c29b29330","1506794778202-cad84cf45f1d",
- "1544005313-94ddf0286df2","1534528741775-53994a69daeb","1507003211169-0a1dd7228f2",
- "1517841905240-472988babdf9","1531123897727-8f129e1688ce"
-].map(x=>`https://images.unsplash.com/photo-${x}?auto=format&fit=crop&w=160&h=160&q=85`);
+        function getDestination(id) { return destinationsData.find(d => d.id === id); }
 
-const countries = [
- ["Spain","ES","Barcelona","1518509562904-e7ef99cdcc86","Spain blends late-night cities, old quarters and Mediterranean coast."],
- ["Japan","JP","Kyoto","1493976040374-85c8e12f0c0e","Temple lanes, quiet gardens and food culture."],
- ["Italy","IT","Rome","1529260830199-42c0b0d2a4f4","Ancient streets, art and unmistakable food."],
- ["France","FR","Paris","1502602898657-3e91760cbb34","Museums, cafés, river walks and neighborhoods."],
- ["Portugal","PT","Lisbon","1555881400-74d7acaacd8b","Hills, tiled streets and Atlantic light."],
- ["Greece","GR","Santorini","1570077188670-e3a8d69ac5ff","Whitewashed villages and island landscapes."],
- ["Egypt","EG","Cairo","1572252009286-268acec5ca0a","Layered history, river life and desert horizons."],
- ["Morocco","MA","Marrakech","1548013146-72479768bada","Souks, courtyards, color and mountain gateways."],
- ["Turkey","TR","Istanbul","1524231757912-21f4fe3a7200","A city stretched between two continents."],
- ["Thailand","TH","Bangkok","1508009603885-50cf7c579365","Street food, temples and restless city energy."],
- ["Indonesia","ID","Bali","1537996194471-e657df975ab4","Rice terraces, surf and volcanic landscapes."],
- ["United States","US","New York","1485871981525-5b1b8f1b6f7f","Neighborhoods, galleries and iconic city scale."],
- ["Canada","CA","Vancouver","1503614472-8c93d56b193d","Mountains, water and a relaxed urban rhythm."],
- ["Australia","AU","Sydney","1506905925346-21bda4d32df4","Harbor views, beaches and coastal walks."],
- ["South Korea","KR","Seoul","1538485399081-7c8977d9b8b5","Design, food, nightlife and mountain-backed neighborhoods."]
-];
+        function getUser(id) { return usersData.find(u => u.id === id); }
 
-const destNames = [
- ["Barcelona","Spain","1518509562904-e7ef99cdcc86"],["Kyoto","Japan","1493976040374-85c8e12f0c0e"],
- ["Rome","Italy","1529260830199-42c0b0d2a4f4"],["Paris","France","1502602898657-3e91760cbb34"],
- ["Lisbon","Portugal","1555881400-74d7acaacd8b"],["Santorini","Greece","1570077188670-e3a8d69ac5ff"],
- ["Cairo","Egypt","1572252009286-268acec5ca0a"],["Marrakech","Morocco","1548013146-72479768bada"],
- ["Istanbul","Turkey","1524231757912-21f4fe3a7200"],["Bangkok","Thailand","1508009603885-50cf7c579365"],
- ["Bali","Indonesia","1537996194471-e657df975ab4"],["New York","United States","1485871981525-5b1b8f1b6f7f"],
- ["Vancouver","Canada","1503614472-8c93d56b193d"],["Sydney","Australia","1506905925346-21bda4d32df4"],
- ["Seoul","South Korea","1538485399081-7c8977d9b8b5"],["Granada","Spain","1539650116574-75c0c6d73f6e"],
- ["Madrid","Spain","1533929736458-ca588d08c8be"],["Valencia","Spain","1528127269322-539801943592"],
- ["Seville","Spain","1518548419970-6c0e9b5b4e3d"],["Osaka","Japan","1528360983277-0a0e1c0e7a1e"],
- ["Nara","Japan","1516483638261-f4dbaf036963"],["Florence","Italy","1540959733332-eab4deabeeaf"],
- ["Amalfi","Italy","1507525428034-b723cf961d3e"],["Nice","France","1499856871958-5b9627545d1a"],
- ["Porto","Portugal","1528909514045-2f3c7e7f7e0d"],["Athens","Greece","1539650116574-75c0c6d73f6e"],
- ["Luxor","Egypt","1500534623283-312aade485b7"],["Chefchaouen","Morocco","1548013146-72479768bada"],
- ["Cappadocia","Turkey","1533929736458-ca588d08c8be"],["Chiang Mai","Thailand","1518509562904-e7ef99cdcc86"],
- ["Ubud","Indonesia","1537996194471-e657df975ab4"],["Los Angeles","United States","1530789253388-582c481c54b0"],
- ["Montreal","Canada","1503614472-8c93d56b193d"],["Melbourne","Australia","1506905925346-21bda4d32df4"],
- ["Busan","South Korea","1538485399081-7c8977d9b8b5"],["Hakone","Japan","1493976040374-85c8e12f0c0e"],
- ["Cinque Terre","Italy","1526392060635-9d6019884377"],["Bordeaux","France","1499856871958-5b9627545d1a"],
- ["Crete","Greece","1570077188670-e3a8d69ac5ff"],["Aswan","Egypt","1572252009286-268acec5ca0a"]
-];
-const descriptions = {
- Barcelona:"Gaudí architecture, beach afternoons and neighborhood dinners make Barcelona easy to keep returning to.",
- Kyoto:"A slower rhythm of temple gardens, wooden lanes, tea houses and seasonal color.",
- Rome:"An open-air museum where ancient ruins, neighborhood trattorias and contemporary life overlap.",
- Paris:"A city of museums, small streets, river walks and long café afternoons.",
- Lisbon:"Sunlit hills, tiled façades and Atlantic air wrapped around a deeply walkable city.",
- Granada:"A compact Andalusian city framed by the Sierra Nevada and the Alhambra."
-};
+        function getBucketEntry(destId) { return state.bucketList.find(b => b.destinationId === destId); }
 
-const destinations = destNames.map((d,i)=>({id:"d"+i,name:d[0],country:d[1],image:img(d[2]),description:descriptions[d[0]]||`Explore ${d[0]} through local neighborhoods, memorable food and places worth slowing down for.`,rating:(4.5+(i%5)/10).toFixed(1),distance:(i+2)*37+" km"}));
-const users = [
- ["Sarah Ahmed","sarahtravels","Cairo, Egypt","A curious traveler collecting cities slowly.",42,17,86],
- ["Alex Morgan","alextravels","London, UK","Finding good streets, better food and quieter corners.",31,12,64],
- ["Maya Chen","mayawanders","Toronto, Canada","Mostly chasing light, architecture and noodles.",57,21,104],
- ["Omar Hassan","omar.roams","Cairo, Egypt","Weekend explorer with a long list.",26,11,73],
- ["Lina Rossi","linarossi","Milan, Italy","Food first, itinerary second.",48,15,91],
- ["Noah Williams","noahgoes","New York, USA","Cities, coastlines, long walks.",36,18,72],
- ["Sofia Martin","sofiasees","Madrid, Spain","Collecting small moments.",63,24,112],
- ["Yuki Tanaka","yukitravels","Tokyo, Japan","Quiet places and local cafés.",39,14,80],
- ["Adam Reed","adamroutes","Manchester, UK","Road trips and old towns.",28,13,59],
- ["Nadia Ali","nadiaexplores","Dubai, UAE","A passport full of unfinished plans.",44,19,88],
- ["Theo Carter","theocarter","Melbourne, Australia","Always planning the next stop.",52,20,97],
- ["Emma Clark","emmamoves","Vancouver, Canada","Mountains outside, city inside.",34,16,75],
- ["Daniel Kim","danielk","Seoul, South Korea","Food, design, late-night walks.",46,18,93],
- ["Mia Johnson","miajourneys","Chicago, USA","Museums and neighborhood bakeries.",29,10,61],
- ["Hana Suzuki","hanascope","Osaka, Japan","A camera roll with too many sunsets.",51,22,99],
- ["Leo Martin","leomiles","Paris, France","Architecture and train windows.",40,17,82],
- ["Clara Evans","claraontheroad","Dublin, Ireland","Small bags, big itineraries.",22,9,55],
- ["Samir Khan","samirkhan","Istanbul, Turkey","Between continents, usually.",38,15,70],
- ["Julia Costa","juliacosta","Lisbon, Portugal","Atlantic days and tiled streets.",45,19,89],
- ["Ethan Brown","ethanbrown","Boston, USA","Finding a good view wherever I go.",27,12,57],
- ["Amelia King","ameliaking","Sydney, Australia","Coastal walks are the itinerary.",33,14,68],
- ["Rami Saleh","ramisaleh","Amman, Jordan","History, food and desert roads.",30,13,66],
- ["Grace Lee","gracelee","Singapore","Short trips, strong coffee.",41,16,79],
- ["Lucas Silva","lucassilva","São Paulo, Brazil","Cities with a pulse.",49,20,96],
- ["Mariam Noor","mariamnoor","Cairo, Egypt","Looking for the stories behind places.",37,15,83],
- ["Ben Taylor","bentaylor","Los Angeles, USA","Roadside stops and mountain mornings.",32,13,71],
- ["Iris Wong","iriswong","Hong Kong","Dense cities and quiet islands.",55,23,108],
- ["Max Weber","maxweber","Berlin, Germany","Museums by day, local bars by night.",43,17,87],
- ["Ella Moore","ellamoore","Auckland, New Zealand","Always one ferry away.",25,11,58],
- ["Karim Adel","karimadel","Alexandria, Egypt","Mediterranean walks and old cafés.",35,14,76]
-].map((u,i)=>({id:"u"+i,name:u[0],username:u[1],location:u[2],bio:u[3],places:u[4],countries:u[5],friends:u[6],avatar:avatarImgs[i%avatarImgs.length]}));
+        function isInBucketList(destId) { return !!getBucketEntry(destId); }
 
-const postCaptions = [
- "The kind of afternoon that makes you forget to check the time.",
- "A few streets, one very good meal, and nowhere else to be.",
- "Saved this corner before I even knew what neighborhood it was.",
- "The best travel days usually have the least ambitious plans.",
- "Still thinking about the light here.",
- "A city is better when you walk it without a destination."
-];
-const posts = Array.from({length:32},(_,i)=>({
- id:"p"+i,user:users[(i+1)%users.length].id,destination:destinations[(i*3)%destinations.length].id,
- image:img(images[i%images.length],900,1000),caption:postCaptions[i%postCaptions.length],
- likes:87+i*13,comments:6+(i%9),liked:i%7===0,saved:i%9===0,type:["photo","note","recommendation","photo"][i%4]
-}));
+        function isFriend(userId) { return state.friends.includes(userId); }
 
-const restaurants = [
- "Disfrutar","Gaggan","Trattoria da Enzo","Le Comptoir du Relais","Taberna da Rua das Flores",
- "Kuzina","Abou Tarek","Dar Yacout","Mikla","Jay Fai","Locavore","Peter Luger",
- "Published on Main","Quay","Mingles","Bar Benfiddich","Casa Mono","Clamato","Santo Palato","Sobrino de Botín",
- "Buvette","Osteria Francescana"
-].map((name,i)=>({name,city:destinations[i%destinations.length].name,image:img(images[(i+5)%images.length],500,400),rating:(4.5+(i%5)/10).toFixed(1)}));
-const activities = ["Sunrise walk","Neighborhood food tour","Museum afternoon","Coastal hike","Old-town photography","Market breakfast","Scenic train ride","Local cooking class","Architecture walk","Sunset viewpoint","Temple visit","Rooftop dinner","Street-food crawl","Cycling route","Desert day trip","Boat ride","Gallery hopping","Coffee crawl","Mountain cable car","Night market"].map((name,i)=>({name,city:destinations[(i+4)%destinations.length].name}));
-const historic = ["Alhambra","Fushimi Inari","Colosseum","Mont-Saint-Michel","Belém Tower","Acropolis","Karnak Temple","Aït Benhaddou","Hagia Sophia","Ayutthaya","Borobudur","Statue of Liberty","Old Montréal","Sydney Opera House","Gyeongbokgung"].map((name,i)=>({name,city:destinations[(i*2)%destinations.length].name,image:img(images[(i+8)%images.length],500,400)}));
+        function getFriendRequestStatus(userId) {
+            if (state.friendRequests.sent.includes(userId)) return 'sent';
+            if (state.friendRequests.received.includes(userId)) return 'received';
+            return null;
+        }
 
-const state = {
- currentUser:users[0], screen:"home", history:[], selectedDestination:null, selectedCountry:null, selectedProfile:null, selectedPost:null,
- searchQuery:"", activeCategory:"All", bucketList:[
-  {destination:"Granada",country:"Spain",status:"Want to Visit",priority:"High",notes:"Spend time around Albaicín and the Alhambra."},
-  {destination:"Barcelona",country:"Spain",status:"Planning",priority:"Medium",notes:"Architecture, food and a long walk by the sea."},
-  {destination:"Kyoto",country:"Japan",status:"Want to Visit",priority:"High",notes:"Temple gardens and a quieter neighborhood stay."},
-  {destination:"Florence",country:"Italy",status:"Want to Visit",priority:"Medium",notes:"Museums and a slow Tuscan day."},
-  {destination:"Lisbon",country:"Portugal",status:"Visited",priority:"Low",notes:"A city I want to revisit."},
-  {destination:"Marrakech",country:"Morocco",status:"Want to Visit",priority:"Medium",notes:"Stay near the medina."},
-  {destination:"Istanbul",country:"Turkey",status:"Planning",priority:"High",notes:"Food and both sides of the city."},
-  {destination:"Seoul",country:"South Korea",status:"Want to Visit",priority:"Medium",notes:"Design districts and late dinners."}
- ],
- friends:users.slice(1,8).map(u=>u.id), friendRequests:[],
- notifications:[
-  {user:"u2",text:"Maya added you as a friend",time:"Today"},
-  {user:"u1",text:"Alex liked your Kyoto recommendation",time:"Today"},
-  {user:"u4",text:"Lina commented on your Rome post",time:"Yesterday"},
-  {user:"u3",text:"Omar started following you",time:"Earlier"}
- ],
- settings:{dark:true,reduced:false,compact:false,notifications:true,private:false},
- searchFocused:false, profileTab:"posts"
-};
+        function getBucketListByCountry() {
+            const grouped = {};
+            state.bucketList.forEach(entry => {
+                const dest = getDestination(entry.destinationId);
+                if (!dest) return;
+                if (!grouped[dest.country]) grouped[dest.country] = [];
+                grouped[dest.country].push({ ...entry, destination: dest });
+            });
+            return grouped;
+        }
 
-function dest(name){return destinations.find(d=>d.name.toLowerCase()===name.toLowerCase())||destinations[0]}
-function user(id){return users.find(u=>u.id===id)||users[0]}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
-function render(){
- document.documentElement.style.setProperty("--nav",state.settings.compact?"68px":"76px");
- document.body.classList.toggle("compact",state.settings.compact);
- const app=document.getElementById("app");
- app.innerHTML=`<div class="shell">
-   ${sidebar()}
-   <main class="main">
-    ${topbar()}
-    <div class="content">${screenHtml()}</div>
-   </main>
- </div>${bottomNav()}`;
- bind();
-}
-function sidebar(){
- const items=[["home","house"],["explore","compass"],["bucket","bookmark"],["friends","people"],["profile","person"]];
- return `<aside class="sidebar"><div class="brand">veyra</div><nav class="side-nav">${items.map(([s,i])=>`<button class="${state.screen===s?'active':''}" onclick="navigate('${s}')"><i class="bi bi-${i}"></i>${s==="bucket"?"Bucket List":s[0].toUpperCase()+s.slice(1)}</button>`).join("")}</nav><div class="side-user"><img src="${state.currentUser.avatar}"><div>${state.currentUser.name}<span>@${state.currentUser.username}</span></div><button class="icon-btn" onclick="navigate('settings')"><i class="bi bi-gear"></i></button></div></aside>`
-}
-function topbar(){return `<header class="topbar"><button class="brand" onclick="navigate('home')">veyra</button><div class="top-actions"><button class="icon-btn" aria-label="Search" onclick="navigate('search')"><i class="bi bi-search"></i></button><button class="icon-btn" aria-label="Notifications" onclick="navigate('notifications')"><i class="bi bi-bell"></i></button><button class="icon-btn" aria-label="Profile" onclick="navigate('profile')"><img class="avatar" src="${state.currentUser.avatar}" alt=""></button></div></header>`}
-function bottomNav(){
- const items=[["home","house","Home"],["explore","compass","Explore"],["bucket","bookmark","Bucket List"],["friends","people","Friends"],["profile","person","Profile"]];
- return `<nav class="bottom-nav">${items.map(([s,i,l])=>`<button class="nav-item ${state.screen===s?'active':''}" onclick="navigate('${s}')"><i class="bi bi-${i}${state.screen===s?"-fill":""}"></i><span>${l}</span></button>`).join("")}</nav>`
-}
+        function timeAgo(isoString) {
+            const now = new Date();
+            const then = new Date(isoString);
+            const diffMs = now - then;
+            const diffMins = Math.floor(diffMs / 60000);
+            if (diffMins < 1) return 'Just now';
+            if (diffMins < 60) return `${diffMins}m ago`;
+            const diffHrs = Math.floor(diffMins / 60);
+            if (diffHrs < 24) return `${diffHrs}h ago`;
+            const diffDays = Math.floor(diffHrs / 24);
+            if (diffDays < 7) return `${diffDays}d ago`;
+            return then.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }
 
-function screenHtml(){
- switch(state.screen){
-  case "home":return home();
-  case "explore":return explore();
-  case "destination":return destinationScreen();
-  case "country":return countryScreen();
-  case "bucket":return bucket();
-  case "bucketDestination":return bucketDestination();
-  case "friends":return friends();
-  case "friend":return profileScreen(state.selectedProfile||users[1],true);
-  case "profile":return profileScreen(state.currentUser,false);
-  case "search":return searchScreen();
-  case "notifications":return notifications();
-  case "create":return createScreen();
-  case "post":return postDetails();
-  case "settings":return settings();
-  default:return home();
- }
-}
-function home(){
- const picks=[dest("Barcelona"),dest("Kyoto"),dest("Lisbon"),dest("Marrakech")];
- return `<div class="screen">
-  <div class="eyebrow">Good morning, ${state.currentUser.name.split(" ")[0]}</div>
-  <h1>Where will you go next?</h1>
-  <div class="search" onclick="navigate('search')"><i class="bi bi-search"></i><input placeholder="Search destinations, people, places..." readonly></div>
-  <div class="home-grid">
-   <div>
-    <div class="hero-feature"><img src="${dest("Granada").image}" alt="Granada"><div class="hero-copy"><div class="eyebrow">Your next stop</div><h2>Granada</h2><p>Trade the obvious route for an Andalusian city of courtyards, mountain views and late dinners.</p><div class="action-row"><button class="primary" onclick="openDestination('Granada')">Explore destination <i class="bi bi-arrow-right"></i></button></div></div></div>
-    <section class="section"><div class="section-head"><h2>Continue Exploring</h2><button onclick="navigate('explore')">See all</button></div><div class="rail">${picks.map(destinationCard).join("")}</div></section>
-   </div>
-   <div>
-    <section class="section" style="margin-top:22px"><div class="section-head"><h2>Your Bucket List</h2><button onclick="navigate('bucket')">View list</button></div><div class="info-list">${bucketPreview()}</div></section>
-    <section class="section"><div class="section-head"><h2>Friends Are Traveling</h2><button onclick="navigate('friends')">All friends</button></div><div class="rail friend-rail">${state.friends.slice(0,5).map(id=>friendMini(user(id))).join("")}</div></section>
-   </div>
-  </div>
-  <section class="section"><div class="section-head"><h2>Recommended For You</h2><button onclick="navigate('explore')">Explore</button></div><div class="rail">${[dest("Florence"),dest("Seoul"),dest("Cappadocia"),dest("Sydney")].map(destinationCard).join("")}</div></section>
-  <section class="section"><div class="section-head"><h2>Trending Now</h2></div><div class="grid">${[dest("Kyoto"),dest("Lisbon"),dest("Istanbul"),dest("Barcelona")].map(exploreCard).join("")}</div></section>
-  <section class="section"><div class="section-head"><h2>Recent Activity</h2></div><div class="activity-list">${activityList()}</div></section>
- </div>`
-}
-function destinationCard(d){
- const saved=state.bucketList.some(b=>b.destination===d.name);
- return `<article class="dest-card"><div class="dest-img"><img loading="lazy" src="${d.image}" alt="${escapeHtml(d.name)}"><button class="save-float ${saved?'saved':''}" onclick="event.stopPropagation();toggleBucket('${d.name}')"><i class="bi bi-bookmark${saved?'-fill':''}"></i></button></div><div class="meta" onclick="openDestination('${escapeHtml(d.name)}')"><div class="place">${escapeHtml(d.country)}</div><strong>${escapeHtml(d.name)}</strong><div class="tiny">${d.rating} rating · ${d.distance}</div></div></article>`
-}
-function exploreCard(d){return `<article class="explore-card" onclick="openDestination('${escapeHtml(d.name)}')"><img loading="lazy" src="${d.image}" alt="${escapeHtml(d.name)}"><div class="label"><small>${escapeHtml(d.country)}</small><strong>${escapeHtml(d.name)}</strong></div></article>`}
-function friendMini(u){return `<button class="friend" onclick="openProfile('${u.id}')"><img class="friend-img" src="${u.avatar}" alt="${escapeHtml(u.name)}"><strong>${escapeHtml(u.name.split(" ")[0])}</strong><span>@${escapeHtml(u.username)}</span></button>`}
-function bucketPreview(){
- return state.bucketList.slice(0,4).map(b=>`<div class="info-row"><span>${escapeHtml(b.country)} · ${escapeHtml(b.destination)}</span><b>${escapeHtml(b.status)}</b></div>`).join("")
-}
-function activityList(){
- const acts=[["u2","Maya added Kyoto to her bucket list","18 min ago"],["u3","Omar visited Barcelona","1 hr ago"],["u4","Lina shared a new restaurant in Rome","3 hr ago"],["u5","Noah saved your Lisbon recommendation","Yesterday"]];
- return acts.map(a=>`<div class="activity"><img src="${user(a[0]).avatar}"><div><p>${escapeHtml(a[1])}</p><time>${a[2]}</time></div></div>`).join("")
-}
+        function showToast(message) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 2600);
+        }
 
-function explore(){
- const filtered=state.activeCategory==="All"?destinations:destinations.filter(d=>{
-  const map={Countries:true,Cities:true,Food:true,History:true,Activities:true,Nature:true,Beaches:true,Architecture:true};
-  return map[state.activeCategory]||true
- });
- return `<div class="screen"><div class="eyebrow">Discovery</div><h1>Explore the world.</h1>
- <div class="search"><i class="bi bi-search"></i><input id="exploreSearch" value="${escapeHtml(state.searchQuery)}" oninput="setSearch(this.value,'explore')" placeholder="Search destinations"></div>
- <div class="section"><div class="chips">${["All","Countries","Cities","Food","History","Activities","Nature","Beaches","Architecture"].map(c=>`<button class="chip ${state.activeCategory===c?'active':''}" onclick="setCategory('${c}')">${c}</button>`).join("")}</div></div>
- <div class="section"><div class="section-head"><h2>${state.searchQuery?`Results for “${escapeHtml(state.searchQuery)}”`:"Places worth saving"}</h2><button onclick="navigate('search')"><i class="bi bi-sliders"></i> Filters</button></div>
- <div class="grid">${filtered.filter(d=>(d.name+" "+d.country).toLowerCase().includes(state.searchQuery.toLowerCase())).slice(0,24).map(exploreCard).join("") || `<div class="empty" style="grid-column:1/-1"><i class="bi bi-compass"></i>No destinations found</div>`}</div></div>
- </div>`
-}
-function destinationScreen(){
- const d=state.selectedDestination||dest("Granada"), saved=state.bucketList.some(b=>b.destination===d.name);
- const places=historic.filter(x=>x.city===d.name).slice(0,3);
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><div><div class="eyebrow">${escapeHtml(d.country)}</div><span class="sub">Destination</span></div></div>
- <div class="destination-hero" style="margin-top:15px"><img src="${d.image}" alt="${escapeHtml(d.name)}"><div class="dest-detail-copy"><div class="eyebrow">${escapeHtml(d.country)}</div><h1>${escapeHtml(d.name)}</h1><p class="sub" style="color:#ddd">${escapeHtml(d.description)}</p><div class="action-row"><button class="${saved?'secondary':'primary'}" onclick="toggleBucket('${escapeHtml(d.name)}')"><i class="bi bi-bookmark${saved?'-fill':''}"></i>${saved?'Saved':'Add to bucket list'}</button><button class="secondary" onclick="openSheet('share')"><i class="bi bi-share"></i></button></div></div></div>
- <section class="section"><div class="section-head"><h2>About</h2></div><p class="sub">${escapeHtml(d.description)} ${escapeHtml(d.name)} rewards travelers who give themselves time to wander beyond the headline sights.</p></section>
- <section class="section"><div class="section-head"><h2>Best Places</h2><button onclick="navigate('country')">Country guide</button></div><div class="info-list">${(places.length?places:historic.slice(0,4)).map(placeRow).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>What next?</h2></div>${nextStop(d)}</section>
- <section class="section"><div class="section-head"><h2>Good to know</h2></div><div class="info-list"><div class="info-row"><span>Best for</span><b>4–6 days</b></div><div class="info-row"><span>Style</span><b>Walkable · Social · Cultural</b></div><div class="info-row"><span>Rating</span><b>${d.rating} / 5</b></div></div></section>
- </div>`
-}
-function placeRow(p){return `<div class="place-row"><img loading="lazy" src="${p.image}" alt="${escapeHtml(p.name)}"><div><strong>${escapeHtml(p.name)}</strong><p>${escapeHtml(p.city)} · Historic place worth making time for.</p><span class="eyebrow">4.8 · Landmark</span></div></div>`}
-function nextStop(d){
- const n={Barcelona:"Valencia",Madrid:"Granada",Granada:"Seville",Lisbon:"Porto",Kyoto:"Nara",Rome:"Florence",Istanbul:"Cappadocia"}[d.name]||destinations[(destinations.indexOf(d)+1)%destinations.length].name;
- return `<div class="next-stop"><img src="${dest(n).image}" alt="${n}"><div class="grow"><div class="eyebrow">Your next stop</div><h3 style="font-size:19px;margin:3px 0">${n}</h3><div class="sub">3h 20m · 312 km · natural continuation</div><p class="sub" style="margin:6px 0 0">More of the same region, with a different pace and nearby places to explore.</p></div><button class="icon-btn" onclick="openDestination('${n}')"><i class="bi bi-arrow-right"></i></button></div>`
-}
-function countryScreen(){
- const d=state.selectedDestination||dest("Granada"), c=countries.find(x=>x[0]===d.country)||countries[0], ds=destinations.filter(x=>x.country===c[0]);
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><div><div class="eyebrow">Country</div><span class="sub">${c[1]}</span></div></div>
- <div class="hero-feature" style="height:340px;margin-top:15px"><img src="${img(c[3])}" alt="${c[0]}"><div class="hero-copy"><div class="eyebrow">Explore</div><h2>${c[0]}</h2><p>${c[4]}</p></div></div>
- <section class="section"><div class="section-head"><h2>Best Places</h2></div><div class="rail">${ds.slice(0,8).map(destinationCard).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>Top 5 Restaurants</h2></div><div class="info-list">${restaurants.filter(r=>r.city===d.name).concat(restaurants.slice(0,5)).slice(0,5).map(r=>`<div class="place-row"><img src="${r.image}" alt=""><div><strong>${r.name}</strong><p>${r.city} · ${r.rating} rating · local favorite</p></div></div>`).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>Traditional Food</h2></div><p class="sub">Look for regional dishes, market snacks and neighborhood restaurants rather than only the famous spots.</p></section>
- <section class="section"><div class="section-head"><h2>Historical Places</h2></div><div class="rail">${historic.slice(0,5).map(h=>`<div class="dest-card"><div class="dest-img" style="height:210px"><img src="${h.image}" alt="${h.name}"></div><div class="meta"><div class="place">${h.city}</div><strong>${h.name}</strong></div></div>`).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>Activities</h2></div><div class="chips">${activities.slice(0,8).map(a=>`<span class="chip">${a.name}</span>`).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>Travel Route</h2></div><div class="route">${["Barcelona","Valencia","Madrid","Granada","Seville"].map((x,i)=>`<div class="route-item"><span>0${i+1}</span><strong>${x}</strong></div>`).join("")}</div></section>
- </div>`
-}
-function bucket(){
- const groups=[...new Set(state.bucketList.map(x=>x.country))];
- return `<div class="screen"><div class="eyebrow">Your collection</div><h1>Bucket List</h1><p class="sub">A structured view of the places you want to visit, plan and remember.</p>
- <div class="section"><div class="chips">${["All","Want to Visit","Planning","Booked","Visited"].map(s=>`<button class="chip ${state.activeCategory===s||(!["Want to Visit","Planning","Booked","Visited"].includes(state.activeCategory)&&s==="All")?'active':''}" onclick="setBucketFilter('${s}')">${s}</button>`).join("")}</div></div>
- <div class="section">${groups.map(countryBucket).join("") || `<div class="empty"><i class="bi bi-bookmark"></i>Your bucket list is empty</div>`}</div>
- <button class="primary" style="width:100%;margin-top:8px" onclick="openSheet('add')"><i class="bi bi-plus"></i>Add destination</button>
- </div>`
-}
-function countryBucket(c){
- let items=state.bucketList.filter(x=>x.country===c);
- if(["Want to Visit","Planning","Booked","Visited"].includes(state.activeCategory)) items=items.filter(x=>x.status===state.activeCategory);
- if(!items.length)return "";
- const cover=dest(items[0].destination);
- return `<div class="country-row"><button class="country-head" style="width:100%;text-align:left" onclick="toggleCountry('${escapeHtml(c)}')"><img src="${cover.image}" alt=""><div class="grow"><strong>${escapeHtml(c)}</strong><small>${items.length} destination${items.length!==1?'s':''} saved</small></div><i class="bi bi-chevron-${state.openCountry===c?'up':'down'}"></i></button>${state.openCountry===c?`<div class="country-body">${items.map(bucketDest).join("")}</div>`:""}</div>`
-}
-function bucketDest(b){
- const d=dest(b.destination);
- return `<button class="bucket-dest" onclick="openBucketDestination('${escapeHtml(b.destination)}')"><img src="${d.image}" alt=""><div class="grow"><strong>${escapeHtml(b.destination)}</strong><small>${escapeHtml(b.notes||"No personal note yet.")}</small></div><span class="status">${escapeHtml(b.status)}</span></button>`
-}
-function bucketDestination(){
- const b=state.bucketList.find(x=>x.destination===state.selectedDestination?.name)||state.bucketList.find(x=>x.destination===state.selectedDestination?.name);
- const d=state.selectedDestination||dest("Granada");
- if(!b)return destinationScreen();
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><div><div class="eyebrow">${escapeHtml(b.country)}</div><span class="sub">Bucket List detail</span></div></div>
- <div class="destination-hero" style="margin-top:15px;height:390px"><img src="${d.image}" alt="${d.name}"><div class="dest-detail-copy"><div class="eyebrow">${escapeHtml(b.status)}</div><h1>${escapeHtml(d.name)}</h1><p class="sub" style="color:#ddd">Saved ${b.priority.toLowerCase()} priority · Your personal travel plan.</p></div></div>
- <section class="section"><div class="section-head"><h2>Trip details</h2></div><div class="info-list"><div class="info-row"><span>Saved</span><b>Aug 08, 2026</b></div><div class="info-row"><span>Priority</span><b>${b.priority}</b></div><div class="info-row"><span>Status</span><b>${b.status}</b></div><div class="info-row"><span>Estimated duration</span><b>4–6 days</b></div></div></section>
- <section class="section"><div class="section-head"><h2>Personal notes</h2><button onclick="openSheet('editBucket')">Edit</button></div><p class="sub">${escapeHtml(b.notes)}</p></section>
- <section class="section"><div class="section-head"><h2>Progress</h2><span class="eyebrow">${b.status==="Visited"?"100":"28"}%</span></div><div style="height:5px;background:#292c29;border-radius:9px;overflow:hidden"><div style="height:100%;width:${b.status==="Visited"?"100":"28"}%;background:var(--accent)"></div></div></section>
- <section class="section"><div class="action-row"><button class="primary" onclick="cycleStatus('${escapeHtml(d.name)}')"><i class="bi bi-check2"></i>Change status</button><button class="secondary" onclick="openSheet('plan')"><i class="bi bi-calendar3"></i>Plan trip</button><button class="secondary" onclick="removeBucket('${escapeHtml(d.name)}')"><i class="bi bi-trash3"></i>Remove</button></div></section>
- </div>`
-}
-function friends(){
- return `<div class="screen"><div class="eyebrow">Your people</div><h1>Friends</h1><div class="search" onclick="navigate('search')"><i class="bi bi-search"></i><input placeholder="Find travelers" readonly></div>
- <section class="section"><div class="section-head"><h2>Friends Are Traveling</h2></div><div class="grid">${state.friends.map(id=>friendCard(user(id))).join("")}</div></section>
- <section class="section"><div class="section-head"><h2>Suggested</h2></div><div class="grid">${users.filter(u=>!state.friends.includes(u.id)&&u.id!==state.currentUser.id).slice(0,8).map(friendCard).join("")}</div></section></div>`
-}
-function friendCard(u){
- const isFriend=state.friends.includes(u.id), pending=state.friendRequests.includes(u.id);
- return `<article style="padding:15px;border:1px solid var(--border);background:var(--surface);border-radius:18px"><img src="${u.avatar}" style="width:58px;height:58px;border-radius:50%;object-fit:cover" alt="${u.name}"><div style="margin-top:10px"><strong style="font:700 15px Manrope">${u.name}</strong><div class="username">@${u.username}</div><div class="sub" style="margin-top:5px">${u.location}</div><div class="sub" style="margin-top:5px">${u.places} places · ${u.countries} countries</div></div><div class="action-row">${isFriend?`<button class="secondary" onclick="openProfile('${u.id}')">View profile</button><button class="icon-btn" onclick="removeFriend('${u.id}')" title="Remove"><i class="bi bi-person-dash"></i></button>`:`<button class="primary" onclick="addFriend('${u.id}')">${pending?"Pending":"Add Friend"}</button>`}</div></article>`
-}
-function profileScreen(u,isFriend){
- const isMe=u.id===state.currentUser.id;
- return `<div class="screen"><div class="profile-cover"><img src="${img(images[(u.places)%images.length])}" alt=""></div><div class="profile-header"><img class="profile-avatar" src="${u.avatar}" alt="${u.name}"><h1>${escapeHtml(u.name)}</h1><div class="username">@${escapeHtml(u.username)}</div><p class="sub">${escapeHtml(u.bio)}</p><div class="sub"><i class="bi bi-geo-alt"></i> ${escapeHtml(u.location)}</div><div class="stats"><div class="stat"><strong>${u.places}</strong><span>PLACES</span></div><div class="stat"><strong>${u.countries}</strong><span>COUNTRIES</span></div><div class="stat"><strong>${u.friends}</strong><span>FRIENDS</span></div></div>${isMe?`<div class="action-row"><button class="secondary" onclick="openSheet('editProfile')">Edit Profile</button><button class="icon-btn" onclick="navigate('settings')"><i class="bi bi-gear"></i></button></div>`:``}</div>
- ${isFriend?`<div class="action-row" style="padding:0 17px"><button class="secondary" onclick="removeFriend('${u.id}')">Remove Friend</button></div>`:""}
- <div class="profile-tabs">${["posts","bucket","saved"].map(t=>`<button class="${state.profileTab===t?'active':''}" onclick="state.profileTab='${t}';render()">${t==="posts"?"Recent Posts":t==="bucket"?"Bucket List":"Saved Places"}</button>`).join("")}</div>
- ${state.profileTab==="posts"?profilePosts(u):state.profileTab==="bucket"?`<div class="info-list">${state.bucketList.slice(0,4).map(b=>`<div class="info-row"><span>${b.country} · ${b.destination}</span><b>${b.status}</b></div>`).join("")}</div>`:`<div class="grid">${restaurants.slice(0,4).map(r=>`<div><div class="dest-img" style="height:160px"><img src="${r.image}" alt=""></div><div class="meta"><strong>${r.name}</strong><div class="tiny">${r.city} · ${r.rating}</div></div></div>`).join("")}</div>`}
- ${isFriend?`<section class="section"><div class="section-head"><h2>Travel Map Preview</h2></div><div class="mapfake"><span class="map-dot dot1"></span><span class="map-dot dot2"></span><span class="map-dot dot3"></span></div></section>`:""}
- </div>`
-}
-function profilePosts(u){return `<div>${posts.filter(p=>p.user===u.id).slice(0,3).map(postCard).join("")||`<div class="empty"><i class="bi bi-camera"></i>No posts yet</div>`}</div>`}
-function postCard(p){
- const u=user(p.user), d=destinations.find(x=>x.id===p.destination)||dest("Kyoto");
- return `<article class="post"><div class="post-head"><img src="${u.avatar}" alt=""><div><strong>${u.name}</strong><span>@${u.username} · ${d.name}, ${d.country}</span></div><button class="icon-btn post-menu" onclick="openSheet('postActions','${p.id}')"><i class="bi bi-three-dots"></i></button></div><div class="post-media" onclick="openPost('${p.id}')"><img loading="lazy" src="${p.image}" alt="${d.name}"></div><div class="post-actions"><button class="${p.liked?'active':''}" onclick="toggleLike('${p.id}')"><i class="bi bi-heart${p.liked?'-fill':''}"></i></button><span class="count">${p.likes}</span><button onclick="openSheet('comments','${p.id}')"><i class="bi bi-chat"></i></button><span class="count">${p.comments}</span><button onclick="openSheet('share','${p.id}')"><i class="bi bi-share"></i></button><button class="${p.saved?'active':''}" style="margin-left:auto" onclick="toggleSave('${p.id}')"><i class="bi bi-bookmark${p.saved?'-fill':''}"></i></button></div><div class="post-caption">${escapeHtml(p.caption)}</div></article>`
-}
-function searchScreen(){
- const q=state.searchQuery.trim().toLowerCase();
- const ds=destinations.filter(d=>(d.name+" "+d.country).toLowerCase().includes(q)).slice(0,8);
- const us=users.filter(u=>(u.name+" "+u.username+" "+u.location).toLowerCase().includes(q)).slice(0,8);
- const rs=restaurants.filter(r=>(r.name+" "+r.city).toLowerCase().includes(q)).slice(0,5);
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><h2>Search</h2></div><div class="search" style="margin-top:16px"><i class="bi bi-search"></i><input id="globalSearch" autofocus value="${escapeHtml(state.searchQuery)}" oninput="setSearch(this.value,'search')" placeholder="Countries, destinations, people..."></div>
- ${q?`<section class="section"><div class="section-head"><h2>Destinations</h2></div><div class="search-results">${ds.map(d=>resultRow(d.image,d.name,d.country,()=>openDestination(d.name))).join("")||emptySmall("No destinations found")}</div></section>
- <section class="section"><div class="section-head"><h2>Travelers</h2></div><div class="search-results">${us.map(u=>resultRow(u.avatar,u.name,"@"+u.username,()=>openProfile(u.id))).join("")||emptySmall("No travelers found")}</div></section>
- <section class="section"><div class="section-head"><h2>Restaurants</h2></div><div class="search-results">${rs.map(r=>resultRow(r.image,r.name,r.city,()=>{})).join("")||emptySmall("No restaurants found")}</div></section>`:`<div class="empty" style="margin-top:70px"><i class="bi bi-search"></i><div>Search the world, your friends and your saved places.</div></div>`}</div>`
-}
-function emptySmall(t){return `<div class="empty">${t}</div>`}
-/* result rows need real inline navigation without serialized functions */
-function resultRow(image,title,sub,fn){
- const action=fn.name==="openDestination"?`openDestination('${escapeHtml(title)}')`:fn.name==="openProfile"?`openProfile('${users.find(u=>u.name===title)?.id||""}')`:"";
- return `<button class="result" onclick="${action}"><img src="${image}" alt=""><div class="grow" style="text-align:left"><strong>${escapeHtml(title)}</strong><small>${escapeHtml(sub)}</small></div><i class="bi bi-chevron-right"></i></button>`
-}
-function notifications(){
- const groups={Today:state.notifications.filter(n=>n.time==="Today"),Yesterday:state.notifications.filter(n=>n.time==="Yesterday"),Earlier:state.notifications.filter(n=>n.time==="Earlier")};
- return `<div class="screen"><div class="eyebrow">Updates</div><h1>Notifications</h1>${Object.entries(groups).map(([g,arr])=>arr.length?`<section class="section"><div class="eyebrow">${g}</div>${arr.map(n=>`<div class="notification"><img src="${user(n.user).avatar}" alt=""><div><p>${escapeHtml(n.text)}</p><time>${g}</time></div></div>`).join("")}</section>`:"").join("")}</div>`
-}
-function createScreen(){
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-x-lg"></i></button><div><div class="eyebrow">New</div><h2>Create Post</h2></div></div><div class="section"><div class="skeleton skeleton-img" id="postPreview"></div><div class="field"><label>Photo URL</label><input id="postImage" placeholder="Paste an image URL" value="${img(images[2],900,1000)}" oninput="document.getElementById('postPreview').innerHTML='<img src=&quot;'+this.value+'&quot; style=&quot;width:100%;height:100%;object-fit:cover&quot;>'"></div><div class="field"><label>Destination</label><select id="postDestination">${destinations.slice(0,25).map(d=>`<option value="${d.id}">${d.name}, ${d.country}</option>`).join("")}</select></div><div class="field"><label>Caption</label><textarea id="postCaption" placeholder="What made this place worth remembering?"></textarea></div><div class="field"><label>Post type</label><select id="postType"><option>Photo</option><option>Destination recommendation</option><option>Travel note</option><option>Restaurant recommendation</option></select></div><button class="primary" style="width:100%;margin-top:5px" onclick="publishPost()">Publish <i class="bi bi-arrow-up-right"></i></button></div></div>`
-}
-function postDetails(){
- const p=posts.find(x=>x.id===state.selectedPost)||posts[0], u=user(p.user), d=destinations.find(x=>x.id===p.destination);
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><div><div class="eyebrow">Post</div><span class="sub">${d.name}, ${d.country}</span></div></div><div style="margin-top:18px">${postCard(p)}</div><section class="section"><div class="section-head"><h2>Comments</h2></div><div class="activity-list"><div class="activity"><img src="${users[2].avatar}"><div><p><b>${users[2].name}</b> This one is going straight onto my list.</p><time>12 min ago</time></div></div><div class="activity"><img src="${users[4].avatar}"><div><p><b>${users[4].name}</b> The composition here is perfect.</p><time>Yesterday</time></div></div></div></section></div>`
-}
-function settings(){
- const rows=[
-  ["person","Account","Profile, username and personal details","navigate('profile')"],
-  ["moon","Appearance","Dark mode is active",""],
-  ["shield-check","Privacy","Control how your profile is shared",""],
-  ["bell","Notifications","Likes, comments and friend activity",""],
-  ["airplane","Travel Preferences","Destinations, food and activities",""],
-  ["info-circle","About","Veyra · frontend edition",""]
- ];
- return `<div class="screen"><div class="page-title"><button class="back" onclick="back()"><i class="bi bi-arrow-left"></i></button><div><div class="eyebrow">Preferences</div><h2>Settings</h2></div></div>${rows.map((r,i)=>`<section class="settings-group"><div class="setting" onclick="${r[3]}"><i class="bi bi-${r[0]}"></i><div class="grow"><strong>${r[1]}</strong><small>${r[2]}</small></div>${i===1?`<button class="switch ${state.settings.dark?'on':''}" onclick="event.stopPropagation();toggleSetting('dark')"></button>`:i===3?`<button class="switch ${state.settings.notifications?'on':''}" onclick="event.stopPropagation();toggleSetting('notifications')"></button>`:i===0?`<i class="bi bi-chevron-right" style="color:var(--faint)"></i>`:""}</div></section>`).join("")}
- <section class="settings-group"><div class="eyebrow">Interface</div><div class="setting"><i class="bi bi-speedometer2"></i><div class="grow"><strong>Reduced motion</strong><small>Use minimal transitions</small></div><button class="switch ${state.settings.reduced?'on':''}" onclick="toggleSetting('reduced')"></button></div><div class="setting"><i class="bi bi-layout-text-window"></i><div class="grow"><strong>Compact mode</strong><small>Tighter information density</small></div><button class="switch ${state.settings.compact?'on':''}" onclick="toggleSetting('compact')"></button></div><div class="setting"><i class="bi bi-lock"></i><div class="grow"><strong>Private profile</strong><small>Only friends can see your travel activity</small></div><button class="switch ${state.settings.private?'on':''}" onclick="toggleSetting('private')"></button></div></section>
- </div>`
-}
+        function openModal(htmlContent) {
+            const container = document.getElementById('modalContainer');
+            container.innerHTML = `
+            <div class="modal-overlay" onclick="if(event.target===this)closeModal()">
+              <div class="modal-sheet" onclick="event.stopPropagation()"><div class="modal-handle"></div>${htmlContent}</div>
+            </div>`;
+            document.body.style.overflow = 'hidden';
+        }
 
-function navigate(screen,push=true){
- if(push && state.screen!==screen)state.history.push(state.screen);
- state.screen=screen; state.searchQuery="";state.activeCategory="All";render();window.scrollTo({top:0,behavior:"smooth"});
-}
-function back(){const s=state.history.pop()||"home";state.screen=s;render();window.scrollTo(0,0)}
-function openDestination(name){const d=dest(name);state.selectedDestination=d;state.history.push(state.screen);state.screen="destination";render();window.scrollTo(0,0)}
-function openCountry(){state.history.push(state.screen);state.screen="country";render()}
-function openBucketDestination(name){state.selectedDestination=dest(name);state.history.push(state.screen);state.screen="bucketDestination";render();window.scrollTo(0,0)}
-function openProfile(id){state.selectedProfile=user(id);state.history.push(state.screen);state.screen="friend";render();window.scrollTo(0,0)}
-function openPost(id){state.selectedPost=id;state.history.push(state.screen);state.screen="post";render();window.scrollTo(0,0)}
-function setSearch(v,from){state.searchQuery=v;if(from==="explore"){render();setTimeout(()=>{const e=document.getElementById("exploreSearch");if(e){e.focus();e.setSelectionRange(v.length,v.length)}},0)}else render()}
-function setCategory(c){state.activeCategory=c;render()}
-function setBucketFilter(s){state.activeCategory=s;render()}
-function toggleCountry(c){state.openCountry=state.openCountry===c?null:c;render()}
-function toggleBucket(name){
- const d=dest(name), i=state.bucketList.findIndex(b=>b.destination===d.name);
- if(i>=0){state.bucketList.splice(i,1);toast(`${d.name} removed from your bucket list`)}
- else{state.bucketList.push({destination:d.name,country:d.country,status:"Want to Visit",priority:"Medium",notes:"Add a note about why you want to go."});toast(`Added ${d.name} to your bucket list`)}
- render()
-}
-function cycleStatus(name){
- const b=state.bucketList.find(x=>x.destination===name);if(!b)return;
- const seq=["Want to Visit","Planning","Booked","Visited"];b.status=seq[(seq.indexOf(b.status)+1)%seq.length];toast(`${name} is now ${b.status}`);render()
-}
-function removeBucket(name){state.bucketList=state.bucketList.filter(b=>b.destination!==name);toast(`${name} removed`);back()}
-function addFriend(id){if(!state.friends.includes(id)&&!state.friendRequests.includes(id)){state.friendRequests.push(id);toast(`Friend request sent to ${user(id).name}`);render()}}
-function removeFriend(id){state.friends=state.friends.filter(x=>x!==id);toast(`${user(id).name} removed from friends`);render()}
-function toggleLike(id){const p=posts.find(x=>x.id===id);p.liked=!p.liked;p.likes+=p.liked?1:-1;render()}
-function toggleSave(id){const p=posts.find(x=>x.id===id);p.saved=!p.saved;toast(p.saved?"Saved to your collection":"Removed from saved");render()}
-function publishPost(){
- const image=document.getElementById("postImage").value.trim()||img(images[1]);
- const destination=document.getElementById("postDestination").value;
- const caption=document.getElementById("postCaption").value.trim()||"A place worth remembering.";
- posts.unshift({id:"p"+Date.now(),user:state.currentUser.id,destination,image,caption,likes:0,comments:0,liked:false,saved:false,type:"photo"});
- toast("Post published");state.history=[];state.screen="home";render()
-}
-function toggleSetting(k){state.settings[k]=!state.settings[k];if(k==="reduced")document.documentElement.style.setProperty("--ease",state.settings[k]?"linear":"cubic-bezier(.2,.8,.2,1)");render();toast(`${k==="private"?"Privacy":k[0].toUpperCase()+k.slice(1)} updated`)}
-function openSheet(type,id){
- const sheet=document.getElementById("sheet"),overlay=document.getElementById("overlay");
- let body="";
- if(type==="add")body=`<div class="grab"></div><div class="sheet-head"><h2>Add Destination</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="field"><label>Country</label><select id="addCountry">${countries.map(c=>`<option>${c[0]}</option>`).join("")}</select></div><div class="field"><label>Destination</label><select id="addDestination">${destinations.map(d=>`<option>${d.name}</option>`).join("")}</select></div><div class="field"><label>Priority</label><select id="addPriority"><option>Medium</option><option>High</option><option>Low</option></select></div><div class="field"><label>Status</label><select id="addStatus"><option>Want to Visit</option><option>Planning</option><option>Booked</option><option>Visited</option></select></div><div class="field"><label>Notes</label><textarea id="addNotes" placeholder="Why do you want to go?"></textarea></div><button class="primary" style="width:100%" onclick="addDestinationFromSheet()">Save to bucket list</button>`;
- if(type==="comments")body=`<div class="grab"></div><div class="sheet-head"><h2>Comments</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="activity-list"><div class="activity"><img src="${users[2].avatar}"><div><p><b>Maya Chen</b> This place is beautiful.</p><time>12 min ago</time></div></div><div class="activity"><img src="${users[4].avatar}"><div><p><b>Lina Rossi</b> Adding this to my list.</p><time>Yesterday</time></div></div></div><div class="field"><input placeholder="Write a comment..." id="commentInput"></div><button class="primary" style="width:100%" onclick="toast('Comment added');closeSheet()">Comment</button>`;
- if(type==="share")body=`<div class="grab"></div><div class="sheet-head"><h2>Share</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="info-list"><button class="info-row" onclick="toast('Link copied');closeSheet()"><span><i class="bi bi-link-45deg"></i> Copy link</span><i class="bi bi-chevron-right"></i></button><button class="info-row" onclick="toast('Shared with friends');closeSheet()"><span><i class="bi bi-people"></i> Send to friends</span><i class="bi bi-chevron-right"></i></button></div>`;
- if(type==="postActions")body=`<div class="grab"></div><div class="sheet-head"><h2>Post actions</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="info-list"><button class="info-row" onclick="toggleSave('${id}');closeSheet()"><span><i class="bi bi-bookmark"></i> Save post</span></button><button class="info-row" onclick="toast('Post link copied');closeSheet()"><span><i class="bi bi-link-45deg"></i> Copy link</span></button><button class="info-row" onclick="toast('Post hidden');closeSheet()"><span><i class="bi bi-eye-slash"></i> Hide post</span></button></div>`;
- if(type==="editProfile")body=`<div class="grab"></div><div class="sheet-head"><h2>Edit Profile</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="field"><label>Display name</label><input id="editName" value="${escapeHtml(state.currentUser.name)}"></div><div class="field"><label>Username</label><input id="editUsername" value="${escapeHtml(state.currentUser.username)}"></div><div class="field"><label>Bio</label><textarea id="editBio">${escapeHtml(state.currentUser.bio)}</textarea></div><button class="primary" style="width:100%" onclick="saveProfile()">Save profile</button>`;
- if(type==="plan")body=`<div class="grab"></div><div class="sheet-head"><h2>Plan Trip</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><p class="sub">This frontend-only planner keeps your first pass local.</p><div class="field"><label>Trip length</label><select><option>4–6 days</option><option>7–10 days</option><option>10+ days</option></select></div><div class="field"><label>Notes</label><textarea placeholder="What do you want this trip to feel like?"></textarea></div><button class="primary" style="width:100%" onclick="toast('Trip plan saved locally');closeSheet()">Save plan</button>`;
- if(type==="editBucket")body=`<div class="grab"></div><div class="sheet-head"><h2>Edit Destination</h2><button class="icon-btn" onclick="closeSheet()"><i class="bi bi-x-lg"></i></button></div><div class="field"><label>Status</label><select id="editStatus">${["Want to Visit","Planning","Booked","Visited"].map(x=>`<option ${x===state.bucketList.find(b=>b.destination===state.selectedDestination.name)?.status?"selected":""}>${x}</option>`).join("")}</select></div><div class="field"><label>Notes</label><textarea id="editNotes">${escapeHtml(state.bucketList.find(b=>b.destination===state.selectedDestination.name)?.notes||"")}</textarea></div><button class="primary" style="width:100%" onclick="saveBucketEdit()">Save changes</button>`;
- sheet.innerHTML=body;sheet.classList.add("show");overlay.classList.add("show")
-}
-function addDestinationFromSheet(){
- const name=document.getElementById("addDestination").value,d=dest(name);
- if(!state.bucketList.some(b=>b.destination===name))state.bucketList.push({destination:name,country:d.country,status:document.getElementById("addStatus").value,priority:document.getElementById("addPriority").value,notes:document.getElementById("addNotes").value||"Add a note about why you want to go."});
- toast(`Added ${name} to your bucket list`);closeSheet();render()
-}
-function saveProfile(){
- state.currentUser.name=document.getElementById("editName").value||state.currentUser.name;
- state.currentUser.username=document.getElementById("editUsername").value||state.currentUser.username;
- state.currentUser.bio=document.getElementById("editBio").value||state.currentUser.bio;
- toast("Profile updated");closeSheet();render()
-}
-function saveBucketEdit(){
- const b=state.bucketList.find(x=>x.destination===state.selectedDestination.name);if(b){b.status=document.getElementById("editStatus").value;b.notes=document.getElementById("editNotes").value}
- toast("Bucket list updated");closeSheet();render()
-}
-function closeSheet(){document.getElementById("sheet").classList.remove("show");document.getElementById("overlay").classList.remove("show")}
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function toast(t){const el=document.getElementById("toast");el.textContent=t;el.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>el.classList.remove("show"),2200)}
-function bind(){
- document.querySelectorAll(".post-media img").forEach(im=>im.addEventListener("error",()=>im.style.opacity=".4"));
-}
-render();
-</script>
+        function closeModal() { document.getElementById('modalContainer').innerHTML = '';
+            document.body.style.overflow = ''; }
+
+        function navigate(page, data = null) {
+            state.currentPage = page;
+            state.currentPageData = data;
+            state.searchQuery = '';
+            updateNavActive();
+            renderPage();
+            document.getElementById('mainContent').scrollTop = 0;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            closeModal();
+        }
+
+        function updateNavActive() {
+            const page = state.currentPage;
+            document.querySelectorAll('[data-nav]').forEach(el => {
+                el.classList.toggle('active', el.dataset.nav === page || (page === 'destination' && el.dataset
+                    .nav === 'explore') || (page === 'bucketlist-detail' && el.dataset.nav === 'bucketlist') ||
+                    (page === 'friend-profile' && el.dataset.nav === 'friends') || (page === 'shared-bl-feed' && el
+                        .dataset.nav === 'bucketlist') || (page === 'settings' && el.dataset.nav === 'profile'));
+            });
+        }
+
+        function DestinationCard(dest, size = 'normal') {
+            const isSmall = size === 'small';
+            const w = isSmall ? 150 : 200;
+            const inBL = isInBucketList(dest.id);
+            return `
+            <div class="card scroll-card${isSmall?' scroll-card-sm':''}" onclick="navigate('destination','${dest.id}')" style="width:${w}px;">
+              <div style="position:relative;overflow:hidden;">
+                <img class="card-image" src="${dest.image}" alt="${dest.name}" loading="lazy" style="aspect-ratio:${isSmall?'1/1':'4/3'};">
+                <button class="btn-bookmark${inBL?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${dest.id}')"><i class="bi bi-bookmark${inBL?'-fill':''}" style="font-size:0.9rem;"></i></button>
+              </div>
+              <div class="card-body"><div class="card-eyebrow">${dest.country}</div><div class="card-title">${dest.name}</div><div class="card-subtitle">${dest.desc.slice(0,50)}...</div></div>
+            </div>`;
+        }
+
+        function FriendCard(user, showActions = true) {
+            const isF = isFriend(user.id);
+            const reqStatus = getFriendRequestStatus(user.id);
+            return `
+            <div class="friend-card" onclick="navigate('friend-profile','${user.id}')">
+              <img class="friend-avatar" src="${user.avatar}" alt="${user.displayName}" loading="lazy">
+              <div class="friend-info"><div class="friend-name">${user.displayName}</div><div class="friend-username">${user.username}</div><div class="friend-stats">${user.location} · ${user.stats.places} Places</div></div>
+              ${showActions ? `
+              <div style="flex-shrink:0;">
+                ${isF ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();removeFriend('${user.id}')">Following</button>` :
+                  reqStatus==='sent' ? `<button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();cancelFriendRequest('${user.id}')">Pending</button>` :
+                  reqStatus==='received' ? `<button class="btn btn-accent btn-sm" onclick="event.stopPropagation();acceptFriend('${user.id}')">Accept</button>` :
+                  `<button class="btn btn-accent btn-sm" onclick="event.stopPropagation();sendFriendRequest('${user.id}')">Add Friend</button>`
+                }
+              </div>` : ''}
+            </div>`;
+        }
+
+        function PostCard(post) {
+            const user = getUser(post.userId);
+            if (!user) return '';
+            return `
+            <div class="post-card" onclick="navigate('post-detail','${post.id}')">
+              <img class="post-image" src="${post.image}" alt="Post" loading="lazy">
+              <div class="post-body">
+                <div class="post-header">
+                  <img class="post-avatar" src="${user.avatar}" alt="${user.displayName}" loading="lazy" onclick="event.stopPropagation();navigate('friend-profile','${post.userId}')">
+                  <div style="flex:1;min-width:0;"><div class="post-user">${user.displayName}</div><div class="post-username">${user.username}</div></div>
+                  <div class="post-location"><i class="bi bi-geo-alt"></i>${post.location}</div>
+                </div>
+                <p class="post-caption">${post.caption}</p>
+                <div class="post-actions">
+                  <button class="post-action${post.liked?' liked':''}" onclick="event.stopPropagation();toggleLike('${post.id}')"><i class="bi bi-heart${post.liked?'-fill':''}"></i>${post.likes}</button>
+                  <button class="post-action" onclick="event.stopPropagation();"><i class="bi bi-chat"></i>${post.comments}</button>
+                  <button class="post-action${post.saved?' saved-post':''}" onclick="event.stopPropagation();toggleSavePost('${post.id}')"><i class="bi bi-bookmark${post.saved?'-fill':''}"></i>Save</button>
+                  <button class="post-action" onclick="event.stopPropagation();"><i class="bi bi-share"></i></button>
+                </div>
+              </div>
+            </div>`;
+        }
+
+        function getStatusDotClass(status) {
+            const s = status.toLowerCase();
+            if (s.includes('visit') || s === 'want') return 'want';
+            if (s.includes('plan')) return 'planning';
+            if (s.includes('book')) return 'booked';
+            if (s.includes('visit') && s.includes('ed')) return 'visited';
+            return 'custom';
+        }
+
+        function toggleBucketList(destId) {
+            const existing = getBucketEntry(destId);
+            if (existing) {
+                state.bucketList = state.bucketList.filter(b => b.destinationId !== destId);
+                showToast('Removed from your bucket list');
+            } else {
+                state.bucketList.push({ destinationId: destId, status: 'Want to Visit', addedDate: new Date()
+                        .toISOString(), notes: '', priority: 'medium', visitedDate: null, visitedDuration: null });
+                showToast('Added to your bucket list');
+            }
+            renderPage();
+        }
+
+        function changeBucketStatus(destId, status) {
+            const entry = getBucketEntry(destId);
+            if (entry) {
+                entry.status = status;
+                if (status === 'Visited' && !entry.visitedDate) { entry.visitedDate = new Date().toISOString().split(
+                        'T')[0];
+                    entry.visitedDuration = entry.visitedDuration || 3; }
+                showToast(`Status updated to "${status}"`);
+                renderPage();
+            }
+        }
+
+        function updateBucketEntryField(destId, field, value) {
+            const entry = getBucketEntry(destId);
+            if (entry) { entry[field] = value;
+                renderPage(); }
+        }
+
+        function removeFromBucket(destId) {
+            state.bucketList = state.bucketList.filter(b => b.destinationId !== destId);
+            showToast('Removed from your bucket list');
+            renderPage();
+        }
+
+        function sendFriendRequest(userId) {
+            if (!state.friendRequests.sent.includes(userId) && !state.friends.includes(userId)) {
+                state.friendRequests.sent.push(userId);
+                state.friendRequests.received = state.friendRequests.received.filter(id => id !== userId);
+                showToast('Friend request sent');
+                renderPage();
+            }
+        }
+
+        function acceptFriend(userId) {
+            state.friendRequests.received = state.friendRequests.received.filter(id => id !== userId);
+            if (!state.friends.includes(userId)) state.friends.push(userId);
+            state.notifications.unshift({ id: 'n' + Date.now(), type: 'friend_accept', userId: userId,
+                text: 'accepted your friend request', time: new Date().toISOString(), read: false });
+            showToast('Friend request accepted');
+            renderPage();
+        }
+
+        function removeFriend(userId) { state.friends = state.friends.filter(id => id !== userId);
+            showToast('Friend removed');
+            renderPage(); }
+
+        function cancelFriendRequest(userId) { state.friendRequests.sent = state.friendRequests.sent.filter(id => id !==
+                userId);
+            showToast('Friend request cancelled');
+            renderPage(); }
+
+        function toggleLike(postId) {
+            const post = postsData.find(p => p.id === postId);
+            if (post) { post.liked = !post.liked;
+                post.likes += post.liked ? 1 : -1;
+                renderPage(); }
+        }
+
+        function toggleSavePost(postId) {
+            const post = postsData.find(p => p.id === postId);
+            if (post) { post.saved = !post.saved;
+                showToast(post.saved ? 'Post saved' : 'Post unsaved');
+                renderPage(); }
+        }
+
+        function createPost(destinationId, caption) {
+            const newPost = { id: 'p' + Date.now(), userId: state.currentUser.id, destinationId: destinationId || 'kyoto',
+                location: destinationId ? getDestination(destinationId)?.name + ', ' + getDestination(destinationId)
+                    ?.country : 'Somewhere', image: destinationId ? getDestination(destinationId)?.image :
+                    destinationsData[0].image, caption: caption || 'New adventure!', likes: 0, comments: 0,
+                liked: false, saved: false, timestamp: new Date().toISOString() };
+            postsData.unshift(newPost);
+            showToast('Post published');
+            closeModal();
+            renderPage();
+        }
+
+        function addDestinationToBucket(destId, priority, status, notes) {
+            if (!isInBucketList(destId)) {
+                state.bucketList.push({ destinationId: destId, status: status || 'Want to Visit', addedDate: new Date()
+                        .toISOString(), notes: notes || '', priority: priority || 'medium', visitedDate: null,
+                    visitedDuration: null });
+                showToast('Added to your bucket list');
+            }
+            closeModal();
+            renderPage();
+        }
+
+        function addCustomStatus(name) {
+            if (name && !state.customStatuses.includes(name)) { state.customStatuses.push(name);
+                showToast(`Status "${name}" added`);
+                renderPage(); }
+        }
+
+        function deleteCustomStatus(name) {
+            if (['Want to Visit', 'Planning', 'Booked', 'Visited'].includes(name)) { showToast(
+                    'Cannot remove default statuses'); return; }
+            state.customStatuses = state.customStatuses.filter(s => s !== name);
+            state.bucketList.forEach(e => { if (e.status === name) e.status = 'Want to Visit'; });
+            showToast(`Status "${name}" removed`);
+            renderPage();
+        }
+
+        function createSharedBucketList(name, description, memberIds, destIds) {
+            const newSBL = { id: 'sbl' + Date.now(), name, description, members: [state.currentUser.id, ...memberIds],
+                destinations: destIds || [], posts: [], createdBy: state.currentUser.id, createdAt: new Date()
+                .toISOString() };
+            state.sharedBucketLists.unshift(newSBL);
+            showToast('Shared bucket list created!');
+            closeModal();
+            renderPage();
+        }
+
+        function addMessageToSharedBL(sblId, text) {
+            const sbl = state.sharedBucketLists.find(s => s.id === sblId);
+            if (sbl && text.trim()) {
+                sbl.posts.push({ userId: state.currentUser.id, text: text.trim(), timestamp: new Date().toISOString() });
+                showToast('Message sent');
+                renderPage();
+            }
+        }
+
+        function addDestToSharedBL(sblId, destId) {
+            const sbl = state.sharedBucketLists.find(s => s.id === sblId);
+            if (sbl && !sbl.destinations.includes(destId)) { sbl.destinations.push(destId);
+                showToast('Destination added to shared list');
+                renderPage(); }
+        }
+
+        function renderSearchDropdown(query) {
+            if (!query || query.length < 1) return '';
+            const q = query.toLowerCase();
+            const matchedDests = destinationsData.filter(d => d.name.toLowerCase().includes(q) || d.country.toLowerCase()
+                .includes(q) || d.continent.toLowerCase().includes(q));
+            const matchedUsers = usersData.filter(u => u.displayName.toLowerCase().includes(q) || u.username.toLowerCase()
+                .includes(q));
+            if (matchedDests.length === 0 && matchedUsers.length === 0) {
+                return `<div class="search-dropdown visible"><div class="search-dropdown-empty">No results for "${query}"</div></div>`;
+            }
+            let html = '<div class="search-dropdown visible">';
+            if (matchedDests.length > 0) {
+                html += '<div class="search-dropdown-section">Destinations & Countries</div>';
+                matchedDests.slice(0, 8).forEach(d => {
+                    html += `
+                <div class="search-dropdown-item" onclick="event.stopPropagation();navigate('destination','${d.id}');document.querySelectorAll('.search-dropdown').forEach(el=>el.classList.remove('visible'));">
+                  <img src="${d.image}" alt="${d.name}" loading="lazy">
+                  <div class="sdi-info"><div class="sdi-name">${d.name}, ${d.country}</div><div class="sdi-sub">${d.continent} · ${d.desc.slice(0,40)}...</div></div>
+                  <i class="bi bi-arrow-right-short" style="color:var(--text-muted);"></i>
+                </div>`;
+                });
+            }
+            if (matchedUsers.length > 0) {
+                html += '<div class="search-dropdown-section">People</div>';
+                matchedUsers.slice(0, 5).forEach(u => {
+                    html += `
+                <div class="search-dropdown-item" onclick="event.stopPropagation();navigate('friend-profile','${u.id}');document.querySelectorAll('.search-dropdown').forEach(el=>el.classList.remove('visible'));">
+                  <img src="${u.avatar}" alt="${u.displayName}" loading="lazy" style="border-radius:50%;">
+                  <div class="sdi-info"><div class="sdi-name">${u.displayName}</div><div class="sdi-sub">${u.username} · ${u.location}</div></div>
+                  <i class="bi bi-arrow-right-short" style="color:var(--text-muted);"></i>
+                </div>`;
+                });
+            }
+            html += '</div>';
+            return html;
+        }
+
+        function renderPage() {
+            const main = document.getElementById('mainContent');
+            const page = state.currentPage;
+            const data = state.currentPageData;
+            updateNavActive();
+            switch (page) {
+                case 'home':
+                    renderHome(main);
+                    break;
+                case 'explore':
+                    renderExplore(main);
+                    break;
+                case 'destination':
+                    renderDestination(main, data);
+                    break;
+                case 'bucketlist':
+                    renderBucketList(main);
+                    break;
+                case 'bucketlist-detail':
+                    renderBucketListDetail(main, data);
+                    break;
+                case 'shared-bl-feed':
+                    renderSharedBLFeed(main, data);
+                    break;
+                case 'friends':
+                    renderFriends(main);
+                    break;
+                case 'friend-profile':
+                    renderFriendProfile(main, data);
+                    break;
+                case 'profile':
+                    renderProfile(main);
+                    break;
+                case 'search':
+                    renderSearch(main);
+                    break;
+                case 'notifications':
+                    renderNotifications(main);
+                    break;
+                case 'post-detail':
+                    renderPostDetail(main, data);
+                    break;
+                case 'settings':
+                    renderSettings(main);
+                    break;
+                default:
+                    renderHome(main);
+            }
+        }
+
+        function renderHome(main) {
+            const blDests = state.bucketList.map(b => getDestination(b.destinationId)).filter(Boolean);
+            const friendPosts = postsData.slice(0, 4);
+            const trending = destinationsData.slice(5, 10);
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <p class="eyebrow">Your Journey</p>
+              <h1 class="heading-xl mb-3">Where are you dreaming of going?</h1>
+              <div class="search-bar mb-3" style="position:relative;">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Search destinations, countries, users..." value="${state.searchQuery}" oninput="handleHomeSearch(this.value)" onfocus="handleHomeSearch(this.value)" id="homeSearchInput" autocomplete="off">
+                ${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;z-index:2;" onclick="event.stopPropagation();state.searchQuery='';document.getElementById('homeSearchInput').value='';renderPage()"></i>`:''}
+                <div id="homeSearchDropdown" style="position:absolute;top:100%;left:0;right:0;z-index:50;">${renderSearchDropdown(state.searchQuery)}</div>
+              </div>
+              <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Continue Exploring</h2></div>
+                <div class="scroll-row hide-scrollbar">${destinationsData.slice(0,8).map(d => DestinationCard(d)).join('')}</div>
+              </div>
+              ${blDests.length>0?`<div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Your Bucket List</h2><span class="text-meta" style="cursor:pointer;" onclick="navigate('bucketlist')">View all</span></div><div class="scroll-row hide-scrollbar">${blDests.slice(0,6).map(d=>DestinationCard(d,'small')).join('')}</div></div>`:''}
+              <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Friends Are Traveling</h2></div>
+                <div style="display:grid;gap:14px;grid-template-columns:1fr;">${friendPosts.map(p=>PostCard(p)).join('')}</div>
+              </div>
+              <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Trending Now</h2></div>
+                <div class="scroll-row hide-scrollbar">${trending.map(d=>DestinationCard(d)).join('')}</div>
+              </div>
+            </div></div>`;
+        }
+
+        function renderExplore(main) {
+            const filter = state.exploreFilter;
+            const filtered = filter ? destinationsData.filter(d => d.country === filter || d.continent === filter) :
+                destinationsData;
+            const allContinents = [...new Set(destinationsData.map(d => d.continent))];
+            const allCountries = [...new Set(destinationsData.map(d => d.country))];
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <h1 class="heading-xl mb-3">Explore the world.</h1>
+              <div class="search-bar mb-3" style="position:relative;">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Where do you want to go?" value="${state.searchQuery}" oninput="handleExploreSearch(this.value)" onfocus="handleExploreSearch(this.value)" id="exploreSearchInput" autocomplete="off">
+                ${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;z-index:2;" onclick="event.stopPropagation();state.searchQuery='';document.getElementById('exploreSearchInput').value='';renderPage()"></i>`:''}
+                <div id="exploreSearchDropdown" style="position:absolute;top:100%;left:0;right:0;z-index:50;">${renderSearchDropdown(state.searchQuery)}</div>
+              </div>
+              <div class="pill-row mb-3 hide-scrollbar" style="flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;">
+                <button class="pill${!filter?' active':''}" onclick="state.exploreFilter=null;renderPage()">All</button>
+                ${allContinents.map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
+                ${allCountries.slice(0,8).map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
+              </div>
+              <div class="section-gap"><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+                ${filtered.map(d=>`
+                  <div class="card" onclick="navigate('destination','${d.id}')">
+                    <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.9rem;"></i></button></div>
+                    <div class="card-body"><div class="card-eyebrow">${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
+                  </div>`).join('')}
+              </div>${filtered.length===0?`<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-compass" style="font-size:2rem;display:block;margin-bottom:8px;"></i>No destinations found.</div>`:''}</div>
+            </div></div>`;
+        }
+
+        function renderDestination(main, destId) {
+            const dest = getDestination(destId);
+            if (!dest) { navigate('home'); return; }
+            const inBL = isInBucketList(destId);
+            const entry = getBucketEntry(destId);
+            main.innerHTML = `
+            <div class="page active">
+              <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:320px;">
+                <img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${dest.country}</div><div class="hero-name">${dest.name}</div><div class="hero-desc">${dest.desc}</div>
+                <div style="margin-top:12px;display:flex;gap:10px;pointer-events:auto;"><button class="btn btn-accent" onclick="toggleBucketList('${destId}')"><i class="bi bi-bookmark${inBL?'-fill':''}"></i>${inBL?'Saved':'Add to Bucket List'}</button>${inBL?`<button class="btn btn-ghost btn-sm" onclick="navigate('bucketlist-detail','${destId}')">View in List</button>`:''}</div></div>
+              </div>
+              <div class="page-content">
+                <div class="section-gap"><h2 class="heading-lg mb-3">About</h2><p class="text-body">${dest.desc} Nestled in ${dest.country}, ${dest.name} offers travelers an unforgettable experience blending history, culture, and breathtaking landscapes.</p></div>
+                ${dest.bestPlaces.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Best Places</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">${dest.bestPlaces.map(p=>`<div class="card"><img class="card-image" src="${p.image}" alt="${p.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-eyebrow">${p.category}</div><div class="card-title">${p.name}</div><div class="card-subtitle">${p.desc}</div><div class="text-meta mt-2">Rating: ${p.rating}/5</div></div></div>`).join('')}</div></div>`:''}
+                ${dest.restaurants.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Top Restaurants</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">${dest.restaurants.map(r=>`<div class="card"><img class="card-image" src="${r.image}" alt="${r.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-title">${r.name}</div><div class="card-subtitle">${r.cuisine} · ${r.rating}/5</div></div></div>`).join('')}</div></div>`:''}
+                <div class="section-gap"><h2 class="heading-lg mb-3">What Next?</h2><div class="card" style="padding:20px;text-align:center;"><p class="text-body">From <strong>${dest.name}</strong>, your next recommended stop is <strong>${destinationsData.find(d=>d.country===dest.country&&d.id!==destId)?.name||'a nearby gem'}</strong> — just a short journey away.</p><button class="btn btn-accent mt-3">Continue Your Journey</button></div></div>
+              </div>
+            </div>`;
+        }
+
+        function renderBucketList(main) {
+            const grouped = getBucketListByCountry();
+            const countryNames = Object.keys(grouped).sort();
+            const sbls = state.sharedBucketLists;
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <h1 class="heading-xl mb-3">Bucket List</h1>
+              <div class="swipe-tabs" id="blSwipeTabs">
+                <button class="swipe-tab${state.blSwipeTab===0?' active':''}" onclick="switchBLTab(0)">My Bucket List</button>
+                <button class="swipe-tab${state.blSwipeTab===1?' active':''}" onclick="switchBLTab(1)">Shared Bucket Lists</button>
+              </div>
+              <div class="swipe-container" id="blSwipeContainer" onscroll="handleBLSwipeScroll()">
+                <div class="swipe-panel" id="blPanelMy">
+                  ${countryNames.length===0?`<div style="text-align:center;padding:60px 20px;color:var(--text-muted);"><i class="bi bi-bookmark" style="font-size:3rem;display:block;margin-bottom:12px;"></i><p class="text-body">Your bucket list is empty.</p><p class="text-meta">Start exploring and save destinations.</p></div>`:''}
+                  ${countryNames.map(cn=>{
+                    const dests=grouped[cn];
+                    return`<div class="bl-country" id="bl-${cn.replace(/\s+/g,'')}" onclick="toggleBLCountry('${cn.replace(/\s+/g,'')}')"><div class="bl-country-header"><span class="bl-country-name">${cn}</span><span class="bl-country-count">${dests.length} destination${dests.length>1?'s':''}</span><i class="bi bi-chevron-right" style="color:var(--text-muted);transition:transform var(--transition-fast);" id="bl-chevron-${cn.replace(/\s+/g,'')}"></i></div><div class="bl-destinations" id="bl-dests-${cn.replace(/\s+/g,'')}">${dests.map(e=>`<div class="bl-dest-item" onclick="event.stopPropagation();navigate('bucketlist-detail','${e.destinationId}')"><span class="bl-status-dot ${getStatusDotClass(e.status)}"></span><span style="flex:1;">${e.destination.name}</span><span class="text-meta" style="text-transform:capitalize;">${e.status}</span><i class="bi bi-chevron-right" style="font-size:0.7rem;color:var(--text-muted);"></i></div>`).join('')}</div></div>`;
+                  }).join('')}
+                  <div class="section-gap text-center"><button class="btn btn-accent" onclick="openAddDestinationModal()"><i class="bi bi-plus"></i>Add Destination</button></div>
+                </div>
+                <div class="swipe-panel" id="blPanelShared">
+                  ${sbls.length===0?`<div style="text-align:center;padding:60px 20px;color:var(--text-muted);"><i class="bi bi-people" style="font-size:2.5rem;display:block;margin-bottom:10px;"></i><p class="text-body">No shared bucket lists yet.</p><p class="text-meta">Create one and plan trips together with friends.</p></div>`:''}
+                  ${sbls.map(sbl=>{
+                    const memberUsers=sbl.members.map(m=>getUser(m)).filter(Boolean);
+                    const destCount=sbl.destinations.length;
+                    return`<div class="shared-bl-card" onclick="navigate('shared-bl-feed','${sbl.id}')"><div class="shared-bl-avatar-stack">${memberUsers.slice(0,4).map(u=>`<img src="${u.avatar}" alt="${u.displayName}" loading="lazy">`).join('')}</div><div class="shared-bl-info"><div class="shared-bl-name">${sbl.name}</div><div class="shared-bl-meta">${memberUsers.map(u=>u.displayName).join(', ')} · ${destCount} destination${destCount!==1?'s':''} · ${sbl.posts.length} message${sbl.posts.length!==1?'s':''}</div></div><i class="bi bi-chevron-right" style="color:var(--text-muted);flex-shrink:0;"></i></div>`;
+                  }).join('')}
+                  <div class="section-gap text-center"><button class="btn btn-accent" onclick="openCreateSharedBLModal()"><i class="bi bi-plus"></i>Create Shared Bucket List</button></div>
+                </div>
+              </div>
+            </div></div>`;
+            setTimeout(() => {
+                const container = document.getElementById('blSwipeContainer');
+                if (container && state.blSwipeTab === 1) container.scrollLeft = container.offsetWidth;
+            }, 50);
+        }
+
+        function renderBucketListDetail(main, destId) {
+            const dest = getDestination(destId);
+            const entry = getBucketEntry(destId);
+            if (!dest || !entry) { navigate('bucketlist'); return; }
+            const isVisited = entry.status === 'Visited';
+            main.innerHTML = `
+            <div class="page active">
+              <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:280px;"><img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${dest.country}</div><div class="hero-name">${dest.name}</div></div></div>
+              <div class="page-content">
+                <div class="card" style="padding:20px;">
+                  <div class="flex-between mb-3"><span class="text-meta">Saved: ${new Date(entry.addedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span><span class="text-meta" style="text-transform:capitalize;">Priority: ${entry.priority}</span></div>
+                  <label>Status</label>
+                  <select onchange="changeBucketStatus('${destId}',this.value)" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;">
+                    ${state.customStatuses.map(s=>`<option value="${s}"${entry.status===s?' selected':''}>${s}</option>`).join('')}
+                    <option disabled>───</option>
+                    <option value="__manage__">Manage Custom Statuses...</option>
+                  </select>
+                  ${isVisited?`
+                  <div class="flex-between mb-3" style="gap:12px;">
+                    <div style="flex:1;"><label>Visited Date</label><input type="date" value="${entry.visitedDate||''}" onchange="updateBucketEntryField('${destId}','visitedDate',this.value)" style="width:100%;"></div>
+                    <div style="flex:1;"><label>Duration (days)</label><input type="number" value="${entry.visitedDuration||''}" onchange="updateBucketEntryField('${destId}','visitedDuration',parseInt(this.value)||null)" placeholder="e.g. 5" min="1" style="width:100%;"></div>
+                  </div>`:''}
+                  <label>Notes</label>
+                  <textarea rows="2" onchange="updateBucketEntryField('${destId}','notes',this.value)" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;resize:vertical;">${entry.notes||''}</textarea>
+                  <div class="flex-between"><button class="btn btn-ghost btn-sm" onclick="removeFromBucket('${destId}');navigate('bucketlist')">Remove</button><button class="btn btn-accent btn-sm" onclick="openEditBucketModal('${destId}')">Edit Details</button></div>
+                </div>
+                ${isVisited && entry.visitedDate?`<div class="section-gap"><div class="card" style="padding:16px;text-align:center;"><p class="text-body">You visited <strong>${dest.name}</strong> on <strong>${new Date(entry.visitedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</strong>${entry.visitedDuration?` for <strong>${entry.visitedDuration} day${entry.visitedDuration>1?'s':''}</strong>`:''}.</p></div></div>`:''}
+              </div>
+            </div>`;
+            document.querySelector('select')?.addEventListener('change', function(e) {
+                if (e.target.value === '__manage__') { openManageStatusesModal();
+                    e.target.value = entry.status; }
+            });
+        }
+
+        function renderSharedBLFeed(main, sblId) {
+            const sbl = state.sharedBucketLists.find(s => s.id === sblId);
+            if (!sbl) { navigate('bucketlist'); return; }
+            const memberUsers = sbl.members.map(m => getUser(m)).filter(Boolean);
+            const dests = sbl.destinations.map(d => getDestination(d)).filter(Boolean);
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <button class="btn btn-ghost btn-sm mb-3" onclick="navigate('bucketlist')"><i class="bi bi-arrow-left"></i>Back to Bucket List</button>
+              <div class="card" style="padding:20px;margin-bottom:16px;">
+                <h2 class="heading-md mb-2">${sbl.name}</h2>
+                <p class="text-body mb-3">${sbl.description||'No description.'}</p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><span class="text-meta">Shared with:</span>${memberUsers.map(u=>`<span style="display:flex;align-items:center;gap:5px;font-size:var(--font-xs);color:var(--text-primary);"><img src="${u.avatar}" style="width:22px;height:22px;border-radius:50%;object-fit:cover;" loading="lazy">${u.displayName}</span>`).join(' ')}</div>
+                ${dests.length>0?`<div class="chip-row mt-3">${dests.map(d=>`<span class="chip" onclick="navigate('destination','${d.id}')" style="cursor:pointer;">${d.name}, ${d.country}</span>`).join('')}</div>`:''}
+                <button class="btn btn-accent btn-sm mt-3" onclick="openAddDestToSharedBLModal('${sblId}')"><i class="bi bi-plus"></i>Add Destination</button>
+              </div>
+              <h2 class="heading-md mb-3">Group Feed</h2>
+              <div style="background:var(--bg-surface);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:14px 16px;max-height:400px;overflow-y:auto;margin-bottom:12px;">
+                ${sbl.posts.length===0?'<p class="text-muted" style="text-align:center;padding:20px;">No messages yet. Start the conversation!</p>':''}
+                ${sbl.posts.map(p=>{
+                  const u=getUser(p.userId);
+                  return`<div class="group-feed-msg"><img src="${u?.avatar||''}" alt="${u?.displayName||''}" loading="lazy"><div class="msg-content"><div class="msg-author">${u?.displayName||'Unknown'} <span style="font-weight:400;color:var(--text-muted);">${u?.username||''}</span></div><div class="msg-text">${p.text}</div><div class="msg-time">${timeAgo(p.timestamp)}</div></div></div>`;
+                }).join('')}
+              </div>
+              <div style="display:flex;gap:8px;"><input type="text" id="sblMsgInput" placeholder="Type a message..." style="flex:1;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);outline:none;" onkeydown="if(event.key==='Enter'){addMessageToSharedBL('${sblId}',this.value);this.value='';}"><button class="btn btn-accent" onclick="const inp=document.getElementById('sblMsgInput');addMessageToSharedBL('${sblId}',inp.value);inp.value='';"><i class="bi bi-send"></i></button></div>
+            </div></div>`;
+        }
+
+        function renderFriends(main) {
+            const friendUsers = state.friends.map(id => getUser(id)).filter(Boolean);
+            const receivedUsers = state.friendRequests.received.map(id => getUser(id)).filter(Boolean);
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <h1 class="heading-xl mb-3">Friends</h1>
+              ${receivedUsers.length>0?`<div class="section-gap"><h2 class="heading-md mb-3">Requests (${receivedUsers.length})</h2>${receivedUsers.map(u=>FriendCard(u)).join('')}</div>`:''}
+              <div class="section-gap"><h2 class="heading-md mb-3">Your Friends (${friendUsers.length})</h2>
+                ${friendUsers.length===0?'<p class="text-muted">No friends yet. Connect with fellow travelers!</p>':friendUsers.map(u=>FriendCard(u)).join('')}
+              </div>
+            </div></div>`;
+        }
+
+        function renderFriendProfile(main, userId) {
+            const user = getUser(userId);
+            if (!user) { navigate('friends'); return; }
+            const isF = isFriend(userId);
+            const reqStatus = getFriendRequestStatus(userId);
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <div class="profile-header"><img class="profile-avatar-lg" src="${user.avatar}" alt="${user.displayName}" loading="lazy"><div class="profile-display-name">${user.displayName}</div><div class="profile-username">${user.username}</div><p class="text-body mt-2">${user.bio}</p><p class="text-meta mt-2"><i class="bi bi-geo-alt"></i> ${user.location}</p>
+                <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
+                <div class="mt-3">${isF?`<button class="btn btn-ghost" onclick="removeFriend('${userId}')">Following</button>`:reqStatus==='sent'?`<button class="btn btn-ghost" onclick="cancelFriendRequest('${userId}')">Pending</button>`:reqStatus==='received'?`<button class="btn btn-accent" onclick="acceptFriend('${userId}')">Accept Request</button>`:`<button class="btn btn-accent" onclick="sendFriendRequest('${userId}')">Add Friend</button>`}</div>
+              </div>
+            </div></div>`;
+        }
+
+        function renderProfile(main) {
+            const user = state.currentUser;
+            const blGrouped = getBucketListByCountry();
+            const totalDests = state.bucketList.length;
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <div class="profile-header"><img class="profile-avatar-lg" src="${user.avatar}" alt="${user.displayName}" loading="lazy"><div class="profile-display-name">${user.displayName}</div><div class="profile-username">${user.username}</div><p class="text-body mt-2">${user.bio}</p><p class="text-meta mt-2"><i class="bi bi-geo-alt"></i> ${user.location}</p>
+                <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
+                <button class="btn btn-ghost mt-3" onclick="navigate('settings')"><i class="bi bi-gear"></i>Settings</button>
+              </div>
+              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>`<div class="card" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${cn}</strong> — ${blGrouped[cn].length} saved</div>`).join('')}</div>
+            </div></div>`;
+        }
+
+        function renderSearch(main) {
+            const q = state.searchQuery.toLowerCase();
+            const results = q ? { destinations: destinationsData.filter(d => d.name.toLowerCase().includes(q) || d.country
+                    .toLowerCase().includes(q)), users: usersData.filter(u => u.displayName.toLowerCase().includes(q) ||
+                        u.username.toLowerCase().includes(q)) } : { destinations: [], users: [] };
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <h1 class="heading-xl mb-3">Search</h1>
+              <div class="search-bar mb-3"><i class="bi bi-search"></i><input type="text" placeholder="Search destinations, users..." value="${state.searchQuery}" oninput="state.searchQuery=this.value;renderPage()" autofocus>${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;" onclick="state.searchQuery='';renderPage()"></i>`:''}</div>
+              ${q?`<div class="section-gap"><h2 class="heading-md mb-3">Destinations</h2>${results.destinations.length===0?'<p class="text-muted">No destinations found.</p>':results.destinations.map(d=>`<div class="card" style="margin-bottom:8px;display:flex;align-items:center;gap:12px;padding:10px 14px;" onclick="navigate('destination','${d.id}')"><img src="${d.image}" style="width:50px;height:50px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.country}</div></div></div>`).join('')}</div><div class="section-gap"><h2 class="heading-md mb-3">Users</h2>${results.users.length===0?'<p class="text-muted">No users found.</p>':results.users.map(u=>FriendCard(u)).join('')}</div>`:'<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Start typing to search</div>'}
+            </div></div>`;
+        }
+
+        function renderNotifications(main) {
+            const today = state.notifications.filter(n => new Date(n.time) > new Date(Date.now() - 86400000));
+            const yesterday = state.notifications.filter(n => new Date(n.time) < new Date(Date.now() - 86400000) && new Date(
+                n.time) > new Date(Date.now() - 172800000));
+            const earlier = state.notifications.filter(n => new Date(n.time) < new Date(Date.now() - 172800000));
+            const renderNotifGroup = (notifs) => notifs.map(n => { const u = getUser(n.userId); return `
+                <div class="notif-item"><img class="notif-avatar" src="${u?.avatar||''}" loading="lazy"><div><div class="notif-text"><strong>${u?.displayName||'Someone'}</strong> ${n.text}</div><div class="notif-time">${timeAgo(n.time)}</div></div></div>`; }).join('');
+            main.innerHTML = `
+            <div class="page active"><div class="page-content"><h1 class="heading-xl mb-3">Notifications</h1>
+              ${state.notifications.length===0?'<div style="text-align:center;padding:60px;color:var(--text-muted);"><i class="bi bi-bell" style="font-size:2.5rem;display:block;margin-bottom:10px;"></i>No notifications yet.</div>':''}
+              ${today.length>0?`<h2 class="heading-md mb-3">Today</h2>${renderNotifGroup(today)}`:''}
+              ${yesterday.length>0?`<h2 class="heading-md mb-3 mt-3">Yesterday</h2>${renderNotifGroup(yesterday)}`:''}
+              ${earlier.length>0?`<h2 class="heading-md mb-3 mt-3">Earlier</h2>${renderNotifGroup(earlier)}`:''}
+            </div></div>`;
+        }
+
+        function renderPostDetail(main, postId) {
+            const post = postsData.find(p => p.id === postId);
+            if (!post) { navigate('home'); return; }
+            const user = getUser(post.userId);
+            main.innerHTML = `
+            <div class="page active"><div class="page-content">
+              <div class="post-card"><img class="post-image" src="${post.image}" alt="Post" loading="lazy" style="aspect-ratio:4/3;"><div class="post-body">
+                <div class="post-header"><img class="post-avatar" src="${user?.avatar||''}" alt="${user?.displayName||''}" loading="lazy" onclick="navigate('friend-profile','${post.userId}')" style="cursor:pointer;"><div style="flex:1;"><div class="post-user">${user?.displayName||''}</div><div class="post-username">${user?.username||''}</div></div><div class="post-location"><i class="bi bi-geo-alt"></i>${post.location}</div></div>
+                <p class="post-caption">${post.caption}</p>
+                <div class="post-actions"><button class="post-action${post.liked?' liked':''}" onclick="toggleLike('${post.id}')"><i class="bi bi-heart${post.liked?'-fill':''}"></i>${post.likes}</button><button class="post-action"><i class="bi bi-chat"></i>${post.comments}</button><button class="post-action${post.saved?' saved-post':''}" onclick="toggleSavePost('${post.id}')"><i class="bi bi-bookmark${post.saved?'-fill':''}"></i>Save</button></div>
+              </div></div>
+            </div></div>`;
+        }
+
+        function renderSettings(main) {
+            const s = state.settings;
+            main.innerHTML = `
+            <div class="page active"><div class="page-content"><h1 class="heading-xl mb-3">Settings</h1>
+              <div class="card" style="padding:20px;">
+                <div class="flex-between mb-3"><span class="text-body">Dark Mode</span><button class="btn btn-ghost btn-sm" onclick="state.settings.darkMode=!state.settings.darkMode;renderPage()">${s.darkMode?'On':'Off'}</button></div>
+                <div class="flex-between mb-3"><span class="text-body">Reduced Motion</span><button class="btn btn-ghost btn-sm" onclick="state.settings.reducedMotion=!state.settings.reducedMotion;renderPage()">${s.reducedMotion?'On':'Off'}</button></div>
+                <div class="flex-between mb-3"><span class="text-body">Notifications</span><button class="btn btn-ghost btn-sm" onclick="state.settings.notifications=!state.settings.notifications;renderPage()">${s.notifications?'On':'Off'}</button></div>
+                <div class="flex-between mb-3"><span class="text-body">Private Profile</span><button class="btn btn-ghost btn-sm" onclick="state.settings.privateProfile=!state.settings.privateProfile;renderPage()">${s.privateProfile?'On':'Off'}</button></div>
+              </div>
+              <button class="btn btn-ghost mt-3" onclick="navigate('profile')"><i class="bi bi-arrow-left"></i>Back to Profile</button>
+            </div></div>`;
+        }
+
+        function openAddDestinationModal() {
+            const countries = [...new Set(destinationsData.map(d => d.country))].sort();
+            openModal(`<h3>Add to Bucket List</h3>
+            <label>Country</label><select id="addDestCountry" onchange="updateAddDestOptions()"><option value="">Select country</option>${countries.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
+            <label>Destination</label><select id="addDestName"><option value="">Select destination</option></select>
+            <label>Priority</label><select id="addDestPriority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select>
+            <label>Status</label><select id="addDestStatus">${state.customStatuses.map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
+            <label>Notes</label><textarea id="addDestNotes" rows="2" placeholder="Any notes..."></textarea>
+            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitAddDestination()">Add to Bucket List</button>`);
+            window.updateAddDestOptions = function() {
+                const country = document.getElementById('addDestCountry').value;
+                const ds = document.getElementById('addDestName');
+                ds.innerHTML = '<option value="">Select destination</option>';
+                if (country) destinationsData.filter(d => d.country === country).forEach(d => { ds.innerHTML +=
+                        `<option value="${d.id}"${isInBucketList(d.id)?' disabled':''}>${d.name}${isInBucketList(d.id)?' (already saved)':''}</option>`; });
+            };
+            window.submitAddDestination = function() {
+                const destId = document.getElementById('addDestName').value;
+                if (!destId) { showToast('Please select a destination'); return; }
+                addDestinationToBucket(destId, document.getElementById('addDestPriority').value, document.getElementById(
+                    'addDestStatus').value, document.getElementById('addDestNotes').value);
+            };
+        }
+
+        function openEditBucketModal(destId) {
+            const entry = getBucketEntry(destId);
+            if (!entry) return;
+            const dest = getDestination(destId);
+            openModal(`<h3>Edit — ${dest?.name||destId}</h3>
+            <label>Status</label><select id="editStatus">${state.customStatuses.map(s=>`<option value="${s}"${entry.status===s?' selected':''}>${s}</option>`).join('')}</select>
+            <label>Priority</label><select id="editPriority"><option value="low"${entry.priority==='low'?' selected':''}>Low</option><option value="medium"${entry.priority==='medium'?' selected':''}>Medium</option><option value="high"${entry.priority==='high'?' selected':''}>High</option></select>
+            <label>Notes</label><textarea id="editNotes" rows="2">${entry.notes||''}</textarea>
+            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitEditBucket('${destId}')">Save Changes</button>`);
+            window.submitEditBucket = function(id) {
+                const e = getBucketEntry(id);
+                if (e) { e.status = document.getElementById('editStatus').value;
+                    e.priority = document.getElementById('editPriority').value;
+                    e.notes = document.getElementById('editNotes').value;
+                    showToast('Bucket list updated');
+                    closeModal();
+                    renderPage(); }
+            };
+        }
+
+        function openManageStatusesModal() {
+            openModal(`<h3>Manage Custom Statuses</h3>
+            <div style="max-height:300px;overflow-y:auto;margin-bottom:10px;">${state.customStatuses.map(s=>`<div class="flex-between" style="padding:8px 0;border-bottom:1px solid var(--border-subtle);"><span style="font-size:var(--font-sm);color:var(--text-primary);">${s}</span>${['Want to Visit','Planning','Booked','Visited'].includes(s)?'<span class="text-meta" style="font-size:0.6rem;">default</span>':`<button class="btn btn-ghost btn-sm" onclick="deleteCustomStatus('${s}');closeModal();openManageStatusesModal();">Delete</button>`}</div>`).join('')}</div>
+            <div style="display:flex;gap:8px;"><input type="text" id="newStatusName" placeholder="New status name..." style="flex:1;"><button class="btn btn-accent btn-sm" onclick="const v=document.getElementById('newStatusName').value.trim();if(v){addCustomStatus(v);closeModal();}">Add</button></div>
+            <button class="btn btn-ghost btn-sm mt-3" style="width:100%;" onclick="closeModal()">Close</button>`);
+        }
+
+        function openCreateSharedBLModal() {
+            const friendUsers = state.friends.map(id => getUser(id)).filter(Boolean);
+            openModal(`<h3>Create Shared Bucket List</h3>
+            <label>Name</label><input type="text" id="sblName" placeholder="e.g. Summer Europe Trip">
+            <label>Description</label><textarea id="sblDesc" rows="2" placeholder="What's this trip about?"></textarea>
+            <label>Share with Friends</label>
+            <div style="max-height:180px;overflow-y:auto;margin-bottom:10px;">${friendUsers.map(u=>`<div class="flex-between" style="padding:6px 0;"><span style="font-size:var(--font-sm);color:var(--text-primary);">${u.displayName} <span class="text-muted">${u.username}</span></span><input type="checkbox" value="${u.id}" class="sbl-member-check"></div>`).join('')}${friendUsers.length===0?'<p class="text-muted">No friends to share with. Add friends first!</p>':''}</div>
+            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitCreateSharedBL()">Create</button>`);
+            window.submitCreateSharedBL = function() {
+                const name = document.getElementById('sblName').value.trim();
+                if (!name) { showToast('Please enter a name'); return; }
+                const desc = document.getElementById('sblDesc').value.trim();
+                const memberIds = [...document.querySelectorAll('.sbl-member-check:checked')].map(cb => cb.value);
+                createSharedBucketList(name, desc, memberIds, []);
+            };
+        }
+
+        function openAddDestToSharedBLModal(sblId) {
+            const sbl = state.sharedBucketLists.find(s => s.id === sblId);
+            if (!sbl) return;
+            const available = destinationsData.filter(d => !sbl.destinations.includes(d.id));
+            openModal(`<h3>Add Destination</h3>
+            <div style="max-height:300px;overflow-y:auto;">${available.map(d=>`<div class="card" style="margin-bottom:6px;display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;" onclick="addDestToSharedBL('${sblId}','${d.id}');closeModal();"><img src="${d.image}" style="width:44px;height:44px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.country}</div></div></div>`).join('')}</div>
+            <button class="btn btn-ghost btn-sm mt-2" style="width:100%;" onclick="closeModal()">Cancel</button>`);
+        }
+
+        function handleHomeSearch(value) {
+            state.searchQuery = value;
+            const dropdown = document.getElementById('homeSearchDropdown');
+            if (dropdown) dropdown.innerHTML = renderSearchDropdown(value);
+            const input = document.getElementById('homeSearchInput');
+            if (input && input.value !== value) input.value = value;
+        }
+
+        function handleExploreSearch(value) {
+            state.searchQuery = value;
+            const dropdown = document.getElementById('exploreSearchDropdown');
+            if (dropdown) dropdown.innerHTML = renderSearchDropdown(value);
+            const input = document.getElementById('exploreSearchInput');
+            if (input && input.value !== value) input.value = value;
+        }
+
+        function switchBLTab(index) {
+            state.blSwipeTab = index;
+            const container = document.getElementById('blSwipeContainer');
+            if (container) container.scrollTo({ left: index * container.offsetWidth, behavior: 'smooth' });
+            document.querySelectorAll('.swipe-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+        }
+
+        function handleBLSwipeScroll() {
+            const container = document.getElementById('blSwipeContainer');
+            if (!container) return;
+            const scrollLeft = container.scrollLeft;
+            const width = container.offsetWidth;
+            const newTab = Math.round(scrollLeft / width);
+            if (newTab !== state.blSwipeTab) { state.blSwipeTab = newTab;
+                document.querySelectorAll('.swipe-tab').forEach((t, i) => t.classList.toggle('active', i === newTab)); }
+        }
+
+        window.toggleBLCountry = function(countryKey) {
+            const el = document.getElementById('bl-dests-' + countryKey);
+            const parent = document.getElementById('bl-' + countryKey);
+            const chevron = document.getElementById('bl-chevron-' + countryKey);
+            if (el && parent) {
+                const isExpanded = parent.classList.contains('expanded');
+                if (isExpanded) { parent.classList.remove('expanded'); if (chevron) chevron.style.transform =
+                        'rotate(0deg)'; } else { parent.classList.add('expanded'); if (chevron) chevron.style.transform =
+                        'rotate(90deg)'; }
+            }
+        };
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.search-bar')) {
+                document.querySelectorAll('.search-dropdown').forEach(el => el.classList.remove('visible'));
+            }
+        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal();
+                document.querySelectorAll('.search-dropdown').forEach(el => el.classList.remove('visible')); } });
+
+        function init() {
+            renderPage();
+            window.navigate = navigate;
+            window.toggleBucketList = toggleBucketList;
+            window.changeBucketStatus = changeBucketStatus;
+            window.updateBucketEntryField = updateBucketEntryField;
+            window.removeFromBucket = removeFromBucket;
+            window.sendFriendRequest = sendFriendRequest;
+            window.acceptFriend = acceptFriend;
+            window.removeFriend = removeFriend;
+            window.cancelFriendRequest = cancelFriendRequest;
+            window.toggleLike = toggleLike;
+            window.toggleSavePost = toggleSavePost;
+            window.createPost = createPost;
+            window.addDestinationToBucket = addDestinationToBucket;
+            window.addCustomStatus = addCustomStatus;
+            window.deleteCustomStatus = deleteCustomStatus;
+            window.createSharedBucketList = createSharedBucketList;
+            window.addMessageToSharedBL = addMessageToSharedBL;
+            window.addDestToSharedBL = addDestToSharedBL;
+            window.openAddDestinationModal = openAddDestinationModal;
+            window.openEditBucketModal = openEditBucketModal;
+            window.openManageStatusesModal = openManageStatusesModal;
+            window.openCreateSharedBLModal = openCreateSharedBLModal;
+            window.openAddDestToSharedBLModal = openAddDestToSharedBLModal;
+            window.handleHomeSearch = handleHomeSearch;
+            window.handleExploreSearch = handleExploreSearch;
+            window.switchBLTab = switchBLTab;
+            window.handleBLSwipeScroll = handleBLSwipeScroll;
+            window.closeModal = closeModal;
+            window.showToast = showToast;
+            window.getDestination = getDestination;
+            window.getUser = getUser;
+            window.isInBucketList = isInBucketList;
+            window.isFriend = isFriend;
+            window.getFriendRequestStatus = getFriendRequestStatus;
+            window.renderPage = renderPage;
+            window.state = state;
+            window.destinationsData = destinationsData;
+            window.usersData = usersData;
+            window.postsData = postsData;
+        }
+        init();
+        console.log('Veyra — Travel Beyond. Premium frontend prototype ready.');
+    </script>
 </body>
 </html>
