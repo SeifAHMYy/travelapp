@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -8,30 +8,30 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;400;450;500;550;600;650;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0b0b10;
-            --bg-surface: #12121a;
-            --bg-surface-hover: #181823;
-            --bg-elevated: #1a1a26;
-            --bg-glass: rgba(14, 14, 22, 0.75);
-            --bg-glass-solid: #16161f;
-            --border: rgba(255, 255, 255, 0.06);
-            --border-subtle: rgba(255, 255, 255, 0.035);
-            --border-active: rgba(255, 255, 255, 0.1);
-            --text-primary: #eeeae3;
-            --text-secondary: #b0aaa0;
-            --text-muted: #6e6860;
-            --text-inverse: #0b0b10;
-            --accent: #c8a87c;
-            --accent-light: #d9bd95;
-            --accent-glow: rgba(200, 168, 124, 0.18);
-            --accent-subtle: rgba(200, 168, 124, 0.07);
-            --accent-strong: rgba(200, 168, 124, 0.25);
-            --danger: #d97878;
-            --success: #7ec9a0;
-            --info: #7ea8c9;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.65);
+            --bg: #f1f5f9;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f8fafc;
+            --bg-elevated: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.88);
+            --bg-glass-solid: #fafbfc;
+            --border: rgba(0, 0, 0, 0.07);
+            --border-subtle: rgba(0, 0, 0, 0.035);
+            --border-active: rgba(0, 0, 0, 0.12);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --text-inverse: #ffffff;
+            --accent: #0d9488;
+            --accent-light: #0f766e;
+            --accent-glow: rgba(13, 148, 136, 0.16);
+            --accent-subtle: rgba(13, 148, 136, 0.06);
+            --accent-strong: rgba(13, 148, 136, 0.22);
+            --danger: #e05858;
+            --success: #0d9488;
+            --info: #3b82f6;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.12);
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 16px;
@@ -57,31 +57,29 @@
             --nav-height: 68px;
             --sidebar-width: 230px;
         }
-
-        [data-theme="light"] {
-            --bg: #f8f7f4;
-            --bg-surface: #ffffff;
-            --bg-surface-hover: #f3f1ec;
-            --bg-elevated: #ffffff;
-            --bg-glass: rgba(255, 255, 255, 0.82);
-            --bg-glass-solid: #faf9f6;
-            --border: rgba(0, 0, 0, 0.08);
-            --border-subtle: rgba(0, 0, 0, 0.04);
-            --border-active: rgba(0, 0, 0, 0.13);
-            --text-primary: #1a1815;
-            --text-secondary: #5c5852;
-            --text-muted: #8a8580;
-            --text-inverse: #f8f7f4;
-            --accent: #b8945f;
-            --accent-light: #a07d4a;
-            --accent-glow: rgba(184, 148, 95, 0.15);
-            --accent-subtle: rgba(184, 148, 95, 0.06);
-            --accent-strong: rgba(184, 148, 95, 0.22);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --bg-surface: #1e293b;
+            --bg-surface-hover: #273449;
+            --bg-elevated: #1e293b;
+            --bg-glass: rgba(15, 23, 42, 0.82);
+            --bg-glass-solid: #1a2332;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-subtle: rgba(255, 255, 255, 0.04);
+            --border-active: rgba(255, 255, 255, 0.13);
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #64748b;
+            --text-inverse: #0f172a;
+            --accent: #2dd4bf;
+            --accent-light: #5eead4;
+            --accent-glow: rgba(45, 212, 191, 0.18);
+            --accent-subtle: rgba(45, 212, 191, 0.07);
+            --accent-strong: rgba(45, 212, 191, 0.25);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.45);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.55);
         }
-
         *,
         *::before,
         *::after {
@@ -113,7 +111,7 @@
         }
         ::selection {
             background: var(--accent);
-            color: var(--text-inverse);
+            color: #fff;
         }
         ::-webkit-scrollbar {
             width: 3px;
@@ -182,7 +180,7 @@
             border-radius: var(--radius);
         }
         .sidebar-brand .brand-icon {
-            color: var(--accent);
+            color: #fff;
             font-weight: 800;
             font-size: 1.4rem;
             letter-spacing: -0.04em;
@@ -191,7 +189,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--accent-subtle);
+            background: var(--accent);
             border-radius: var(--radius-sm);
             flex-shrink: 0;
         }
@@ -465,11 +463,11 @@
             border-radius: var(--radius-sm);
         }
         .btn-bookmark {
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: var(--blur-light);
             -webkit-backdrop-filter: var(--blur-light);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            color: #475569;
             border-radius: 50%;
             width: 36px;
             height: 36px;
@@ -484,11 +482,26 @@
         .btn-bookmark:hover {
             border-color: var(--accent);
             color: var(--accent);
-            background: rgba(0, 0, 0, 0.65);
+            background: #fff;
         }
         .btn-bookmark.saved {
             background: var(--accent);
             color: #fff;
+            border-color: var(--accent);
+        }
+        [data-theme="dark"] .btn-bookmark {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+        [data-theme="dark"] .btn-bookmark:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: rgba(0, 0, 0, 0.65);
+        }
+        [data-theme="dark"] .btn-bookmark.saved {
+            background: var(--accent);
+            color: #0f172a;
             border-color: var(--accent);
         }
         .card {
@@ -572,7 +585,7 @@
             font-size: var(--font-xs);
             text-transform: uppercase;
             letter-spacing: 0.07em;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(255, 255, 255, 0.85);
             margin-bottom: 4px;
             display: flex;
             align-items: center;
@@ -742,7 +755,7 @@
             position: fixed;
             inset: 0;
             z-index: 200;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
             display: flex;
@@ -794,7 +807,7 @@
         .modal-handle {
             width: 36px;
             height: 4px;
-            background: rgba(128, 128, 128, 0.25);
+            background: rgba(128, 128, 128, 0.2);
             border-radius: 2px;
             margin: 0 auto 16px;
         }
@@ -1080,7 +1093,7 @@
             color: var(--text-primary);
         }
         .post-action.liked {
-            color: #e07070;
+            color: #e05858;
         }
         .post-action.saved-post {
             color: var(--accent);
@@ -1207,19 +1220,19 @@
             flex-shrink: 0;
         }
         .bl-status-dot.want {
-            background: #8ab4f8;
+            background: #3b82f6;
         }
         .bl-status-dot.planning {
-            background: #f5c96a;
+            background: #f59e0b;
         }
         .bl-status-dot.booked {
-            background: #7dd3a8;
+            background: #10b981;
         }
         .bl-status-dot.visited {
-            background: #c8a87c;
+            background: #0d9488;
         }
         .bl-status-dot.custom {
-            background: #b088f0;
+            background: #8b5cf6;
         }
         .notif-item {
             display: flex;
@@ -1456,8 +1469,6 @@
             color: var(--accent-light);
             letter-spacing: 0.01em;
         }
-
-        /* AOS Animations */
         .aos-item {
             opacity: 0;
             transform: translateY(18px);
@@ -1479,8 +1490,6 @@
         .aos-item.aos-delay-4 {
             transition-delay: 0.24s;
         }
-
-        /* Friend Selection Redesign */
         .friend-select-section {
             margin-top: 4px;
         }
@@ -1641,8 +1650,6 @@
             color: var(--text-muted);
             font-size: 0.82rem;
         }
-
-        /* Desire Level Hearts */
         .desire-level-container {
             display: flex;
             align-items: center;
@@ -1664,8 +1671,8 @@
             line-height: 1;
         }
         .desire-heart.active {
-            color: var(--accent);
-            text-shadow: 0 0 10px var(--accent-glow);
+            color: #e05858;
+            text-shadow: 0 0 10px rgba(224, 88, 88, 0.2);
         }
         .desire-heart:hover {
             transform: scale(1.18);
@@ -1677,11 +1684,9 @@
             transition: color 180ms ease;
         }
         .desire-label.active-label {
-            color: var(--accent-light);
+            color: #e05858;
             font-weight: 500;
         }
-
-        /* Theme toggle pill */
         .theme-toggle-pill {
             display: inline-flex;
             align-items: center;
@@ -1705,6 +1710,29 @@
         }
         .theme-toggle-pill i {
             font-size: 1rem;
+        }
+        .add-post-fab {
+            position: sticky;
+            bottom: 16px;
+            float: right;
+            z-index: 20;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .add-post-fab:hover {
+            transform: scale(1.08);
+            background: var(--accent-light);
         }
     </style>
 </head>
@@ -1763,13 +1791,6 @@
             if (code) return `https://flagcdn.com/w${size}/${code}.png`;
             return null;
         }
-
-        function flagImg(countryName, size = 40, className = 'flag-icon') {
-            const url = getFlagUrl(countryName, size);
-            if (url) return `<img src="${url}" alt="${countryName}" class="${className}" loading="lazy" style="width:${size>=40?20:size>=26?18:16}px;height:${size>=40?14:size>=26?12:11}px;border-radius:2px;object-fit:cover;flex-shrink:0;">`;
-            return '';
-        }
-
         function flagImgTag(countryName, size = 40, className = 'flag-icon') {
             const url = getFlagUrl(countryName, size);
             if (!url) return '';
@@ -1777,7 +1798,6 @@
             const h = size >= 40 ? 14 : size >= 26 ? 12 : 11;
             return `<img src="${url}" alt="${countryName}" class="${className}" loading="lazy" style="width:${w}px;height:${h}px;border-radius:2px;object-fit:cover;flex-shrink:0;">`;
         }
-
         const destinationsData = [
             { id: 'granada', name: 'Granada', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=800&h=500&fit=crop',
@@ -1789,8 +1809,8 @@
                         image: 'https://images.unsplash.com/photo-1580121444775-6e5a9b82d1b9?w=400&h=300&fit=crop',
                         desc: 'Historic Roma quarter with cave dwellings and flamenco.', rating: 4.6 },
                 ], restaurants: [{ name: 'Restaurante Chikito', cuisine: 'Andalusian',
-                    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop',
-                    rating: 4.5 }, ] },
+                    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop', rating: 4.5
+                }, ] },
             { id: 'barcelona', name: 'Barcelona', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&h=500&fit=crop',
                 desc: 'A sun-drenched Mediterranean city of Gaudí masterpieces.', bestPlaces: [], restaurants: [] },
@@ -1901,32 +1921,39 @@
         const postsData = [
             { id: 'p1', userId: 'user4', destinationId: 'kyoto', location: 'Kyoto, Japan',
                 image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=700&h=500&fit=crop',
-                caption: 'Morning light at Fushimi Inari. Arrive before 7am.', likes: 342, comments: 28, liked: false,
-                saved: false, timestamp: '2024-12-10T08:30:00' },
+                caption: 'Morning light at Fushimi Inari. Arrive before 7am to beat the crowds — the torii gates glow like something from another world.', likes: 342,
+                comments: 28, liked: false, saved: false, timestamp: '2024-12-10T08:30:00' },
             { id: 'p2', userId: 'user2', destinationId: 'bali',
                 image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=700&h=500&fit=crop',
-                caption: 'Sunrise over Tegallalang rice terraces.', likes: 218, comments: 15, liked: false, saved: false,
-                timestamp: '2024-12-08T14:00:00' },
+                caption: 'Sunrise over Tegallalang rice terraces. Bali never disappoints — the green here is unreal.', likes: 218,
+                comments: 15, liked: false, saved: false, timestamp: '2024-12-08T14:00:00' },
             { id: 'p3', userId: 'user3', destinationId: 'granada',
                 image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=700&h=500&fit=crop',
-                caption: 'The Alhambra at golden hour.', likes: 567, comments: 42, liked: false, saved: false,
-                timestamp: '2024-12-05T18:45:00' },
+                caption: 'The Alhambra at golden hour. Every arch, every tile tells a story.', likes: 567, comments: 42,
+                liked: false, saved: false, timestamp: '2024-12-05T18:45:00' },
             { id: 'p4', userId: 'user5', destinationId: 'santorini',
                 image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e?w=700&h=500&fit=crop',
-                caption: 'Sunset dinners in Oia.', likes: 894, comments: 63, liked: false, saved: false,
-                timestamp: '2024-12-01T20:15:00' },
+                caption: 'Sunset dinners in Oia — the whole village glows pink and gold.', likes: 894, comments: 63,
+                liked: false, saved: false, timestamp: '2024-12-01T20:15:00' },
             { id: 'p5', userId: 'user6', destinationId: 'marrakech',
                 image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=700&h=500&fit=crop',
-                caption: 'Lost in the souks of Marrakech.', likes: 156, comments: 11, liked: false, saved: false,
-                timestamp: '2024-11-28T11:20:00' },
+                caption: 'Lost in the souks of Marrakech. Every corner hides a treasure.', likes: 156, comments: 11,
+                liked: false, saved: false, timestamp: '2024-11-28T11:20:00' },
             { id: 'p6', userId: 'user1', destinationId: 'lisbon',
                 image: 'https://images.unsplash.com/photo-1548707309-dcebe4b2f8e2?w=700&h=500&fit=crop',
-                caption: 'Tram 28 through the hills of Lisbon.', likes: 432, comments: 35, liked: false, saved: false,
-                timestamp: '2024-11-25T16:00:00' },
+                caption: 'Tram 28 through the hills of Lisbon — the best way to see this beautiful city.', likes: 432,
+                comments: 35, liked: false, saved: false, timestamp: '2024-11-25T16:00:00' },
+            { id: 'p7', userId: 'user8', destinationId: 'capetown',
+                image: 'https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=700&h=500&fit=crop',
+                caption: 'Table Mountain at dawn. Worth every step of the hike.', likes: 671, comments: 48, liked: false,
+                saved: false, timestamp: '2024-12-12T06:00:00' },
+            { id: 'p8', userId: 'user7', destinationId: 'seoul',
+                image: 'https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?w=700&h=500&fit=crop',
+                caption: 'Gyeongbokgung Palace in the snow. Seoul is pure magic in winter.', likes: 289, comments: 22,
+                liked: false, saved: false, timestamp: '2024-12-11T09:00:00' },
         ];
 
-        const desireLabels = ['', 'Curious', 'Interested', 'Want to Visit', 'Really Want to Visit',
-        'Dream Destination'];
+        const desireLabels = ['', 'Curious', 'Interested', 'Want to Visit', 'Really Want to Visit', 'Dream Destination'];
 
         const state = {
             currentPage: 'home',
@@ -1939,10 +1966,10 @@
                     notes: 'Amazing architecture', desireLevel: 3, visitedDate: '2024-05-10', visitedDuration: 5 },
                 { destinationId: 'kyoto', status: 'Planning', addedDate: '2024-10-01',
                     notes: 'Cherry blossom season 2025', desireLevel: 5, visitedDate: null, visitedDuration: null },
-                { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12',
-                    notes: 'Sunset views', desireLevel: 3, visitedDate: null, visitedDuration: null },
-                { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05',
-                    notes: 'Booked for March 2025', desireLevel: 4, visitedDate: null, visitedDuration: null },
+                { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12', notes: 'Sunset views',
+                    desireLevel: 3, visitedDate: null, visitedDuration: null },
+                { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05', notes: 'Booked for March 2025',
+                    desireLevel: 4, visitedDate: null, visitedDuration: null },
             ],
             friends: ['user2', 'user3', 'user4', 'user5'],
             friendRequests: { sent: [], received: ['user6', 'user7', 'user8'] },
@@ -1954,7 +1981,7 @@
                 { id: 'n3', type: 'comment', userId: 'user3', text: 'commented on your Granada post',
                     time: '2024-12-09T14:30:00', read: true },
                 { id: 'n4', type: 'follow', userId: 'user8', text: 'started following you',
-                    time: '2024-12-08T11:00:00', read: true },
+                time: '2024-12-08T11:00:00', read: true },
                 { id: 'n5', type: 'bucketlist', userId: 'user2', text: 'added Bali to their bucket list',
                     time: '2024-12-07T08:00:00', read: true },
             ],
@@ -1981,9 +2008,10 @@
             ],
             searchQuery: '',
             exploreFilter: null,
-            settings: { darkMode: true, reducedMotion: false, compactMode: false, notifications: true,
+            settings: { darkMode: false, reducedMotion: false, compactMode: false, notifications: true,
                 privateProfile: false },
             blSwipeTab: 0,
+            exploreSwipeTab: 0,
             tempSelectedFriends: [],
         };
 
@@ -2058,7 +2086,7 @@
             document.getElementById('mainContent').scrollTop = 0;
             window.scrollTo({ top: 0, behavior: 'smooth' });
             closeModal();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function updateNavActive() {
@@ -2159,7 +2187,7 @@
                 showToast('Added to your bucket list');
             }
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function changeBucketStatus(destId, status) {
@@ -2171,7 +2199,7 @@
                     entry.visitedDuration = entry.visitedDuration || 3; }
                 showToast(`Status updated to "${status}"`);
                 renderPage();
-                setTimeout(refreshAOS, 120);
+                setTimeout(refreshAOS, 150);
             }
         }
 
@@ -2179,14 +2207,14 @@
             const entry = getBucketEntry(destId);
             if (entry) { entry[field] = value;
                 renderPage();
-                setTimeout(refreshAOS, 120); }
+                setTimeout(refreshAOS, 150); }
         }
 
         function removeFromBucket(destId) {
             state.bucketList = state.bucketList.filter(b => b.destinationId !== destId);
             showToast('Removed from your bucket list');
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function sendFriendRequest(userId) {
@@ -2195,7 +2223,7 @@
                 state.friendRequests.received = state.friendRequests.received.filter(id => id !== userId);
                 showToast('Friend request sent');
                 renderPage();
-                setTimeout(refreshAOS, 120);
+                setTimeout(refreshAOS, 150);
             }
         }
 
@@ -2206,26 +2234,26 @@
                 text: 'accepted your friend request', time: new Date().toISOString(), read: false });
             showToast('Friend request accepted');
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function removeFriend(userId) { state.friends = state.friends.filter(id => id !== userId);
             showToast('Friend removed');
             renderPage();
-            setTimeout(refreshAOS, 120); }
+            setTimeout(refreshAOS, 150); }
 
         function cancelFriendRequest(userId) { state.friendRequests.sent = state.friendRequests.sent.filter(id => id !==
                 userId);
             showToast('Friend request cancelled');
             renderPage();
-            setTimeout(refreshAOS, 120); }
+            setTimeout(refreshAOS, 150); }
 
         function toggleLike(postId) {
             const post = postsData.find(p => p.id === postId);
             if (post) { post.liked = !post.liked;
                 post.likes += post.liked ? 1 : -1;
                 renderPage();
-                setTimeout(refreshAOS, 120); }
+                setTimeout(refreshAOS, 150); }
         }
 
         function toggleSavePost(postId) {
@@ -2233,20 +2261,29 @@
             if (post) { post.saved = !post.saved;
                 showToast(post.saved ? 'Post saved' : 'Post unsaved');
                 renderPage();
-                setTimeout(refreshAOS, 120); }
+                setTimeout(refreshAOS, 150); }
         }
 
-        function createPost(destinationId, caption) {
-            const newPost = { id: 'p' + Date.now(), userId: state.currentUser.id, destinationId: destinationId || 'kyoto',
-                location: destinationId ? getDestination(destinationId)?.name + ', ' + getDestination(destinationId)
-                    ?.country : 'Somewhere', image: destinationId ? getDestination(destinationId)?.image :
-                    destinationsData[0].image, caption: caption || 'New adventure!', likes: 0, comments: 0,
-                liked: false, saved: false, timestamp: new Date().toISOString() };
+        function createPost(destinationId, caption, imageUrl) {
+            const dest = destinationId ? getDestination(destinationId) : null;
+            const newPost = {
+                id: 'p' + Date.now(),
+                userId: state.currentUser.id,
+                destinationId: destinationId || 'kyoto',
+                location: dest ? dest.name + ', ' + dest.country : 'Somewhere',
+                image: imageUrl || (dest ? dest.image : destinationsData[0].image),
+                caption: caption || 'New adventure!',
+                likes: 0,
+                comments: 0,
+                liked: false,
+                saved: false,
+                timestamp: new Date().toISOString()
+            };
             postsData.unshift(newPost);
-            showToast('Post published');
+            showToast('Post published!');
             closeModal();
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function addDestinationToBucket(destId, desireLevel, status, notes) {
@@ -2258,14 +2295,14 @@
             }
             closeModal();
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function addCustomStatus(name) {
             if (name && !state.customStatuses.includes(name)) { state.customStatuses.push(name);
                 showToast(`Status "${name}" added`);
                 renderPage();
-                setTimeout(refreshAOS, 120); }
+                setTimeout(refreshAOS, 150); }
         }
 
         function deleteCustomStatus(name) {
@@ -2275,7 +2312,7 @@
             state.bucketList.forEach(e => { if (e.status === name) e.status = 'Want to Visit'; });
             showToast(`Status "${name}" removed`);
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function createSharedBucketList(name, description, memberIds, destIds) {
@@ -2287,7 +2324,7 @@
             showToast('Shared bucket list created!');
             closeModal();
             renderPage();
-            setTimeout(refreshAOS, 120);
+            setTimeout(refreshAOS, 150);
         }
 
         function addMessageToSharedBL(sblId, text) {
@@ -2296,7 +2333,7 @@
                 sbl.posts.push({ userId: state.currentUser.id, text: text.trim(), timestamp: new Date().toISOString() });
                 showToast('Message sent');
                 renderPage();
-                setTimeout(refreshAOS, 120);
+                setTimeout(refreshAOS, 150);
             }
         }
 
@@ -2305,7 +2342,7 @@
             if (sbl && !sbl.destinations.includes(destId)) { sbl.destinations.push(destId);
                 showToast('Destination added to shared list');
                 renderPage();
-                setTimeout(refreshAOS, 120); }
+                setTimeout(refreshAOS, 150); }
         }
 
         function renderSearchDropdown(query) {
@@ -2393,7 +2430,7 @@
                 default:
                     renderHome(main);
             }
-            setTimeout(refreshAOS, 100);
+            setTimeout(refreshAOS, 120);
         }
 
         function renderHome(main) {
@@ -2429,38 +2466,61 @@
                 destinationsData;
             const allContinents = [...new Set(destinationsData.map(d => d.continent))];
             const allCountries = [...new Set(destinationsData.map(d => d.country))];
+            const allPosts = [...postsData].sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             main.innerHTML = `
             <div class="page active"><div class="page-content">
               <h1 class="heading-xl mb-3">Explore the world.</h1>
-              <div class="search-bar mb-3" style="position:relative;">
-                <i class="bi bi-search"></i>
-                <input type="text" placeholder="Where do you want to go?" value="${state.searchQuery}" oninput="handleExploreSearch(this.value)" onfocus="handleExploreSearch(this.value)" id="exploreSearchInput" autocomplete="off">
-                ${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;z-index:2;" onclick="event.stopPropagation();state.searchQuery='';document.getElementById('exploreSearchInput').value='';renderPage()"></i>`:''}
-                <div id="exploreSearchDropdown" style="position:absolute;top:100%;left:0;right:0;z-index:50;">${renderSearchDropdown(state.searchQuery)}</div>
+              <div class="swipe-tabs" id="exploreSwipeTabs">
+                <button class="swipe-tab${state.exploreSwipeTab===0?' active':''}" onclick="switchExploreTab(0)">Discover</button>
+                <button class="swipe-tab${state.exploreSwipeTab===1?' active':''}" onclick="switchExploreTab(1)">Community Posts</button>
               </div>
-              <div class="pill-row mb-3 hide-scrollbar" style="flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;">
-                <button class="pill${!filter?' active':''}" onclick="state.exploreFilter=null;renderPage()">All</button>
-                ${allContinents.map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
-                ${allCountries.slice(0,8).map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
+              <div class="swipe-container" id="exploreSwipeContainer" onscroll="handleExploreSwipeScroll()">
+                <div class="swipe-panel" id="explorePanelDiscover">
+                  <div class="search-bar mb-3" style="position:relative;">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Where do you want to go?" value="${state.searchQuery}" oninput="handleExploreSearch(this.value)" onfocus="handleExploreSearch(this.value)" id="exploreSearchInput" autocomplete="off">
+                    ${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;z-index:2;" onclick="event.stopPropagation();state.searchQuery='';document.getElementById('exploreSearchInput').value='';renderPage()"></i>`:''}
+                    <div id="exploreSearchDropdown" style="position:absolute;top:100%;left:0;right:0;z-index:50;">${renderSearchDropdown(state.searchQuery)}</div>
+                  </div>
+                  <div class="pill-row mb-3 hide-scrollbar" style="flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;">
+                    <button class="pill${!filter?' active':''}" onclick="state.exploreFilter=null;renderPage()">All</button>
+                    ${allContinents.map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
+                    ${allCountries.slice(0,8).map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
+                  </div>
+                  <div class="section-gap"><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
+                    ${filtered.map((d,i)=>{
+                      const fHtml=flagImgTag(d.country,40,'flag-icon-sm');
+                      return`
+                      <div class="card aos-item${i>0?` aos-delay-${Math.min(i,4)}`:''}" onclick="navigate('destination','${d.id}')">
+                        <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.85rem;"></i></button></div>
+                        <div class="card-body"><div class="card-eyebrow">${fHtml}${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
+                      </div>`;
+                    }).join('')}
+                  </div>${filtered.length===0?`<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-compass" style="font-size:2rem;display:block;margin-bottom:8px;"></i>No destinations found.</div>`:''}</div>
+                </div>
+                <div class="swipe-panel" id="explorePanelPosts">
+                  <div class="flex-between mb-3">
+                    <h2 class="heading-md">Public Posts</h2>
+                    <button class="btn btn-accent btn-sm" onclick="openCreatePostModal()"><i class="bi bi-plus"></i>Add Post</button>
+                  </div>
+                  <div style="display:grid;gap:14px;grid-template-columns:1fr;">
+                    ${allPosts.map((p,i)=>PostCard(p).replace('aos-item','aos-item'+(i>0?` aos-delay-${Math.min(i,3)}`:''))).join('')}
+                  </div>
+                  ${allPosts.length===0?`<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-camera" style="font-size:2rem;display:block;margin-bottom:8px;"></i>No posts yet. Be the first to share!</div>`:''}
+                </div>
               </div>
-              <div class="section-gap"><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
-                ${filtered.map((d,i)=>{
-                  const fHtml=flagImgTag(d.country,40,'flag-icon-sm');
-                  return`
-                  <div class="card aos-item${i>0?` aos-delay-${Math.min(i,4)}`:''}" onclick="navigate('destination','${d.id}')">
-                    <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.85rem;"></i></button></div>
-                    <div class="card-body"><div class="card-eyebrow">${fHtml}${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
-                  </div>`;
-                }).join('')}
-              </div>${filtered.length===0?`<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-compass" style="font-size:2rem;display:block;margin-bottom:8px;"></i>No destinations found.</div>`:''}</div>
             </div></div>`;
+            setTimeout(() => {
+                const container = document.getElementById('exploreSwipeContainer');
+                if (container && state.exploreSwipeTab === 1) container.scrollLeft = container.offsetWidth;
+                refreshAOS();
+            }, 80);
         }
 
         function renderDestination(main, destId) {
             const dest = getDestination(destId);
             if (!dest) { navigate('home'); return; }
             const inBL = isInBucketList(destId);
-            const entry = getBucketEntry(destId);
             const flagHtml = flagImgTag(dest.country, 60);
             main.innerHTML = `
             <div class="page active">
@@ -2472,7 +2532,6 @@
                 <div class="section-gap"><h2 class="heading-lg mb-3">About</h2><p class="text-body">${dest.desc} Nestled in ${dest.country}, ${dest.name} offers travelers an unforgettable experience blending history, culture, and breathtaking landscapes.</p></div>
                 ${dest.bestPlaces.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Best Places</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">${dest.bestPlaces.map(p=>`<div class="card aos-item"><img class="card-image" src="${p.image}" alt="${p.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-eyebrow">${p.category}</div><div class="card-title">${p.name}</div><div class="card-subtitle">${p.desc}</div><div class="text-meta mt-2">Rating: ${p.rating}/5</div></div></div>`).join('')}</div></div>`:''}
                 ${dest.restaurants.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Top Restaurants</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">${dest.restaurants.map(r=>`<div class="card aos-item"><img class="card-image" src="${r.image}" alt="${r.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-title">${r.name}</div><div class="card-subtitle">${r.cuisine} · ${r.rating}/5</div></div></div>`).join('')}</div></div>`:''}
-                <div class="section-gap"><h2 class="heading-lg mb-3">What Next?</h2><div class="card aos-item" style="padding:20px;text-align:center;"><p class="text-body">From <strong>${dest.name}</strong>, your next recommended stop is <strong>${destinationsData.find(d=>d.country===dest.country&&d.id!==destId)?.name||'a nearby gem'}</strong> — just a short journey away.</p><button class="btn btn-accent mt-3">Continue Your Journey</button></div></div>
               </div>
             </div>`;
         }
@@ -2524,7 +2583,9 @@
             const isVisited = entry.status === 'Visited';
             const flagHtml = flagImgTag(dest.country, 60, 'flag-icon-lg');
             const dl = entry.desireLevel || 3;
-            const heartsHtml = Array.from({ length: 5 }, (_, i) => `<span class="desire-heart${i < dl ? ' active' : ''}" style="font-size:1.3rem;${i<dl?'':'pointer-events:none;'}" data-level="${i+1}">♥</span>`).join('');
+            const heartsHtml = Array.from({ length: 5 }, (_, i) =>
+                `<span class="desire-heart${i < dl ? ' active' : ''}" style="font-size:1.3rem;" data-level="${i+1}">♥</span>`
+                ).join('');
             main.innerHTML = `
             <div class="page active">
               <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:280px;"><img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${flagHtml}${dest.country}</div><div class="hero-name">${dest.name}</div></div></div>
@@ -2535,7 +2596,7 @@
                   <div class="desire-hearts mb-3" style="gap:4px;" id="detailDesireHearts">${heartsHtml}</div>
                   <span class="desire-label${dl>=3?' active-label':''}" id="detailDesireLabel" style="font-size:0.7rem;">${desireLabels[dl]}</span>
                   <label style="margin-top:10px;">Status</label>
-                  <select onchange="changeBucketStatus('${destId}',this.value)" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;">
+                  <select onchange="handleBucketStatusChange(this,'${destId}')" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;">
                     ${state.customStatuses.map(s=>`<option value="${s}"${entry.status===s?' selected':''}>${s}</option>`).join('')}
                     <option disabled>───</option>
                     <option value="__manage__">Manage Custom Statuses...</option>
@@ -2552,10 +2613,6 @@
                 ${isVisited && entry.visitedDate?`<div class="section-gap"><div class="card aos-item" style="padding:16px;text-align:center;"><p class="text-body">You visited <strong>${dest.name}</strong> on <strong>${new Date(entry.visitedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</strong>${entry.visitedDuration?` for <strong>${entry.visitedDuration} day${entry.visitedDuration>1?'s':''}</strong>`:''}.</p></div></div>`:''}
               </div>
             </div>`;
-            document.querySelector('select')?.addEventListener('change', function(e) {
-                if (e.target.value === '__manage__') { openManageStatusesModal();
-                    e.target.value = entry.status; }
-            });
             setTimeout(() => {
                 const heartsContainer = document.getElementById('detailDesireHearts');
                 if (heartsContainer) {
@@ -2564,11 +2621,20 @@
                             const level = parseInt(this.dataset.level);
                             updateBucketEntryField(destId, 'desireLevel', level);
                             renderPage();
-                            setTimeout(refreshAOS, 120);
+                            setTimeout(refreshAOS, 150);
                         });
                     });
                 }
             }, 100);
+            window.handleBucketStatusChange = function(selectEl, destId) {
+                if (selectEl.value === '__manage__') {
+                    openManageStatusesModal();
+                    const entry = getBucketEntry(destId);
+                    selectEl.value = entry ? entry.status : 'Want to Visit';
+                } else {
+                    changeBucketStatus(destId, selectEl.value);
+                }
+            };
         }
 
         function renderSharedBLFeed(main, sblId) {
@@ -2771,7 +2837,7 @@
                     showToast('Bucket list updated');
                     closeModal();
                     renderPage();
-                    setTimeout(refreshAOS, 120); }
+                    setTimeout(refreshAOS, 150); }
             };
             setTimeout(() => {
                 const hearts = document.querySelectorAll('#editDesireHearts .desire-heart');
@@ -2796,6 +2862,23 @@
             <button class="btn btn-ghost btn-sm mt-3" style="width:100%;" onclick="closeModal()">Close</button>`);
         }
 
+        function openCreatePostModal() {
+            const destOptions = destinationsData.map(d =>
+                `<option value="${d.id}">${d.name}, ${d.country}</option>`).join('');
+            openModal(`<h3>Create a Post</h3>
+            <label>Destination</label><select id="postDest"><option value="">Select destination (optional)</option>${destOptions}</select>
+            <label>Caption</label><textarea id="postCaption" rows="3" placeholder="Share your travel story..."></textarea>
+            <label>Image URL (optional)</label><input type="text" id="postImageUrl" placeholder="Leave blank to use destination image">
+            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitCreatePost()">Publish Post</button>`);
+            window.submitCreatePost = function() {
+                const destId = document.getElementById('postDest').value || null;
+                const caption = document.getElementById('postCaption').value.trim();
+                const imageUrl = document.getElementById('postImageUrl').value.trim();
+                if (!caption) { showToast('Please write a caption'); return; }
+                createPost(destId, caption, imageUrl || null);
+            };
+        }
+
         function openCreateSharedBLModal() {
             const friendUsers = state.friends.map(id => getUser(id)).filter(Boolean);
             state.tempSelectedFriends = [];
@@ -2810,65 +2893,46 @@
                   </div>
                   <div class="selection-circle"></div>
                 </div>`).join('');
-
             openModal(`<h3>Create Shared Bucket List</h3>
             <label>Name</label><input type="text" id="sblName" placeholder="e.g. Summer Europe Trip">
             <label>Description</label><textarea id="sblDesc" rows="2" placeholder="What's this trip about?"></textarea>
             <div class="friend-select-section">
-              <div class="friend-select-header">
-                <label>Share with Friends</label>
-                <p class="friend-select-desc">Choose who can collaborate on this list</p>
-              </div>
-              <div class="friend-search-wrapper">
-                <i class="bi bi-search"></i>
-                <input type="text" id="friendSearchInput" placeholder="Search friends..." oninput="filterFriendSelectionRows(this.value)" autocomplete="off">
-              </div>
-              <div class="friend-select-list" id="friendSelectList">
-                ${friendRowsHtml}
-              </div>
+              <div class="friend-select-header"><label>Share with Friends</label><p class="friend-select-desc">Choose who can collaborate on this list</p></div>
+              <div class="friend-search-wrapper"><i class="bi bi-search"></i><input type="text" id="friendSearchInput" placeholder="Search friends..." oninput="filterFriendSelectionRows(this.value)" autocomplete="off"></div>
+              <div class="friend-select-list" id="friendSelectList">${friendRowsHtml}</div>
               <div class="friend-select-count" id="friendSelectCount">0 friends selected</div>
             </div>
             <button class="btn btn-accent" style="width:100%;margin-top:8px;" onclick="submitCreateSharedBL()">Create shared list</button>`);
-
             window.toggleFriendSelectionRow = function(row) {
                 const userId = row.dataset.userId;
                 const circle = row.querySelector('.selection-circle');
                 row.classList.toggle('selected');
                 circle.classList.toggle('selected');
-                if (row.classList.contains('selected')) {
-                    if (!state.tempSelectedFriends.includes(userId)) state.tempSelectedFriends.push(userId);
-                } else {
-                    state.tempSelectedFriends = state.tempSelectedFriends.filter(id => id !== userId);
-                }
+                if (row.classList.contains('selected')) { if (!state.tempSelectedFriends.includes(userId)) state
+                        .tempSelectedFriends.push(userId); } else { state.tempSelectedFriends = state.tempSelectedFriends
+                        .filter(id => id !== userId); }
                 updateFriendSelectCount();
             };
-
             window.filterFriendSelectionRows = function(query) {
                 const q = query.toLowerCase().trim();
-                const rows = document.querySelectorAll('#friendSelectList .friend-select-row');
-                rows.forEach(row => {
+                document.querySelectorAll('#friendSelectList .friend-select-row').forEach(row => {
                     const name = (row.querySelector('.friend-select-name')?.textContent || '').toLowerCase();
                     const username = (row.querySelector('.friend-select-username')?.textContent || '')
                         .toLowerCase();
-                    if (!q || name.includes(q) || username.includes(q)) {
-                        row.style.display = 'flex';
-                    } else {
-                        row.style.display = 'none';
-                    }
+                    row.style.display = (!q || name.includes(q) || username.includes(q)) ? 'flex' : 'none';
                 });
             };
-
             window.updateFriendSelectCount = function() {
                 const count = state.tempSelectedFriends.length;
                 const el = document.getElementById('friendSelectCount');
                 if (el) el.textContent = `${count} friend${count !== 1 ? 's' : ''} selected`;
             };
-
             window.submitCreateSharedBL = function() {
                 const name = document.getElementById('sblName').value.trim();
                 if (!name) { showToast('Please enter a name'); return; }
-                const desc = document.getElementById('sblDesc').value.trim();
-                createSharedBucketList(name, desc, [...state.tempSelectedFriends], []);
+                createSharedBucketList(name, document.getElementById('sblDesc').value.trim(), [...state
+                    .tempSelectedFriends
+                ], []);
             };
         }
 
@@ -2877,8 +2941,20 @@
             if (!sbl) return;
             const available = destinationsData.filter(d => !sbl.destinations.includes(d.id));
             openModal(`<h3>Add Destination</h3>
-            <div style="max-height:300px;overflow-y:auto;">${available.map(d=>`<div class="card" style="margin-bottom:6px;display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;" onclick="addDestToSharedBL('${sblId}','${d.id}');closeModal();"><img src="${d.image}" style="width:44px;height:44px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.country}</div></div></div>`).join('')}</div>
+            <div class="friend-search-wrapper mb-3"><i class="bi bi-search"></i><input type="text" id="sblDestSearch" placeholder="Search destinations..." oninput="filterSBLDestinations(this.value)" autocomplete="off"></div>
+            <div style="max-height:300px;overflow-y:auto;" id="sblDestList">
+              ${available.map(d=>`<div class="card sbl-dest-option" data-dest-id="${d.id}" data-dest-name="${d.name.toLowerCase()}" data-dest-country="${d.country.toLowerCase()}" style="margin-bottom:6px;display:flex;align-items:center;gap:10px;padding:10px;cursor:pointer;" onclick="addDestToSharedBL('${sblId}','${d.id}');closeModal();"><img src="${d.image}" style="width:44px;height:44px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.country}</div></div></div>`).join('')}
+              ${available.length===0?'<div style="text-align:center;padding:20px;color:var(--text-muted);">No more destinations to add.</div>':''}
+            </div>
             <button class="btn btn-ghost btn-sm mt-2" style="width:100%;" onclick="closeModal()">Cancel</button>`);
+            window.filterSBLDestinations = function(query) {
+                const q = query.toLowerCase().trim();
+                document.querySelectorAll('#sblDestList .sbl-dest-option').forEach(el => {
+                    const name = el.dataset.destName || '';
+                    const country = el.dataset.destCountry || '';
+                    el.style.display = (!q || name.includes(q) || country.includes(q)) ? 'flex' : 'none';
+                });
+            };
         }
 
         function handleHomeSearch(value) {
@@ -2901,18 +2977,36 @@
             state.blSwipeTab = index;
             const container = document.getElementById('blSwipeContainer');
             if (container) container.scrollTo({ left: index * container.offsetWidth, behavior: 'smooth' });
-            document.querySelectorAll('.swipe-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+            document.querySelectorAll('#blSwipeTabs .swipe-tab').forEach((t, i) => t.classList.toggle('active', i ===
+                index));
             setTimeout(refreshAOS, 300);
         }
 
         function handleBLSwipeScroll() {
             const container = document.getElementById('blSwipeContainer');
             if (!container) return;
-            const scrollLeft = container.scrollLeft;
-            const width = container.offsetWidth;
-            const newTab = Math.round(scrollLeft / width);
+            const newTab = Math.round(container.scrollLeft / container.offsetWidth);
             if (newTab !== state.blSwipeTab) { state.blSwipeTab = newTab;
-                document.querySelectorAll('.swipe-tab').forEach((t, i) => t.classList.toggle('active', i === newTab)); }
+                document.querySelectorAll('#blSwipeTabs .swipe-tab').forEach((t, i) => t.classList.toggle('active', i ===
+                    newTab)); }
+        }
+
+        function switchExploreTab(index) {
+            state.exploreSwipeTab = index;
+            const container = document.getElementById('exploreSwipeContainer');
+            if (container) container.scrollTo({ left: index * container.offsetWidth, behavior: 'smooth' });
+            document.querySelectorAll('#exploreSwipeTabs .swipe-tab').forEach((t, i) => t.classList.toggle('active', i ===
+                index));
+            setTimeout(refreshAOS, 300);
+        }
+
+        function handleExploreSwipeScroll() {
+            const container = document.getElementById('exploreSwipeContainer');
+            if (!container) return;
+            const newTab = Math.round(container.scrollLeft / container.offsetWidth);
+            if (newTab !== state.exploreSwipeTab) { state.exploreSwipeTab = newTab;
+                document.querySelectorAll('#exploreSwipeTabs .swipe-tab').forEach((t, i) => t.classList.toggle('active',
+                    i === newTab)); }
         }
 
         window.toggleBLCountry = function(countryKey) {
@@ -2935,25 +3029,25 @@
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal();
                 document.querySelectorAll('.search-dropdown').forEach(el => el.classList.remove('visible')); } });
 
+        let aosObserver = null;
+
         function refreshAOS() {
+            if (aosObserver) aosObserver.disconnect();
             if (state.settings.reducedMotion) {
-                document.querySelectorAll('.aos-item').forEach(el => {
-                    el.classList.add('aos-visible');
-                });
+                document.querySelectorAll('.aos-item').forEach(el => el.classList.add('aos-visible'));
                 return;
             }
-            const observer = new IntersectionObserver((entries) => {
+            aosObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('aos-visible');
-                        observer.unobserve(entry.target);
+                        aosObserver.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+            }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
             document.querySelectorAll('.aos-item:not(.aos-visible)').forEach(el => {
-                observer.observe(el);
+                aosObserver.observe(el);
             });
-            setTimeout(() => observer.disconnect(), 3000);
         }
 
         function init() {
@@ -2982,16 +3076,21 @@
             window.openManageStatusesModal = openManageStatusesModal;
             window.openCreateSharedBLModal = openCreateSharedBLModal;
             window.openAddDestToSharedBLModal = openAddDestToSharedBLModal;
+            window.openCreatePostModal = openCreatePostModal;
             window.handleHomeSearch = handleHomeSearch;
             window.handleExploreSearch = handleExploreSearch;
             window.switchBLTab = switchBLTab;
             window.handleBLSwipeScroll = handleBLSwipeScroll;
+            window.switchExploreTab = switchExploreTab;
+            window.handleExploreSwipeScroll = handleExploreSwipeScroll;
             window.closeModal = closeModal;
             window.showToast = showToast;
             window.toggleTheme = toggleTheme;
             window.toggleFriendSelectionRow = null;
             window.filterFriendSelectionRows = null;
             window.updateFriendSelectCount = null;
+            window.filterSBLDestinations = null;
+            window.submitCreatePost = null;
             window.getDestination = getDestination;
             window.getUser = getUser;
             window.isInBucketList = isInBucketList;
@@ -3006,16 +3105,18 @@
             window.getFlagUrl = getFlagUrl;
             window.countryCodeMap = countryCodeMap;
             window.desireLabels = desireLabels;
-            setTimeout(refreshAOS, 200);
+            setTimeout(refreshAOS, 250);
             const mainContent = document.getElementById('mainContent');
             if (mainContent) {
+                let scrollTimeout;
                 mainContent.addEventListener('scroll', () => {
-                    refreshAOS();
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(refreshAOS, 200);
                 }, { passive: true });
             }
         }
         init();
-        console.log('Veyra — Travel Beyond. Premium redesigned prototype ready with light mode, AOS, and refined friend selection.');
+        console.log('Veyra — Travel Beyond. Fresh teal design, light mode default, fixed AOS, explore swipe, and searchable shared BL destinations.');
     </script>
 </body>
 </html>
