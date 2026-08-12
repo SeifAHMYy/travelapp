@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -29,14 +29,14 @@
             --danger: #d97878;
             --success: #7ec9a0;
             --info: #7ea8c9;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.65);
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-2xl: 24px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.65);
             --blur: blur(28px);
             --blur-light: blur(14px);
             --transition-fast: 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -56,6 +56,30 @@
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --nav-height: 68px;
             --sidebar-width: 230px;
+        }
+
+        [data-theme="light"] {
+            --bg: #f8f7f4;
+            --bg-surface: #ffffff;
+            --bg-surface-hover: #f3f1ec;
+            --bg-elevated: #ffffff;
+            --bg-glass: rgba(255, 255, 255, 0.82);
+            --bg-glass-solid: #faf9f6;
+            --border: rgba(0, 0, 0, 0.08);
+            --border-subtle: rgba(0, 0, 0, 0.04);
+            --border-active: rgba(0, 0, 0, 0.13);
+            --text-primary: #1a1815;
+            --text-secondary: #5c5852;
+            --text-muted: #8a8580;
+            --text-inverse: #f8f7f4;
+            --accent: #b8945f;
+            --accent-light: #a07d4a;
+            --accent-glow: rgba(184, 148, 95, 0.15);
+            --accent-subtle: rgba(184, 148, 95, 0.06);
+            --accent-strong: rgba(184, 148, 95, 0.22);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.14);
         }
 
         *,
@@ -85,6 +109,7 @@
             -webkit-tap-highlight-color: transparent;
             -webkit-user-select: none;
             user-select: none;
+            transition: background var(--transition), color var(--transition);
         }
         ::selection {
             background: var(--accent);
@@ -98,11 +123,11 @@
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(128, 128, 128, 0.2);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.12);
+            background: rgba(128, 128, 128, 0.35);
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -140,7 +165,7 @@
             flex-direction: column;
             padding: 22px 14px;
             gap: 4px;
-            transition: transform var(--transition);
+            transition: transform var(--transition), background var(--transition);
         }
         .sidebar-brand {
             display: flex;
@@ -413,7 +438,7 @@
         }
         .btn-accent {
             background: var(--accent);
-            color: var(--text-inverse);
+            color: #fff;
             font-weight: 550;
         }
         .btn-accent:hover {
@@ -463,7 +488,7 @@
         }
         .btn-bookmark.saved {
             background: var(--accent);
-            color: var(--text-inverse);
+            color: #fff;
             border-color: var(--accent);
         }
         .card {
@@ -502,15 +527,6 @@
             display: flex;
             align-items: center;
             gap: 5px;
-        }
-        .card-eyebrow img.flag-mini {
-            width: 16px;
-            height: 11px;
-            border-radius: 2px;
-            object-fit: cover;
-            flex-shrink: 0;
-            display: inline-block;
-            vertical-align: middle;
         }
         .card-title {
             font-size: var(--font-md);
@@ -561,12 +577,6 @@
             display: flex;
             align-items: center;
             gap: 6px;
-        }
-        .hero-overlay .hero-country img.flag-mini {
-            width: 18px;
-            height: 12px;
-            border-radius: 2px;
-            object-fit: cover;
         }
         .hero-overlay .hero-name {
             font-size: var(--font-2xl);
@@ -625,7 +635,7 @@
         }
         .pill.active {
             background: var(--accent);
-            color: var(--text-inverse);
+            color: #fff;
             border-color: var(--accent);
             font-weight: 500;
         }
@@ -784,7 +794,7 @@
         .modal-handle {
             width: 36px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(128, 128, 128, 0.25);
             border-radius: 2px;
             margin: 0 auto 16px;
         }
@@ -1304,6 +1314,8 @@
             scroll-snap-align: start;
             flex-shrink: 0;
             padding: 0 2px;
+            max-width: 100%;
+            overflow: hidden;
         }
         .swipe-tabs {
             display: flex;
@@ -1349,6 +1361,8 @@
             display: flex;
             align-items: center;
             gap: 14px;
+            max-width: 100%;
+            overflow: hidden;
         }
         .shared-bl-card:hover {
             border-color: var(--border-active);
@@ -1375,17 +1389,24 @@
         .shared-bl-info {
             flex: 1;
             min-width: 0;
+            overflow: hidden;
         }
         .shared-bl-name {
             font-weight: 600;
             font-size: var(--font-sm);
             color: var(--text-primary);
             letter-spacing: var(--letter-spacing-tight);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .shared-bl-meta {
             font-size: var(--font-xs);
             color: var(--text-muted);
             margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .group-feed-msg {
             display: flex;
@@ -1434,6 +1455,256 @@
             background: var(--accent-subtle);
             color: var(--accent-light);
             letter-spacing: 0.01em;
+        }
+
+        /* AOS Animations */
+        .aos-item {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .aos-item.aos-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .aos-item.aos-delay-1 {
+            transition-delay: 0.06s;
+        }
+        .aos-item.aos-delay-2 {
+            transition-delay: 0.12s;
+        }
+        .aos-item.aos-delay-3 {
+            transition-delay: 0.18s;
+        }
+        .aos-item.aos-delay-4 {
+            transition-delay: 0.24s;
+        }
+
+        /* Friend Selection Redesign */
+        .friend-select-section {
+            margin-top: 4px;
+        }
+        .friend-select-header {
+            margin-bottom: 14px;
+        }
+        .friend-select-header label {
+            font-size: var(--font-xs);
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .friend-select-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 0;
+            letter-spacing: 0.01em;
+        }
+        .friend-search-wrapper {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .friend-search-wrapper i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .friend-search-wrapper input {
+            width: 100%;
+            padding: 10px 14px 10px 36px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.82rem;
+            outline: none;
+            transition: border var(--transition-fast);
+        }
+        .friend-search-wrapper input:focus {
+            border-color: var(--accent);
+        }
+        .friend-search-wrapper input::placeholder {
+            color: var(--text-muted);
+        }
+        .friend-select-list {
+            max-height: 280px;
+            overflow-y: auto;
+            margin: 0 -4px;
+            padding: 0 4px;
+            border-radius: var(--radius);
+        }
+        .friend-select-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 160ms ease;
+            position: relative;
+            min-height: 64px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+        .friend-select-row:last-child {
+            border-bottom: none;
+        }
+        .friend-select-row:hover {
+            background: var(--bg-surface-hover);
+        }
+        .friend-select-row.selected {
+            background: var(--accent-subtle);
+        }
+        .friend-select-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--border);
+            transition: border-color 160ms ease;
+        }
+        .friend-select-row.selected .friend-select-avatar {
+            border-color: var(--accent-strong);
+        }
+        .friend-select-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .friend-select-name {
+            font-size: 0.95rem;
+            font-weight: 550;
+            color: var(--text-primary);
+            letter-spacing: var(--letter-spacing-tight);
+            display: block;
+            line-height: 1.2;
+        }
+        .friend-select-username {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: block;
+            margin-top: 1px;
+        }
+        .selection-circle {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            border: 2px solid var(--border-active);
+            background: transparent;
+            transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .selection-circle::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 6px;
+            border-left: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            transform: rotate(-45deg) scale(0);
+            top: 7px;
+            left: 6px;
+            transition: transform 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            opacity: 0;
+        }
+        .selection-circle.selected {
+            background: var(--accent);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px var(--accent-subtle);
+        }
+        .selection-circle.selected::after {
+            transform: rotate(-45deg) scale(1);
+            opacity: 1;
+        }
+        .friend-select-count {
+            font-size: 0.73rem;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 10px 0 6px;
+            letter-spacing: 0.02em;
+            transition: all 160ms ease;
+        }
+        .friend-select-none {
+            text-align: center;
+            padding: 30px 16px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        /* Desire Level Hearts */
+        .desire-level-container {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .desire-hearts {
+            display: flex;
+            gap: 6px;
+        }
+        .desire-heart {
+            font-size: 1.7rem;
+            cursor: pointer;
+            transition: all 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            color: var(--border-active);
+            user-select: none;
+            -webkit-user-select: none;
+            line-height: 1;
+        }
+        .desire-heart.active {
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        .desire-heart:hover {
+            transform: scale(1.18);
+        }
+        .desire-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            letter-spacing: 0.02em;
+            transition: color 180ms ease;
+        }
+        .desire-label.active-label {
+            color: var(--accent-light);
+            font-weight: 500;
+        }
+
+        /* Theme toggle pill */
+        .theme-toggle-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 22px;
+            font-size: var(--font-xs);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 1px solid var(--border);
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+            font-family: inherit;
+            white-space: nowrap;
+        }
+        .theme-toggle-pill:hover {
+            border-color: var(--border-active);
+            color: var(--text-primary);
+            background: var(--bg-surface-hover);
+        }
+        .theme-toggle-pill i {
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -1654,21 +1925,24 @@
                 timestamp: '2024-11-25T16:00:00' },
         ];
 
+        const desireLabels = ['', 'Curious', 'Interested', 'Want to Visit', 'Really Want to Visit',
+        'Dream Destination'];
+
         const state = {
             currentPage: 'home',
             currentUser: usersData[0],
             customStatuses: ['Want to Visit', 'Planning', 'Booked', 'Visited'],
             bucketList: [
                 { destinationId: 'granada', status: 'Want to Visit', addedDate: '2024-11-15',
-                    notes: 'Dream trip for the Alhambra', priority: 'high', visitedDate: null, visitedDuration: null },
+                    notes: 'Dream trip for the Alhambra', desireLevel: 5, visitedDate: null, visitedDuration: null },
                 { destinationId: 'barcelona', status: 'Visited', addedDate: '2023-06-20',
-                    notes: 'Amazing architecture', priority: 'medium', visitedDate: '2024-05-10', visitedDuration: 5 },
+                    notes: 'Amazing architecture', desireLevel: 3, visitedDate: '2024-05-10', visitedDuration: 5 },
                 { destinationId: 'kyoto', status: 'Planning', addedDate: '2024-10-01',
-                    notes: 'Cherry blossom season 2025', priority: 'high', visitedDate: null, visitedDuration: null },
+                    notes: 'Cherry blossom season 2025', desireLevel: 5, visitedDate: null, visitedDuration: null },
                 { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12',
-                    notes: 'Sunset views', priority: 'medium', visitedDate: null, visitedDuration: null },
+                    notes: 'Sunset views', desireLevel: 3, visitedDate: null, visitedDuration: null },
                 { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05',
-                    notes: 'Booked for March 2025', priority: 'high', visitedDate: null, visitedDuration: null },
+                    notes: 'Booked for March 2025', desireLevel: 4, visitedDate: null, visitedDuration: null },
             ],
             friends: ['user2', 'user3', 'user4', 'user5'],
             friendRequests: { sent: [], received: ['user6', 'user7', 'user8'] },
@@ -1710,6 +1984,7 @@
             settings: { darkMode: true, reducedMotion: false, compactMode: false, notifications: true,
                 privateProfile: false },
             blSwipeTab: 0,
+            tempSelectedFriends: [],
         };
 
         function getDestination(id) { return destinationsData.find(d => d.id === id); }
@@ -1783,6 +2058,7 @@
             document.getElementById('mainContent').scrollTop = 0;
             window.scrollTo({ top: 0, behavior: 'smooth' });
             closeModal();
+            setTimeout(refreshAOS, 120);
         }
 
         function updateNavActive() {
@@ -1795,13 +2071,25 @@
             });
         }
 
+        function applyTheme() {
+            const isDark = state.settings.darkMode;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        }
+
+        function toggleTheme() {
+            state.settings.darkMode = !state.settings.darkMode;
+            applyTheme();
+            renderPage();
+            showToast(state.settings.darkMode ? 'Dark mode' : 'Light mode');
+        }
+
         function DestinationCard(dest, size = 'normal') {
             const isSmall = size === 'small';
             const w = isSmall ? 150 : 200;
             const inBL = isInBucketList(dest.id);
             const flagHtml = flagImgTag(dest.country, 40, 'flag-icon-sm');
             return `
-            <div class="card scroll-card${isSmall?' scroll-card-sm':''}" onclick="navigate('destination','${dest.id}')" style="width:${w}px;">
+            <div class="card scroll-card${isSmall?' scroll-card-sm':''} aos-item" onclick="navigate('destination','${dest.id}')" style="width:${w}px;">
               <div style="position:relative;overflow:hidden;">
                 <img class="card-image" src="${dest.image}" alt="${dest.name}" loading="lazy" style="aspect-ratio:${isSmall?'1/1':'4/3'};">
                 <button class="btn-bookmark${inBL?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${dest.id}')"><i class="bi bi-bookmark${inBL?'-fill':''}" style="font-size:0.85rem;"></i></button>
@@ -1814,7 +2102,7 @@
             const isF = isFriend(user.id);
             const reqStatus = getFriendRequestStatus(user.id);
             return `
-            <div class="friend-card" onclick="navigate('friend-profile','${user.id}')">
+            <div class="friend-card aos-item" onclick="navigate('friend-profile','${user.id}')">
               <img class="friend-avatar" src="${user.avatar}" alt="${user.displayName}" loading="lazy">
               <div class="friend-info"><div class="friend-name">${user.displayName}</div><div class="friend-username">${user.username}</div><div class="friend-stats">${user.location} · ${user.stats.places} Places</div></div>
               ${showActions ? `
@@ -1832,7 +2120,7 @@
             const user = getUser(post.userId);
             if (!user) return '';
             return `
-            <div class="post-card" onclick="navigate('post-detail','${post.id}')">
+            <div class="post-card aos-item" onclick="navigate('post-detail','${post.id}')">
               <img class="post-image" src="${post.image}" alt="Post" loading="lazy">
               <div class="post-body">
                 <div class="post-header">
@@ -1867,10 +2155,11 @@
                 showToast('Removed from your bucket list');
             } else {
                 state.bucketList.push({ destinationId: destId, status: 'Want to Visit', addedDate: new Date()
-                        .toISOString(), notes: '', priority: 'medium', visitedDate: null, visitedDuration: null });
+                        .toISOString(), notes: '', desireLevel: 3, visitedDate: null, visitedDuration: null });
                 showToast('Added to your bucket list');
             }
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function changeBucketStatus(destId, status) {
@@ -1882,19 +2171,22 @@
                     entry.visitedDuration = entry.visitedDuration || 3; }
                 showToast(`Status updated to "${status}"`);
                 renderPage();
+                setTimeout(refreshAOS, 120);
             }
         }
 
         function updateBucketEntryField(destId, field, value) {
             const entry = getBucketEntry(destId);
             if (entry) { entry[field] = value;
-                renderPage(); }
+                renderPage();
+                setTimeout(refreshAOS, 120); }
         }
 
         function removeFromBucket(destId) {
             state.bucketList = state.bucketList.filter(b => b.destinationId !== destId);
             showToast('Removed from your bucket list');
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function sendFriendRequest(userId) {
@@ -1903,6 +2195,7 @@
                 state.friendRequests.received = state.friendRequests.received.filter(id => id !== userId);
                 showToast('Friend request sent');
                 renderPage();
+                setTimeout(refreshAOS, 120);
             }
         }
 
@@ -1913,29 +2206,34 @@
                 text: 'accepted your friend request', time: new Date().toISOString(), read: false });
             showToast('Friend request accepted');
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function removeFriend(userId) { state.friends = state.friends.filter(id => id !== userId);
             showToast('Friend removed');
-            renderPage(); }
+            renderPage();
+            setTimeout(refreshAOS, 120); }
 
         function cancelFriendRequest(userId) { state.friendRequests.sent = state.friendRequests.sent.filter(id => id !==
                 userId);
             showToast('Friend request cancelled');
-            renderPage(); }
+            renderPage();
+            setTimeout(refreshAOS, 120); }
 
         function toggleLike(postId) {
             const post = postsData.find(p => p.id === postId);
             if (post) { post.liked = !post.liked;
                 post.likes += post.liked ? 1 : -1;
-                renderPage(); }
+                renderPage();
+                setTimeout(refreshAOS, 120); }
         }
 
         function toggleSavePost(postId) {
             const post = postsData.find(p => p.id === postId);
             if (post) { post.saved = !post.saved;
                 showToast(post.saved ? 'Post saved' : 'Post unsaved');
-                renderPage(); }
+                renderPage();
+                setTimeout(refreshAOS, 120); }
         }
 
         function createPost(destinationId, caption) {
@@ -1948,23 +2246,26 @@
             showToast('Post published');
             closeModal();
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
-        function addDestinationToBucket(destId, priority, status, notes) {
+        function addDestinationToBucket(destId, desireLevel, status, notes) {
             if (!isInBucketList(destId)) {
                 state.bucketList.push({ destinationId: destId, status: status || 'Want to Visit', addedDate: new Date()
-                        .toISOString(), notes: notes || '', priority: priority || 'medium', visitedDate: null,
+                        .toISOString(), notes: notes || '', desireLevel: desireLevel || 3, visitedDate: null,
                     visitedDuration: null });
                 showToast('Added to your bucket list');
             }
             closeModal();
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function addCustomStatus(name) {
             if (name && !state.customStatuses.includes(name)) { state.customStatuses.push(name);
                 showToast(`Status "${name}" added`);
-                renderPage(); }
+                renderPage();
+                setTimeout(refreshAOS, 120); }
         }
 
         function deleteCustomStatus(name) {
@@ -1974,6 +2275,7 @@
             state.bucketList.forEach(e => { if (e.status === name) e.status = 'Want to Visit'; });
             showToast(`Status "${name}" removed`);
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function createSharedBucketList(name, description, memberIds, destIds) {
@@ -1985,6 +2287,7 @@
             showToast('Shared bucket list created!');
             closeModal();
             renderPage();
+            setTimeout(refreshAOS, 120);
         }
 
         function addMessageToSharedBL(sblId, text) {
@@ -1993,6 +2296,7 @@
                 sbl.posts.push({ userId: state.currentUser.id, text: text.trim(), timestamp: new Date().toISOString() });
                 showToast('Message sent');
                 renderPage();
+                setTimeout(refreshAOS, 120);
             }
         }
 
@@ -2000,7 +2304,8 @@
             const sbl = state.sharedBucketLists.find(s => s.id === sblId);
             if (sbl && !sbl.destinations.includes(destId)) { sbl.destinations.push(destId);
                 showToast('Destination added to shared list');
-                renderPage(); }
+                renderPage();
+                setTimeout(refreshAOS, 120); }
         }
 
         function renderSearchDropdown(query) {
@@ -2088,6 +2393,7 @@
                 default:
                     renderHome(main);
             }
+            setTimeout(refreshAOS, 100);
         }
 
         function renderHome(main) {
@@ -2105,14 +2411,14 @@
                 <div id="homeSearchDropdown" style="position:absolute;top:100%;left:0;right:0;z-index:50;">${renderSearchDropdown(state.searchQuery)}</div>
               </div>
               <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Continue Exploring</h2></div>
-                <div class="scroll-row hide-scrollbar">${destinationsData.slice(0,8).map(d => DestinationCard(d)).join('')}</div>
+                <div class="scroll-row hide-scrollbar">${destinationsData.slice(0,8).map((d,i) => DestinationCard(d).replace('aos-item','aos-item'+(i>0?` aos-delay-${Math.min(i,4)}`:''))).join('')}</div>
               </div>
-              ${blDests.length>0?`<div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Your Bucket List</h2><span class="text-meta" style="cursor:pointer;" onclick="navigate('bucketlist')">View all</span></div><div class="scroll-row hide-scrollbar">${blDests.slice(0,6).map(d=>DestinationCard(d,'small')).join('')}</div></div>`:''}
+              ${blDests.length>0?`<div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Your Bucket List</h2><span class="text-meta" style="cursor:pointer;" onclick="navigate('bucketlist')">View all</span></div><div class="scroll-row hide-scrollbar">${blDests.slice(0,6).map((d,i)=>DestinationCard(d,'small').replace('aos-item','aos-item'+(i>0?` aos-delay-${Math.min(i,4)}`:''))).join('')}</div></div>`:''}
               <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Friends Are Traveling</h2></div>
-                <div style="display:grid;gap:14px;grid-template-columns:1fr;">${friendPosts.map(p=>PostCard(p)).join('')}</div>
+                <div style="display:grid;gap:14px;grid-template-columns:1fr;">${friendPosts.map((p,i)=>PostCard(p).replace('aos-item','aos-item'+(i>0?` aos-delay-${Math.min(i,3)}`:''))).join('')}</div>
               </div>
               <div class="section-gap"><div class="flex-between mb-3"><h2 class="heading-md">Trending Now</h2></div>
-                <div class="scroll-row hide-scrollbar">${trending.map(d=>DestinationCard(d)).join('')}</div>
+                <div class="scroll-row hide-scrollbar">${trending.map((d,i)=>DestinationCard(d).replace('aos-item','aos-item'+(i>0?` aos-delay-${Math.min(i,4)}`:''))).join('')}</div>
               </div>
             </div></div>`;
         }
@@ -2138,10 +2444,10 @@
                 ${allCountries.slice(0,8).map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
               </div>
               <div class="section-gap"><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
-                ${filtered.map(d=>{
+                ${filtered.map((d,i)=>{
                   const fHtml=flagImgTag(d.country,40,'flag-icon-sm');
                   return`
-                  <div class="card" onclick="navigate('destination','${d.id}')">
+                  <div class="card aos-item${i>0?` aos-delay-${Math.min(i,4)}`:''}" onclick="navigate('destination','${d.id}')">
                     <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.85rem;"></i></button></div>
                     <div class="card-body"><div class="card-eyebrow">${fHtml}${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
                   </div>`;
@@ -2164,9 +2470,9 @@
               </div>
               <div class="page-content">
                 <div class="section-gap"><h2 class="heading-lg mb-3">About</h2><p class="text-body">${dest.desc} Nestled in ${dest.country}, ${dest.name} offers travelers an unforgettable experience blending history, culture, and breathtaking landscapes.</p></div>
-                ${dest.bestPlaces.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Best Places</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">${dest.bestPlaces.map(p=>`<div class="card"><img class="card-image" src="${p.image}" alt="${p.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-eyebrow">${p.category}</div><div class="card-title">${p.name}</div><div class="card-subtitle">${p.desc}</div><div class="text-meta mt-2">Rating: ${p.rating}/5</div></div></div>`).join('')}</div></div>`:''}
-                ${dest.restaurants.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Top Restaurants</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">${dest.restaurants.map(r=>`<div class="card"><img class="card-image" src="${r.image}" alt="${r.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-title">${r.name}</div><div class="card-subtitle">${r.cuisine} · ${r.rating}/5</div></div></div>`).join('')}</div></div>`:''}
-                <div class="section-gap"><h2 class="heading-lg mb-3">What Next?</h2><div class="card" style="padding:20px;text-align:center;"><p class="text-body">From <strong>${dest.name}</strong>, your next recommended stop is <strong>${destinationsData.find(d=>d.country===dest.country&&d.id!==destId)?.name||'a nearby gem'}</strong> — just a short journey away.</p><button class="btn btn-accent mt-3">Continue Your Journey</button></div></div>
+                ${dest.bestPlaces.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Best Places</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">${dest.bestPlaces.map(p=>`<div class="card aos-item"><img class="card-image" src="${p.image}" alt="${p.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-eyebrow">${p.category}</div><div class="card-title">${p.name}</div><div class="card-subtitle">${p.desc}</div><div class="text-meta mt-2">Rating: ${p.rating}/5</div></div></div>`).join('')}</div></div>`:''}
+                ${dest.restaurants.length>0?`<div class="section-gap"><h2 class="heading-lg mb-3">Top Restaurants</h2><div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));">${dest.restaurants.map(r=>`<div class="card aos-item"><img class="card-image" src="${r.image}" alt="${r.name}" loading="lazy" style="aspect-ratio:3/2;"><div class="card-body"><div class="card-title">${r.name}</div><div class="card-subtitle">${r.cuisine} · ${r.rating}/5</div></div></div>`).join('')}</div></div>`:''}
+                <div class="section-gap"><h2 class="heading-lg mb-3">What Next?</h2><div class="card aos-item" style="padding:20px;text-align:center;"><p class="text-body">From <strong>${dest.name}</strong>, your next recommended stop is <strong>${destinationsData.find(d=>d.country===dest.country&&d.id!==destId)?.name||'a nearby gem'}</strong> — just a short journey away.</p><button class="btn btn-accent mt-3">Continue Your Journey</button></div></div>
               </div>
             </div>`;
         }
@@ -2188,7 +2494,8 @@
                   ${countryNames.map(cn=>{
                     const dests=grouped[cn];
                     const fHtml=flagImgTag(cn,40,'flag-icon');
-                    return`<div class="bl-country" id="bl-${cn.replace(/[^a-zA-Z0-9]/g,'')}" onclick="toggleBLCountry('${cn.replace(/[^a-zA-Z0-9]/g,'')}')"><div class="bl-country-header"><span class="bl-country-name">${fHtml}${cn}</span><span class="bl-country-count">${dests.length} destination${dests.length>1?'s':''}</span><i class="bi bi-chevron-right" style="color:var(--text-muted);transition:transform var(--transition-fast);" id="bl-chevron-${cn.replace(/[^a-zA-Z0-9]/g,'')}"></i></div><div class="bl-destinations" id="bl-dests-${cn.replace(/[^a-zA-Z0-9]/g,'')}">${dests.map(e=>`<div class="bl-dest-item" onclick="event.stopPropagation();navigate('bucketlist-detail','${e.destinationId}')"><span class="bl-status-dot ${getStatusDotClass(e.status)}"></span><span style="flex:1;">${e.destination.name}</span><span class="text-meta" style="text-transform:capitalize;">${e.status}</span><i class="bi bi-chevron-right" style="font-size:0.7rem;color:var(--text-muted);"></i></div>`).join('')}</div></div>`;
+                    const safeKey=cn.replace(/[^a-zA-Z0-9]/g,'');
+                    return`<div class="bl-country aos-item" id="bl-${safeKey}" onclick="toggleBLCountry('${safeKey}')"><div class="bl-country-header"><span class="bl-country-name">${fHtml}${cn}</span><span class="bl-country-count">${dests.length} destination${dests.length>1?'s':''}</span><i class="bi bi-chevron-right" style="color:var(--text-muted);transition:transform var(--transition-fast);" id="bl-chevron-${safeKey}"></i></div><div class="bl-destinations" id="bl-dests-${safeKey}">${dests.map(e=>`<div class="bl-dest-item" onclick="event.stopPropagation();navigate('bucketlist-detail','${e.destinationId}')"><span class="bl-status-dot ${getStatusDotClass(e.status)}"></span><span style="flex:1;">${e.destination.name}</span><span class="text-meta" style="text-transform:capitalize;">${e.status}</span><i class="bi bi-chevron-right" style="font-size:0.7rem;color:var(--text-muted);"></i></div>`).join('')}</div></div>`;
                   }).join('')}
                   <div class="section-gap text-center"><button class="btn btn-accent" onclick="openAddDestinationModal()"><i class="bi bi-plus"></i>Add Destination</button></div>
                 </div>
@@ -2197,7 +2504,7 @@
                   ${sbls.map(sbl=>{
                     const memberUsers=sbl.members.map(m=>getUser(m)).filter(Boolean);
                     const destCount=sbl.destinations.length;
-                    return`<div class="shared-bl-card" onclick="navigate('shared-bl-feed','${sbl.id}')"><div class="shared-bl-avatar-stack">${memberUsers.slice(0,4).map(u=>`<img src="${u.avatar}" alt="${u.displayName}" loading="lazy">`).join('')}</div><div class="shared-bl-info"><div class="shared-bl-name">${sbl.name}</div><div class="shared-bl-meta">${memberUsers.map(u=>u.displayName).join(', ')} · ${destCount} destination${destCount!==1?'s':''} · ${sbl.posts.length} message${sbl.posts.length!==1?'s':''}</div></div><i class="bi bi-chevron-right" style="color:var(--text-muted);flex-shrink:0;"></i></div>`;
+                    return`<div class="shared-bl-card aos-item" onclick="navigate('shared-bl-feed','${sbl.id}')"><div class="shared-bl-avatar-stack">${memberUsers.slice(0,4).map(u=>`<img src="${u.avatar}" alt="${u.displayName}" loading="lazy">`).join('')}</div><div class="shared-bl-info"><div class="shared-bl-name">${sbl.name}</div><div class="shared-bl-meta">${memberUsers.map(u=>u.displayName).join(', ')} · ${destCount} destination${destCount!==1?'s':''} · ${sbl.posts.length} message${sbl.posts.length!==1?'s':''}</div></div><i class="bi bi-chevron-right" style="color:var(--text-muted);flex-shrink:0;"></i></div>`;
                   }).join('')}
                   <div class="section-gap text-center"><button class="btn btn-accent" onclick="openCreateSharedBLModal()"><i class="bi bi-plus"></i>Create Shared Bucket List</button></div>
                 </div>
@@ -2206,7 +2513,8 @@
             setTimeout(() => {
                 const container = document.getElementById('blSwipeContainer');
                 if (container && state.blSwipeTab === 1) container.scrollLeft = container.offsetWidth;
-            }, 50);
+                refreshAOS();
+            }, 80);
         }
 
         function renderBucketListDetail(main, destId) {
@@ -2215,13 +2523,18 @@
             if (!dest || !entry) { navigate('bucketlist'); return; }
             const isVisited = entry.status === 'Visited';
             const flagHtml = flagImgTag(dest.country, 60, 'flag-icon-lg');
+            const dl = entry.desireLevel || 3;
+            const heartsHtml = Array.from({ length: 5 }, (_, i) => `<span class="desire-heart${i < dl ? ' active' : ''}" style="font-size:1.3rem;${i<dl?'':'pointer-events:none;'}" data-level="${i+1}">♥</span>`).join('');
             main.innerHTML = `
             <div class="page active">
               <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:280px;"><img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${flagHtml}${dest.country}</div><div class="hero-name">${dest.name}</div></div></div>
               <div class="page-content">
                 <div class="card" style="padding:20px;">
-                  <div class="flex-between mb-3"><span class="text-meta">Saved: ${new Date(entry.addedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span><span class="text-meta" style="text-transform:capitalize;">Priority: ${entry.priority}</span></div>
-                  <label>Status</label>
+                  <div class="flex-between mb-3"><span class="text-meta">Saved: ${new Date(entry.addedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span><span class="text-meta">Desire: ${desireLabels[dl]}</span></div>
+                  <label>How much do you want to visit?</label>
+                  <div class="desire-hearts mb-3" style="gap:4px;" id="detailDesireHearts">${heartsHtml}</div>
+                  <span class="desire-label${dl>=3?' active-label':''}" id="detailDesireLabel" style="font-size:0.7rem;">${desireLabels[dl]}</span>
+                  <label style="margin-top:10px;">Status</label>
                   <select onchange="changeBucketStatus('${destId}',this.value)" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;">
                     ${state.customStatuses.map(s=>`<option value="${s}"${entry.status===s?' selected':''}>${s}</option>`).join('')}
                     <option disabled>───</option>
@@ -2236,13 +2549,26 @@
                   <textarea rows="2" onchange="updateBucketEntryField('${destId}','notes',this.value)" style="width:100%;padding:10px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-family:inherit;font-size:var(--font-sm);margin-bottom:10px;outline:none;resize:vertical;">${entry.notes||''}</textarea>
                   <div class="flex-between"><button class="btn btn-ghost btn-sm" onclick="removeFromBucket('${destId}');navigate('bucketlist')">Remove</button><button class="btn btn-accent btn-sm" onclick="openEditBucketModal('${destId}')">Edit Details</button></div>
                 </div>
-                ${isVisited && entry.visitedDate?`<div class="section-gap"><div class="card" style="padding:16px;text-align:center;"><p class="text-body">You visited <strong>${dest.name}</strong> on <strong>${new Date(entry.visitedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</strong>${entry.visitedDuration?` for <strong>${entry.visitedDuration} day${entry.visitedDuration>1?'s':''}</strong>`:''}.</p></div></div>`:''}
+                ${isVisited && entry.visitedDate?`<div class="section-gap"><div class="card aos-item" style="padding:16px;text-align:center;"><p class="text-body">You visited <strong>${dest.name}</strong> on <strong>${new Date(entry.visitedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</strong>${entry.visitedDuration?` for <strong>${entry.visitedDuration} day${entry.visitedDuration>1?'s':''}</strong>`:''}.</p></div></div>`:''}
               </div>
             </div>`;
             document.querySelector('select')?.addEventListener('change', function(e) {
                 if (e.target.value === '__manage__') { openManageStatusesModal();
                     e.target.value = entry.status; }
             });
+            setTimeout(() => {
+                const heartsContainer = document.getElementById('detailDesireHearts');
+                if (heartsContainer) {
+                    heartsContainer.querySelectorAll('.desire-heart').forEach(heart => {
+                        heart.addEventListener('click', function() {
+                            const level = parseInt(this.dataset.level);
+                            updateBucketEntryField(destId, 'desireLevel', level);
+                            renderPage();
+                            setTimeout(refreshAOS, 120);
+                        });
+                    });
+                }
+            }, 100);
         }
 
         function renderSharedBLFeed(main, sblId) {
@@ -2253,7 +2579,7 @@
             main.innerHTML = `
             <div class="page active"><div class="page-content">
               <button class="btn btn-ghost btn-sm mb-3" onclick="navigate('bucketlist')"><i class="bi bi-arrow-left"></i>Back to Bucket List</button>
-              <div class="card" style="padding:20px;margin-bottom:16px;">
+              <div class="card aos-item" style="padding:20px;margin-bottom:16px;">
                 <h2 class="heading-md mb-2">${sbl.name}</h2>
                 <p class="text-body mb-3">${sbl.description||'No description.'}</p>
                 <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;"><span class="text-meta">Shared with:</span>${memberUsers.map(u=>`<span style="display:flex;align-items:center;gap:5px;font-size:var(--font-xs);color:var(--text-primary);"><img src="${u.avatar}" style="width:22px;height:22px;border-radius:50%;object-fit:cover;" loading="lazy">${u.displayName}</span>`).join(' ')}</div>
@@ -2309,7 +2635,7 @@
                 <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
                 <button class="btn btn-ghost mt-3" onclick="navigate('settings')"><i class="bi bi-gear"></i>Settings</button>
               </div>
-              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>{const fHtml=flagImgTag(cn,40,'flag-icon');return`<div class="card" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${fHtml} ${cn}</strong> — ${blGrouped[cn].length} saved</div>`;}).join('')}</div>
+              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>{const fHtml=flagImgTag(cn,40,'flag-icon');return`<div class="card aos-item" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${fHtml} ${cn}</strong> — ${blGrouped[cn].length} saved</div>`;}).join('')}</div>
             </div></div>`;
         }
 
@@ -2361,7 +2687,7 @@
             main.innerHTML = `
             <div class="page active"><div class="page-content"><h1 class="heading-xl mb-3">Settings</h1>
               <div class="card" style="padding:20px;">
-                <div class="flex-between mb-3"><span class="text-body">Dark Mode</span><button class="btn btn-ghost btn-sm" onclick="state.settings.darkMode=!state.settings.darkMode;renderPage()">${s.darkMode?'On':'Off'}</button></div>
+                <div class="flex-between mb-3"><span class="text-body">Theme</span><button class="theme-toggle-pill" onclick="toggleTheme()"><i class="bi bi-${s.darkMode?'moon-fill':'sun-fill'}"></i>${s.darkMode?'Dark Mode':'Light Mode'}</button></div>
                 <div class="flex-between mb-3"><span class="text-body">Reduced Motion</span><button class="btn btn-ghost btn-sm" onclick="state.settings.reducedMotion=!state.settings.reducedMotion;renderPage()">${s.reducedMotion?'On':'Off'}</button></div>
                 <div class="flex-between mb-3"><span class="text-body">Notifications</span><button class="btn btn-ghost btn-sm" onclick="state.settings.notifications=!state.settings.notifications;renderPage()">${s.notifications?'On':'Off'}</button></div>
                 <div class="flex-between mb-3"><span class="text-body">Private Profile</span><button class="btn btn-ghost btn-sm" onclick="state.settings.privateProfile=!state.settings.privateProfile;renderPage()">${s.privateProfile?'On':'Off'}</button></div>
@@ -2375,7 +2701,18 @@
             openModal(`<h3>Add to Bucket List</h3>
             <label>Country</label><select id="addDestCountry" onchange="updateAddDestOptions()"><option value="">Select country</option>${countries.map(c=>`<option value="${c}">${c}</option>`).join('')}</select>
             <label>Destination</label><select id="addDestName"><option value="">Select destination</option></select>
-            <label>Priority</label><select id="addDestPriority"><option value="medium">Medium</option><option value="high">High</option><option value="low">Low</option></select>
+            <label>How much do you want to visit?</label>
+            <div class="desire-level-container">
+              <div class="desire-hearts" id="addDesireHearts">
+                <span class="desire-heart active" data-level="1">♥</span>
+                <span class="desire-heart active" data-level="2">♥</span>
+                <span class="desire-heart active" data-level="3">♥</span>
+                <span class="desire-heart" data-level="4">♥</span>
+                <span class="desire-heart" data-level="5">♥</span>
+              </div>
+              <span class="desire-label active-label" id="addDesireLabel">Want to Visit</span>
+            </div>
+            <input type="hidden" id="addDesireLevel" value="3">
             <label>Status</label><select id="addDestStatus">${state.customStatuses.map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
             <label>Notes</label><textarea id="addDestNotes" rows="2" placeholder="Any notes..."></textarea>
             <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitAddDestination()">Add to Bucket List</button>`);
@@ -2389,29 +2726,67 @@
             window.submitAddDestination = function() {
                 const destId = document.getElementById('addDestName').value;
                 if (!destId) { showToast('Please select a destination'); return; }
-                addDestinationToBucket(destId, document.getElementById('addDestPriority').value, document.getElementById(
-                    'addDestStatus').value, document.getElementById('addDestNotes').value);
+                const dl = parseInt(document.getElementById('addDesireLevel').value) || 3;
+                addDestinationToBucket(destId, dl, document.getElementById('addDestStatus').value, document
+                    .getElementById('addDestNotes').value);
             };
+            setTimeout(() => {
+                const hearts = document.querySelectorAll('#addDesireHearts .desire-heart');
+                const label = document.getElementById('addDesireLabel');
+                const hidden = document.getElementById('addDesireLevel');
+                hearts.forEach(heart => {
+                    heart.addEventListener('click', function() {
+                        const level = parseInt(this.dataset.level);
+                        hidden.value = level;
+                        label.textContent = desireLabels[level];
+                        label.classList.toggle('active-label', level >= 3);
+                        hearts.forEach((h, i) => h.classList.toggle('active', i < level));
+                    });
+                });
+            }, 100);
         }
 
         function openEditBucketModal(destId) {
             const entry = getBucketEntry(destId);
             if (!entry) return;
             const dest = getDestination(destId);
+            const dl = entry.desireLevel || 3;
             openModal(`<h3>Edit — ${dest?.name||destId}</h3>
             <label>Status</label><select id="editStatus">${state.customStatuses.map(s=>`<option value="${s}"${entry.status===s?' selected':''}>${s}</option>`).join('')}</select>
-            <label>Priority</label><select id="editPriority"><option value="low"${entry.priority==='low'?' selected':''}>Low</option><option value="medium"${entry.priority==='medium'?' selected':''}>Medium</option><option value="high"${entry.priority==='high'?' selected':''}>High</option></select>
+            <label>How much do you want to visit?</label>
+            <div class="desire-level-container">
+              <div class="desire-hearts" id="editDesireHearts">
+                ${Array.from({length:5},(_,i)=>`<span class="desire-heart${i<dl?' active':''}" data-level="${i+1}">♥</span>`).join('')}
+              </div>
+              <span class="desire-label${dl>=3?' active-label':''}" id="editDesireLabel">${desireLabels[dl]}</span>
+            </div>
+            <input type="hidden" id="editDesireLevel" value="${dl}">
             <label>Notes</label><textarea id="editNotes" rows="2">${entry.notes||''}</textarea>
             <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitEditBucket('${destId}')">Save Changes</button>`);
             window.submitEditBucket = function(id) {
                 const e = getBucketEntry(id);
                 if (e) { e.status = document.getElementById('editStatus').value;
-                    e.priority = document.getElementById('editPriority').value;
+                    e.desireLevel = parseInt(document.getElementById('editDesireLevel').value) || 3;
                     e.notes = document.getElementById('editNotes').value;
                     showToast('Bucket list updated');
                     closeModal();
-                    renderPage(); }
+                    renderPage();
+                    setTimeout(refreshAOS, 120); }
             };
+            setTimeout(() => {
+                const hearts = document.querySelectorAll('#editDesireHearts .desire-heart');
+                const label = document.getElementById('editDesireLabel');
+                const hidden = document.getElementById('editDesireLevel');
+                hearts.forEach(heart => {
+                    heart.addEventListener('click', function() {
+                        const level = parseInt(this.dataset.level);
+                        hidden.value = level;
+                        label.textContent = desireLabels[level];
+                        label.classList.toggle('active-label', level >= 3);
+                        hearts.forEach((h, i) => h.classList.toggle('active', i < level));
+                    });
+                });
+            }, 100);
         }
 
         function openManageStatusesModal() {
@@ -2423,18 +2798,77 @@
 
         function openCreateSharedBLModal() {
             const friendUsers = state.friends.map(id => getUser(id)).filter(Boolean);
+            state.tempSelectedFriends = [];
+            const friendRowsHtml = friendUsers.length === 0 ?
+                `<div class="friend-select-none">No friends yet. Add friends first to share a bucket list.</div>` :
+                friendUsers.map(u => `
+                <div class="friend-select-row" data-user-id="${u.id}" onclick="toggleFriendSelectionRow(this)">
+                  <img class="friend-select-avatar" src="${u.avatar}" alt="${u.displayName}" loading="lazy">
+                  <div class="friend-select-info">
+                    <span class="friend-select-name">${u.displayName}</span>
+                    <span class="friend-select-username">${u.username}</span>
+                  </div>
+                  <div class="selection-circle"></div>
+                </div>`).join('');
+
             openModal(`<h3>Create Shared Bucket List</h3>
             <label>Name</label><input type="text" id="sblName" placeholder="e.g. Summer Europe Trip">
             <label>Description</label><textarea id="sblDesc" rows="2" placeholder="What's this trip about?"></textarea>
-            <label>Share with Friends</label>
-            <div style="max-height:180px;overflow-y:auto;margin-bottom:10px;">${friendUsers.map(u=>`<div class="flex-between" style="padding:6px 0;"><span style="font-size:var(--font-sm);color:var(--text-primary);">${u.displayName} <span class="text-muted">${u.username}</span></span><input type="checkbox" value="${u.id}" class="sbl-member-check"></div>`).join('')}${friendUsers.length===0?'<p class="text-muted">No friends to share with. Add friends first!</p>':''}</div>
-            <button class="btn btn-accent" style="width:100%;margin-top:10px;" onclick="submitCreateSharedBL()">Create</button>`);
+            <div class="friend-select-section">
+              <div class="friend-select-header">
+                <label>Share with Friends</label>
+                <p class="friend-select-desc">Choose who can collaborate on this list</p>
+              </div>
+              <div class="friend-search-wrapper">
+                <i class="bi bi-search"></i>
+                <input type="text" id="friendSearchInput" placeholder="Search friends..." oninput="filterFriendSelectionRows(this.value)" autocomplete="off">
+              </div>
+              <div class="friend-select-list" id="friendSelectList">
+                ${friendRowsHtml}
+              </div>
+              <div class="friend-select-count" id="friendSelectCount">0 friends selected</div>
+            </div>
+            <button class="btn btn-accent" style="width:100%;margin-top:8px;" onclick="submitCreateSharedBL()">Create shared list</button>`);
+
+            window.toggleFriendSelectionRow = function(row) {
+                const userId = row.dataset.userId;
+                const circle = row.querySelector('.selection-circle');
+                row.classList.toggle('selected');
+                circle.classList.toggle('selected');
+                if (row.classList.contains('selected')) {
+                    if (!state.tempSelectedFriends.includes(userId)) state.tempSelectedFriends.push(userId);
+                } else {
+                    state.tempSelectedFriends = state.tempSelectedFriends.filter(id => id !== userId);
+                }
+                updateFriendSelectCount();
+            };
+
+            window.filterFriendSelectionRows = function(query) {
+                const q = query.toLowerCase().trim();
+                const rows = document.querySelectorAll('#friendSelectList .friend-select-row');
+                rows.forEach(row => {
+                    const name = (row.querySelector('.friend-select-name')?.textContent || '').toLowerCase();
+                    const username = (row.querySelector('.friend-select-username')?.textContent || '')
+                        .toLowerCase();
+                    if (!q || name.includes(q) || username.includes(q)) {
+                        row.style.display = 'flex';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            };
+
+            window.updateFriendSelectCount = function() {
+                const count = state.tempSelectedFriends.length;
+                const el = document.getElementById('friendSelectCount');
+                if (el) el.textContent = `${count} friend${count !== 1 ? 's' : ''} selected`;
+            };
+
             window.submitCreateSharedBL = function() {
                 const name = document.getElementById('sblName').value.trim();
                 if (!name) { showToast('Please enter a name'); return; }
                 const desc = document.getElementById('sblDesc').value.trim();
-                const memberIds = [...document.querySelectorAll('.sbl-member-check:checked')].map(cb => cb.value);
-                createSharedBucketList(name, desc, memberIds, []);
+                createSharedBucketList(name, desc, [...state.tempSelectedFriends], []);
             };
         }
 
@@ -2468,6 +2902,7 @@
             const container = document.getElementById('blSwipeContainer');
             if (container) container.scrollTo({ left: index * container.offsetWidth, behavior: 'smooth' });
             document.querySelectorAll('.swipe-tab').forEach((t, i) => t.classList.toggle('active', i === index));
+            setTimeout(refreshAOS, 300);
         }
 
         function handleBLSwipeScroll() {
@@ -2493,14 +2928,36 @@
         };
 
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.search-bar')) {
+            if (!e.target.closest('.search-bar') && !e.target.closest('.friend-search-wrapper')) {
                 document.querySelectorAll('.search-dropdown').forEach(el => el.classList.remove('visible'));
             }
         });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { closeModal();
                 document.querySelectorAll('.search-dropdown').forEach(el => el.classList.remove('visible')); } });
 
+        function refreshAOS() {
+            if (state.settings.reducedMotion) {
+                document.querySelectorAll('.aos-item').forEach(el => {
+                    el.classList.add('aos-visible');
+                });
+                return;
+            }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('aos-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
+            document.querySelectorAll('.aos-item:not(.aos-visible)').forEach(el => {
+                observer.observe(el);
+            });
+            setTimeout(() => observer.disconnect(), 3000);
+        }
+
         function init() {
+            applyTheme();
             renderPage();
             window.navigate = navigate;
             window.toggleBucketList = toggleBucketList;
@@ -2531,6 +2988,10 @@
             window.handleBLSwipeScroll = handleBLSwipeScroll;
             window.closeModal = closeModal;
             window.showToast = showToast;
+            window.toggleTheme = toggleTheme;
+            window.toggleFriendSelectionRow = null;
+            window.filterFriendSelectionRows = null;
+            window.updateFriendSelectCount = null;
             window.getDestination = getDestination;
             window.getUser = getUser;
             window.isInBucketList = isInBucketList;
@@ -2544,9 +3005,17 @@
             window.flagImgTag = flagImgTag;
             window.getFlagUrl = getFlagUrl;
             window.countryCodeMap = countryCodeMap;
+            window.desireLabels = desireLabels;
+            setTimeout(refreshAOS, 200);
+            const mainContent = document.getElementById('mainContent');
+            if (mainContent) {
+                mainContent.addEventListener('scroll', () => {
+                    refreshAOS();
+                }, { passive: true });
+            }
         }
         init();
-        console.log('Veyra — Travel Beyond. Premium redesigned prototype ready.');
+        console.log('Veyra — Travel Beyond. Premium redesigned prototype ready with light mode, AOS, and refined friend selection.');
     </script>
 </body>
 </html>
