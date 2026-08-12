@@ -5,51 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Veyra — Travel Beyond</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;400;450;500;550;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;350;400;450;500;550;600;650;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0d0d0f;
-            --bg-surface: #141418;
-            --bg-surface-hover: #1a1a1f;
-            --bg-elevated: #1c1c22;
-            --bg-glass: rgba(22, 22, 28, 0.7);
+            --bg: #0b0b10;
+            --bg-surface: #12121a;
+            --bg-surface-hover: #181823;
+            --bg-elevated: #1a1a26;
+            --bg-glass: rgba(14, 14, 22, 0.75);
+            --bg-glass-solid: #16161f;
             --border: rgba(255, 255, 255, 0.06);
-            --border-subtle: rgba(255, 255, 255, 0.04);
-            --border-active: rgba(255, 255, 255, 0.12);
-            --text-primary: #f0f0f2;
-            --text-secondary: #b0b0b8;
-            --text-muted: #6b6b75;
-            --text-inverse: #0d0d0f;
-            --accent: #c8a97e;
-            --accent-glow: rgba(200, 169, 126, 0.15);
-            --accent-subtle: rgba(200, 169, 126, 0.08);
+            --border-subtle: rgba(255, 255, 255, 0.035);
+            --border-active: rgba(255, 255, 255, 0.1);
+            --text-primary: #eeeae3;
+            --text-secondary: #b0aaa0;
+            --text-muted: #6e6860;
+            --text-inverse: #0b0b10;
+            --accent: #c8a87c;
+            --accent-light: #d9bd95;
+            --accent-glow: rgba(200, 168, 124, 0.18);
+            --accent-subtle: rgba(200, 168, 124, 0.07);
+            --accent-strong: rgba(200, 168, 124, 0.25);
+            --danger: #d97878;
+            --success: #7ec9a0;
+            --info: #7ea8c9;
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 16px;
             --radius-xl: 20px;
             --radius-2xl: 24px;
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-            --shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
-            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
-            --blur: blur(24px);
-            --blur-light: blur(12px);
-            --transition-fast: 180ms cubic-bezier(0.22, 0.61, 0.36, 1);
-            --transition: 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
-            --font-xs: 0.72rem;
-            --font-sm: 0.82rem;
-            --font-base: 0.94rem;
-            --font-md: 1.05rem;
-            --font-lg: 1.2rem;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.55);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.65);
+            --blur: blur(28px);
+            --blur-light: blur(14px);
+            --transition-fast: 180ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --transition: 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --font-xs: 0.7rem;
+            --font-sm: 0.8rem;
+            --font-base: 0.92rem;
+            --font-md: 1.02rem;
+            --font-lg: 1.18rem;
             --font-xl: 1.5rem;
             --font-2xl: 1.9rem;
-            --font-3xl: 2.5rem;
-            --font-4xl: 3.2rem;
-            --letter-spacing-tight: -0.03em;
+            --font-3xl: 2.4rem;
+            --font-4xl: 3rem;
+            --letter-spacing-tight: -0.025em;
             --letter-spacing-normal: -0.01em;
-            --letter-spacing-wide: 0.04em;
+            --letter-spacing-wide: 0.05em;
             --safe-bottom: env(safe-area-inset-bottom, 0px);
             --nav-height: 68px;
-            --sidebar-width: 220px;
+            --sidebar-width: 230px;
         }
 
         *,
@@ -85,18 +91,18 @@
             color: var(--text-inverse);
         }
         ::-webkit-scrollbar {
-            width: 4px;
-            height: 4px;
+            width: 3px;
+            height: 3px;
         }
         ::-webkit-scrollbar-track {
             background: transparent;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.12);
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -114,9 +120,10 @@
         .main-content {
             flex: 1;
             margin-left: 0;
-            padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 24px);
+            padding-bottom: calc(var(--nav-height) + var(--safe-bottom) + 20px);
             transition: margin-left var(--transition);
             min-height: 100vh;
+            overflow-y: auto;
         }
         .sidebar {
             display: none;
@@ -131,33 +138,42 @@
             border-right: 1px solid var(--border);
             z-index: 100;
             flex-direction: column;
-            padding: 20px 14px;
-            gap: 6px;
+            padding: 22px 14px;
+            gap: 4px;
             transition: transform var(--transition);
         }
         .sidebar-brand {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 8px 10px;
-            margin-bottom: 16px;
+            padding: 10px 12px;
+            margin-bottom: 20px;
             font-weight: 700;
             font-size: var(--font-lg);
             letter-spacing: var(--letter-spacing-tight);
             color: var(--text-primary);
             text-decoration: none;
             cursor: pointer;
+            border-radius: var(--radius);
         }
-        .sidebar-brand span {
+        .sidebar-brand .brand-icon {
             color: var(--accent);
             font-weight: 800;
-            font-size: 1.35rem;
+            font-size: 1.4rem;
             letter-spacing: -0.04em;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-subtle);
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
         }
         .sidebar-nav {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
             flex: 1;
         }
         .sidebar-nav a {
@@ -176,10 +192,10 @@
             position: relative;
         }
         .sidebar-nav a i {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             width: 22px;
             text-align: center;
-            opacity: 0.7;
+            opacity: 0.65;
             transition: opacity var(--transition-fast);
         }
         .sidebar-nav a:hover {
@@ -191,8 +207,8 @@
         }
         .sidebar-nav a.active {
             background: var(--accent-subtle);
-            color: var(--accent);
-            font-weight: 500;
+            color: var(--accent-light);
+            font-weight: 550;
         }
         .sidebar-nav a.active i {
             opacity: 1;
@@ -204,32 +220,33 @@
             left: -4px;
             top: 50%;
             transform: translateY(-50%);
-            width: 3px;
-            height: 20px;
+            width: 2px;
+            height: 18px;
             background: var(--accent);
-            border-radius: 0 3px 3px 0;
+            border-radius: 0 2px 2px 0;
         }
         .sidebar-user {
             display: flex;
             align-items: center;
             gap: 10px;
-            padding: 10px 12px;
+            padding: 12px;
             border-radius: var(--radius);
             cursor: pointer;
             transition: background var(--transition-fast);
             margin-top: auto;
             border-top: 1px solid var(--border-subtle);
-            padding-top: 14px;
+            padding-top: 16px;
         }
         .sidebar-user:hover {
             background: var(--bg-surface-hover);
         }
         .sidebar-user-avatar {
-            width: 32px;
-            height: 32px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
+            border: 2px solid var(--border);
         }
         .sidebar-user-info {
             display: flex;
@@ -245,7 +262,7 @@
             text-overflow: ellipsis;
         }
         .sidebar-user-username {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             color: var(--text-muted);
         }
         .bottom-nav {
@@ -272,7 +289,7 @@
             gap: 3px;
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 0.62rem;
+            font-size: 0.6rem;
             font-weight: 450;
             letter-spacing: 0.02em;
             padding: 4px 10px;
@@ -280,14 +297,14 @@
             transition: all var(--transition-fast);
             cursor: pointer;
             position: relative;
-            min-width: 48px;
+            min-width: 44px;
         }
         .bottom-nav a i {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             transition: all var(--transition-fast);
         }
         .bottom-nav a.active {
-            color: var(--accent);
+            color: var(--accent-light);
         }
         .bottom-nav a.active i {
             color: var(--accent);
@@ -295,11 +312,11 @@
         .bottom-nav a.active::after {
             content: '';
             position: absolute;
-            top: -8px;
-            width: 18px;
-            height: 2.5px;
+            top: -7px;
+            width: 16px;
+            height: 2px;
             background: var(--accent);
-            border-radius: 0 0 3px 3px;
+            border-radius: 0 0 2px 2px;
         }
         .page {
             display: none;
@@ -311,7 +328,7 @@
         @keyframes pageIn {
             from {
                 opacity: 0;
-                transform: translateY(6px);
+                transform: translateY(8px);
             }
             to {
                 opacity: 1;
@@ -319,18 +336,18 @@
             }
         }
         .page-content {
-            max-width: 1100px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 20px 16px 40px;
+            padding: 18px 14px 36px;
         }
         @media(min-width:769px) {
             .page-content {
-                padding: 28px 28px 48px;
+                padding: 26px 24px 44px;
             }
         }
         @media(min-width:1200px) {
             .page-content {
-                padding: 32px 40px 56px;
+                padding: 30px 36px 52px;
             }
         }
         .eyebrow {
@@ -339,27 +356,27 @@
             letter-spacing: var(--letter-spacing-wide);
             text-transform: uppercase;
             color: var(--accent);
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
         .heading-xl {
             font-size: var(--font-3xl);
             font-weight: 700;
             letter-spacing: var(--letter-spacing-tight);
-            line-height: 1.12;
+            line-height: 1.1;
             color: var(--text-primary);
         }
         .heading-lg {
             font-size: var(--font-2xl);
             font-weight: 650;
             letter-spacing: var(--letter-spacing-tight);
-            line-height: 1.18;
+            line-height: 1.14;
             color: var(--text-primary);
         }
         .heading-md {
             font-size: var(--font-xl);
             font-weight: 600;
             letter-spacing: var(--letter-spacing-tight);
-            line-height: 1.22;
+            line-height: 1.18;
             color: var(--text-primary);
         }
         .text-body {
@@ -397,11 +414,12 @@
         .btn-accent {
             background: var(--accent);
             color: var(--text-inverse);
+            font-weight: 550;
         }
         .btn-accent:hover {
-            background: #d4b68a;
+            background: var(--accent-light);
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px var(--accent-glow);
+            box-shadow: 0 6px 20px var(--accent-glow);
         }
         .btn-accent:active {
             transform: scale(0.97);
@@ -422,24 +440,26 @@
             border-radius: var(--radius-sm);
         }
         .btn-bookmark {
-            background: var(--bg-glass);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: var(--blur-light);
             -webkit-backdrop-filter: var(--blur-light);
-            border: 1px solid var(--border);
-            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
             border-radius: 50%;
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
             padding: 0;
             cursor: pointer;
             transition: all var(--transition-fast);
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.85rem;
         }
         .btn-bookmark:hover {
             border-color: var(--accent);
             color: var(--accent);
+            background: rgba(0, 0, 0, 0.65);
         }
         .btn-bookmark.saved {
             background: var(--accent);
@@ -465,20 +485,32 @@
             object-fit: cover;
             display: block;
             aspect-ratio: 4/3;
-            transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .card:hover .card-image {
             transform: scale(1.04);
         }
         .card-body {
-            padding: 14px 16px;
+            padding: 13px 15px;
         }
         .card-eyebrow {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-muted);
             margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .card-eyebrow img.flag-mini {
+            width: 16px;
+            height: 11px;
+            border-radius: 2px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: inline-block;
+            vertical-align: middle;
         }
         .card-title {
             font-size: var(--font-md);
@@ -505,7 +537,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .hero-destination:hover img {
             transform: scale(1.05);
@@ -513,7 +545,7 @@
         .hero-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.05) 100%);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.25) 40%, rgba(0, 0, 0, 0.02) 100%);
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
@@ -523,29 +555,38 @@
         .hero-overlay .hero-country {
             font-size: var(--font-xs);
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.07em;
             color: rgba(255, 255, 255, 0.8);
             margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .hero-overlay .hero-country img.flag-mini {
+            width: 18px;
+            height: 12px;
+            border-radius: 2px;
+            object-fit: cover;
         }
         .hero-overlay .hero-name {
             font-size: var(--font-2xl);
             font-weight: 700;
             color: #fff;
             letter-spacing: var(--letter-spacing-tight);
-            line-height: 1.1;
+            line-height: 1.08;
         }
         .hero-overlay .hero-desc {
             font-size: var(--font-sm);
             color: rgba(255, 255, 255, 0.7);
             margin-top: 4px;
-            max-width: 400px;
+            max-width: 420px;
         }
         .scroll-row {
             display: flex;
             gap: 14px;
             overflow-x: auto;
             scroll-snap-type: x proximity;
-            padding: 4px 0 16px;
+            padding: 4px 0 14px;
             -webkit-overflow-scrolling: touch;
         }
         .scroll-row>* {
@@ -606,7 +647,7 @@
         }
         .search-bar i {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             flex-shrink: 0;
         }
         .search-bar input {
@@ -681,9 +722,9 @@
         }
         .search-dropdown-section {
             padding: 8px 16px 4px;
-            font-size: 0.65rem;
+            font-size: 0.63rem;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.07em;
             color: var(--text-muted);
             font-weight: 550;
         }
@@ -717,7 +758,7 @@
             max-height: 85dvh;
             overflow-y: auto;
             padding: 20px 20px 28px;
-            animation: slideUp 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+            animation: slideUp 320ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: var(--shadow-lg);
         }
         @keyframes slideUp {
@@ -743,7 +784,7 @@
         .modal-handle {
             width: 36px;
             height: 4px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 2px;
             margin: 0 auto 16px;
         }
@@ -778,7 +819,7 @@
         .modal-sheet label {
             font-size: var(--font-xs);
             font-weight: 500;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
             color: var(--text-secondary);
             display: block;
             margin-bottom: 4px;
@@ -806,7 +847,7 @@
             font-weight: 450;
             box-shadow: var(--shadow-lg);
             pointer-events: auto;
-            animation: toastIn 350ms cubic-bezier(0.22, 0.61, 0.36, 1), toastOut 300ms 2.2s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: toastIn 350ms cubic-bezier(0.25, 0.46, 0.45, 0.94), toastOut 300ms 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
             white-space: nowrap;
         }
         @keyframes toastIn {
@@ -851,10 +892,10 @@
             gap: 10px;
         }
         .section-gap {
-            margin-top: 32px;
+            margin-top: 30px;
         }
         .section-gap-lg {
-            margin-top: 44px;
+            margin-top: 42px;
         }
         .text-accent {
             color: var(--accent);
@@ -880,6 +921,29 @@
         .gap-3 {
             gap: 14px;
         }
+        .flag-icon {
+            width: 20px;
+            height: 14px;
+            border-radius: 2px;
+            object-fit: cover;
+            flex-shrink: 0;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .flag-icon-sm {
+            width: 16px;
+            height: 11px;
+            border-radius: 1.5px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+        .flag-icon-lg {
+            width: 26px;
+            height: 18px;
+            border-radius: 3px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
         @media(min-width:769px) {
             .bottom-nav {
                 display: none;
@@ -889,7 +953,7 @@
             }
             .main-content {
                 margin-left: var(--sidebar-width);
-                padding-bottom: 40px;
+                padding-bottom: 36px;
             }
             .hero-destination {
                 aspect-ratio: 21/9;
@@ -915,13 +979,13 @@
         }
         @media(max-width:380px) {
             .heading-xl {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
             }
             .heading-lg {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
             }
             .scroll-card {
-                width: 155px;
+                width: 148px;
             }
             .hero-destination {
                 min-height: 220px;
@@ -948,7 +1012,7 @@
             transform: scale(1.03);
         }
         .post-body {
-            padding: 14px 16px;
+            padding: 13px 15px;
         }
         .post-header {
             display: flex;
@@ -961,6 +1025,7 @@
             height: 34px;
             border-radius: 50%;
             object-fit: cover;
+            border: 2px solid var(--border);
         }
         .post-user {
             font-size: var(--font-sm);
@@ -1005,7 +1070,7 @@
             color: var(--text-primary);
         }
         .post-action.liked {
-            color: #e85d5d;
+            color: #e07070;
         }
         .post-action.saved-post {
             color: var(--accent);
@@ -1014,7 +1079,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 14px;
+            padding: 13px 15px;
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
@@ -1026,11 +1091,12 @@
             background: var(--bg-surface-hover);
         }
         .friend-avatar {
-            width: 48px;
-            height: 48px;
+            width: 46px;
+            height: 46px;
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
+            border: 2px solid var(--border);
         }
         .friend-info {
             flex: 1;
@@ -1046,7 +1112,7 @@
             color: var(--text-muted);
         }
         .friend-stats {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -1054,7 +1120,7 @@
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 16px;
+            padding: 14px 16px;
             cursor: pointer;
             transition: all var(--transition);
             margin-bottom: 8px;
@@ -1074,6 +1140,9 @@
             font-size: var(--font-md);
             color: var(--text-primary);
             letter-spacing: var(--letter-spacing-tight);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .bl-country-count {
             font-size: var(--font-xs);
@@ -1118,7 +1187,7 @@
             color: var(--text-primary);
         }
         .bl-dest-item i {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
         .bl-status-dot {
@@ -1137,7 +1206,7 @@
             background: #7dd3a8;
         }
         .bl-status-dot.visited {
-            background: #c8a97e;
+            background: #c8a87c;
         }
         .bl-status-dot.custom {
             background: #b088f0;
@@ -1161,6 +1230,7 @@
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
+            border: 2px solid var(--border);
         }
         .notif-text {
             font-size: var(--font-sm);
@@ -1172,7 +1242,7 @@
             font-weight: 550;
         }
         .notif-time {
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -1217,7 +1287,7 @@
             font-size: var(--font-xs);
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.03em;
+            letter-spacing: 0.04em;
         }
         .swipe-container {
             overflow-x: auto;
@@ -1233,7 +1303,7 @@
             min-width: 100%;
             scroll-snap-align: start;
             flex-shrink: 0;
-            padding: 0 4px;
+            padding: 0 2px;
         }
         .swipe-tabs {
             display: flex;
@@ -1265,14 +1335,14 @@
             white-space: nowrap;
         }
         .swipe-tab.active {
-            color: var(--accent);
+            color: var(--accent-light);
             border-bottom-color: var(--accent);
         }
         .shared-bl-card {
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             border-radius: var(--radius-lg);
-            padding: 16px;
+            padding: 15px 16px;
             cursor: pointer;
             transition: all var(--transition);
             margin-bottom: 10px;
@@ -1292,8 +1362,8 @@
             margin-right: 6px;
         }
         .shared-bl-avatar-stack img {
-            width: 34px;
-            height: 34px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--bg-surface);
@@ -1330,6 +1400,7 @@
             border-radius: 50%;
             object-fit: cover;
             flex-shrink: 0;
+            border: 2px solid var(--border);
         }
         .group-feed-msg .msg-content {
             flex: 1;
@@ -1345,7 +1416,7 @@
             margin-top: 2px;
         }
         .group-feed-msg .msg-time {
-            font-size: 0.65rem;
+            font-size: 0.63rem;
             color: var(--text-muted);
             margin-top: 2px;
         }
@@ -1358,10 +1429,10 @@
         .chip {
             padding: 5px 10px;
             border-radius: 14px;
-            font-size: 0.68rem;
+            font-size: 0.66rem;
             font-weight: 450;
             background: var(--accent-subtle);
-            color: var(--accent);
+            color: var(--accent-light);
             letter-spacing: 0.01em;
         }
     </style>
@@ -1369,14 +1440,14 @@
 <body>
     <div id="app">
         <nav class="sidebar" id="sidebar">
-            <div class="sidebar-brand" onclick="navigate('home')"><span>V</span> Veyra</div>
+            <div class="sidebar-brand" onclick="navigate('home')"><span class="brand-icon">V</span>Veyra</div>
             <div class="sidebar-nav">
-                <a data-nav="home" class="active" onclick="navigate('home')"><i class="bi-house"></i> Home</a>
-                <a data-nav="explore" onclick="navigate('explore')"><i class="bi-compass"></i> Explore</a>
-                <a data-nav="bucketlist" onclick="navigate('bucketlist')"><i class="bi-bookmark"></i> Bucket List</a>
-                <a data-nav="friends" onclick="navigate('friends')"><i class="bi-people"></i> Friends</a>
-                <a data-nav="notifications" onclick="navigate('notifications')"><i class="bi-bell"></i> Notifications</a>
-                <a data-nav="search" onclick="navigate('search')"><i class="bi-search"></i> Search</a>
+                <a data-nav="home" class="active" onclick="navigate('home')"><i class="bi-house"></i>Home</a>
+                <a data-nav="explore" onclick="navigate('explore')"><i class="bi-compass"></i>Explore</a>
+                <a data-nav="bucketlist" onclick="navigate('bucketlist')"><i class="bi-bookmark"></i>Bucket List</a>
+                <a data-nav="friends" onclick="navigate('friends')"><i class="bi-people"></i>Friends</a>
+                <a data-nav="notifications" onclick="navigate('notifications')"><i class="bi-bell"></i>Notifications</a>
+                <a data-nav="search" onclick="navigate('search')"><i class="bi-search"></i>Search</a>
             </div>
             <div class="sidebar-user" onclick="navigate('profile')">
                 <img class="sidebar-user-avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=face" alt="User avatar" loading="lazy">
@@ -1396,6 +1467,46 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <script>
+        const countryCodeMap = {
+            'Spain': 'es',
+            'Japan': 'jp',
+            'Italy': 'it',
+            'France': 'fr',
+            'Portugal': 'pt',
+            'Greece': 'gr',
+            'Egypt': 'eg',
+            'Morocco': 'ma',
+            'Turkey': 'tr',
+            'Thailand': 'th',
+            'Indonesia': 'id',
+            'South Korea': 'kr',
+            'Australia': 'au',
+            'United States': 'us',
+            'Canada': 'ca',
+            'Argentina': 'ar',
+            'South Africa': 'za'
+        };
+
+        function getFlagUrl(countryName, size = 40) {
+            const code = countryCodeMap[countryName];
+            if (code) return `https://flagcdn.com/w${size}/${code}.png`;
+            return null;
+        }
+
+        function flagImg(countryName, size = 40, className = 'flag-icon') {
+            const url = getFlagUrl(countryName, size);
+            if (url) return `<img src="${url}" alt="${countryName}" class="${className}" loading="lazy" style="width:${size>=40?20:size>=26?18:16}px;height:${size>=40?14:size>=26?12:11}px;border-radius:2px;object-fit:cover;flex-shrink:0;">`;
+            return '';
+        }
+
+        function flagImgTag(countryName, size = 40, className = 'flag-icon') {
+            const url = getFlagUrl(countryName, size);
+            if (!url) return '';
+            const w = size >= 40 ? 20 : size >= 26 ? 18 : 16;
+            const h = size >= 40 ? 14 : size >= 26 ? 12 : 11;
+            return `<img src="${url}" alt="${countryName}" class="${className}" loading="lazy" style="width:${w}px;height:${h}px;border-radius:2px;object-fit:cover;flex-shrink:0;">`;
+        }
+
         const destinationsData = [
             { id: 'granada', name: 'Granada', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1563911302283-d2bc129e7570?w=800&h=500&fit=crop',
@@ -1414,7 +1525,7 @@
                 desc: 'A sun-drenched Mediterranean city of Gaudí masterpieces.', bestPlaces: [], restaurants: [] },
             { id: 'madrid', name: 'Madrid', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1539037116277-4d84aee60e91?w=800&h=500&fit=crop',
-                desc: 'Spain\'s vibrant capital of art, tapas, and endless energy.', bestPlaces: [], restaurants: [] },
+                desc: "Spain's vibrant capital of art, tapas, and endless energy.", bestPlaces: [], restaurants: [] },
             { id: 'seville', name: 'Seville', country: 'Spain', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1583553327105-7c3c1b3c9a9e?w=800&h=500&fit=crop',
                 desc: 'The passionate heart of Andalusia.', bestPlaces: [], restaurants: [] },
@@ -1423,7 +1534,7 @@
                 desc: 'Futuristic architecture meets ancient history.', bestPlaces: [], restaurants: [] },
             { id: 'kyoto', name: 'Kyoto', country: 'Japan', continent: 'Asia',
                 image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=500&fit=crop',
-                desc: 'Japan\'s cultural soul with ancient temples and bamboo groves.', bestPlaces: [
+                desc: "Japan's cultural soul with ancient temples and bamboo groves.", bestPlaces: [
                     { name: 'Fushimi Inari', category: 'Shrine',
                         image: 'https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=400&h=300&fit=crop',
                         desc: 'Thousands of vermilion torii gates.', rating: 4.9 }, ], restaurants: [] },
@@ -1432,7 +1543,7 @@
                 desc: 'A dazzling metropolis where tradition and futurism collide.', bestPlaces: [], restaurants: [] },
             { id: 'osaka', name: 'Osaka', country: 'Japan', continent: 'Asia',
                 image: 'https://images.unsplash.com/photo-1590559899731-a382839e5549?w=800&h=500&fit=crop',
-                desc: 'Japan\'s kitchen — a food lover\'s paradise.', bestPlaces: [], restaurants: [] },
+                desc: "Japan's kitchen — a food lover's paradise.", bestPlaces: [], restaurants: [] },
             { id: 'rome', name: 'Rome', country: 'Italy', continent: 'Europe',
                 image: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=800&h=500&fit=crop',
                 desc: 'The Eternal City — layers of history spanning millennia.', bestPlaces: [], restaurants: [] },
@@ -1483,28 +1594,36 @@
                 desc: 'Stunning coastline beneath Table Mountain.', bestPlaces: [], restaurants: [] },
         ];
         const usersData = [
-            { id: 'user1', displayName: 'Sarah Ahmed', username: '@sarahtravels', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
+            { id: 'user1', displayName: 'Sarah Ahmed', username: '@sarahtravels',
+                avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face',
                 bio: 'Wanderer, photographer, food lover. 37 countries and counting.', location: 'London, UK',
                 stats: { places: 42, countries: 17, friends: 86 } },
-            { id: 'user2', displayName: 'Maya Chen', username: '@mayagoesplaces', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
+            { id: 'user2', displayName: 'Maya Chen', username: '@mayagoesplaces',
+                avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop&crop=face',
                 bio: 'Slow travel advocate. Currently in Southeast Asia.', location: 'Singapore',
                 stats: { places: 28, countries: 12, friends: 54 } },
-            { id: 'user3', displayName: 'Omar Farouk', username: '@omarwanders', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
+            { id: 'user3', displayName: 'Omar Farouk', username: '@omarwanders',
+                avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
                 bio: 'Architecture enthusiast.', location: 'Cairo, Egypt', stats: { places: 55, countries: 22,
-                friends: 103 } },
-            { id: 'user4', displayName: 'Alex Rivera', username: '@alextravels', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
+                    friends: 103 } },
+            { id: 'user4', displayName: 'Alex Rivera', username: '@alextravels',
+                avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
                 bio: 'Digital nomad. Remote work from paradise.', location: 'Bali, Indonesia',
                 stats: { places: 33, countries: 14, friends: 67 } },
-            { id: 'user5', displayName: 'Lina Johansson', username: '@linaexplores', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
+            { id: 'user5', displayName: 'Lina Johansson', username: '@linaexplores',
+                avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
                 bio: 'Nordic explorer with a passion for warm climates.', location: 'Stockholm, Sweden',
                 stats: { places: 19, countries: 9, friends: 41 } },
-            { id: 'user6', displayName: 'David Kim', username: '@davidkimtravel', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
+            { id: 'user6', displayName: 'David Kim', username: '@davidkimtravel',
+                avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face',
                 bio: 'Food first, sights second.', location: 'Seoul, South Korea', stats: { places: 38, countries: 16,
                     friends: 72 } },
-            { id: 'user7', displayName: 'Priya Sharma', username: '@priyawanders', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+            { id: 'user7', displayName: 'Priya Sharma', username: '@priyawanders',
+                avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
                 bio: 'Solo female traveler.', location: 'Mumbai, India', stats: { places: 24, countries: 10,
-                friends: 58 } },
-            { id: 'user8', displayName: 'Tom Baker', username: '@tombaker', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face',
+                    friends: 58 } },
+            { id: 'user8', displayName: 'Tom Baker', username: '@tombaker',
+                avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&h=200&fit=crop&crop=face',
                 bio: 'Adventure travel photographer.', location: 'Denver, USA', stats: { places: 61, countries: 28,
                     friends: 95 } },
         ];
@@ -1540,16 +1659,16 @@
             currentUser: usersData[0],
             customStatuses: ['Want to Visit', 'Planning', 'Booked', 'Visited'],
             bucketList: [
-                { destinationId: 'granada', status: 'Want to Visit', addedDate: '2024-11-15', notes: 'Dream trip for the Alhambra',
-                    priority: 'high', visitedDate: null, visitedDuration: null },
-                { destinationId: 'barcelona', status: 'Visited', addedDate: '2023-06-20', notes: 'Amazing architecture',
-                    priority: 'medium', visitedDate: '2024-05-10', visitedDuration: 5 },
+                { destinationId: 'granada', status: 'Want to Visit', addedDate: '2024-11-15',
+                    notes: 'Dream trip for the Alhambra', priority: 'high', visitedDate: null, visitedDuration: null },
+                { destinationId: 'barcelona', status: 'Visited', addedDate: '2023-06-20',
+                    notes: 'Amazing architecture', priority: 'medium', visitedDate: '2024-05-10', visitedDuration: 5 },
                 { destinationId: 'kyoto', status: 'Planning', addedDate: '2024-10-01',
-                notes: 'Cherry blossom season 2025', priority: 'high', visitedDate: null, visitedDuration: null },
-                { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12', notes: 'Sunset views',
-                    priority: 'medium', visitedDate: null, visitedDuration: null },
-                { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05', notes: 'Booked for March 2025',
-                    priority: 'high', visitedDate: null, visitedDuration: null },
+                    notes: 'Cherry blossom season 2025', priority: 'high', visitedDate: null, visitedDuration: null },
+                { destinationId: 'santorini', status: 'Want to Visit', addedDate: '2024-09-12',
+                    notes: 'Sunset views', priority: 'medium', visitedDate: null, visitedDuration: null },
+                { destinationId: 'marrakech', status: 'Booked', addedDate: '2024-08-05',
+                    notes: 'Booked for March 2025', priority: 'high', visitedDate: null, visitedDuration: null },
             ],
             friends: ['user2', 'user3', 'user4', 'user5'],
             friendRequests: { sent: [], received: ['user6', 'user7', 'user8'] },
@@ -1561,19 +1680,20 @@
                 { id: 'n3', type: 'comment', userId: 'user3', text: 'commented on your Granada post',
                     time: '2024-12-09T14:30:00', read: true },
                 { id: 'n4', type: 'follow', userId: 'user8', text: 'started following you',
-                time: '2024-12-08T11:00:00', read: true },
+                    time: '2024-12-08T11:00:00', read: true },
                 { id: 'n5', type: 'bucketlist', userId: 'user2', text: 'added Bali to their bucket list',
                     time: '2024-12-07T08:00:00', read: true },
             ],
             sharedBucketLists: [
                 { id: 'sbl1', name: 'Summer Europe 2025', description: 'Planning our dream European summer trip',
                     members: ['user1', 'user2', 'user3'], destinations: ['granada', 'barcelona', 'paris'], posts: [
-                        { userId: 'user2', text: 'I can\'t wait for Granada! The Alhambra looks incredible.',
+                        { userId: 'user2', text: "I can't wait for Granada! The Alhambra looks incredible.",
                             timestamp: '2024-12-01T10:00:00' },
-                        { userId: 'user3', text: 'We should add Seville too — it\'s only a short train from Granada.',
+                        { userId: 'user3',
+                            text: "We should add Seville too — it's only a short train from Granada.",
                             timestamp: '2024-12-02T14:30:00' },
                         { userId: 'user1',
-                            text: 'Great idea! Let\'s map out the full route: Barcelona → Granada → Seville → Paris.',
+                            text: "Great idea! Let's map out the full route: Barcelona → Granada → Seville → Paris.",
                             timestamp: '2024-12-02T16:00:00' },
                     ], createdBy: 'user1', createdAt: '2024-11-20T08:00:00' },
                 { id: 'sbl2', name: 'Asia Adventure', description: 'Exploring Japan and Korea together',
@@ -1679,13 +1799,14 @@
             const isSmall = size === 'small';
             const w = isSmall ? 150 : 200;
             const inBL = isInBucketList(dest.id);
+            const flagHtml = flagImgTag(dest.country, 40, 'flag-icon-sm');
             return `
             <div class="card scroll-card${isSmall?' scroll-card-sm':''}" onclick="navigate('destination','${dest.id}')" style="width:${w}px;">
               <div style="position:relative;overflow:hidden;">
                 <img class="card-image" src="${dest.image}" alt="${dest.name}" loading="lazy" style="aspect-ratio:${isSmall?'1/1':'4/3'};">
-                <button class="btn-bookmark${inBL?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${dest.id}')"><i class="bi bi-bookmark${inBL?'-fill':''}" style="font-size:0.9rem;"></i></button>
+                <button class="btn-bookmark${inBL?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${dest.id}')"><i class="bi bi-bookmark${inBL?'-fill':''}" style="font-size:0.85rem;"></i></button>
               </div>
-              <div class="card-body"><div class="card-eyebrow">${dest.country}</div><div class="card-title">${dest.name}</div><div class="card-subtitle">${dest.desc.slice(0,50)}...</div></div>
+              <div class="card-body"><div class="card-eyebrow">${flagHtml}${dest.country}</div><div class="card-title">${dest.name}</div><div class="card-subtitle">${dest.desc.slice(0,48)}...</div></div>
             </div>`;
         }
 
@@ -1732,7 +1853,7 @@
 
         function getStatusDotClass(status) {
             const s = status.toLowerCase();
-            if (s.includes('visit') || s === 'want') return 'want';
+            if (s.includes('visit') && !s.includes('ed') && s.includes('want')) return 'want';
             if (s.includes('plan')) return 'planning';
             if (s.includes('book')) return 'booked';
             if (s.includes('visit') && s.includes('ed')) return 'visited';
@@ -1856,9 +1977,10 @@
         }
 
         function createSharedBucketList(name, description, memberIds, destIds) {
-            const newSBL = { id: 'sbl' + Date.now(), name, description, members: [state.currentUser.id, ...memberIds],
-                destinations: destIds || [], posts: [], createdBy: state.currentUser.id, createdAt: new Date()
-                .toISOString() };
+            const newSBL = { id: 'sbl' + Date.now(), name, description, members: [state.currentUser.id,
+                    ...memberIds
+                ], destinations: destIds || [], posts: [], createdBy: state.currentUser.id, createdAt: new Date()
+                    .toISOString() };
             state.sharedBucketLists.unshift(newSBL);
             showToast('Shared bucket list created!');
             closeModal();
@@ -2016,11 +2138,14 @@
                 ${allCountries.slice(0,8).map(c=>`<button class="pill${filter===c?' active':''}" onclick="state.exploreFilter='${c}';renderPage()">${c}</button>`).join('')}
               </div>
               <div class="section-gap"><div style="display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));">
-                ${filtered.map(d=>`
+                ${filtered.map(d=>{
+                  const fHtml=flagImgTag(d.country,40,'flag-icon-sm');
+                  return`
                   <div class="card" onclick="navigate('destination','${d.id}')">
-                    <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.9rem;"></i></button></div>
-                    <div class="card-body"><div class="card-eyebrow">${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
-                  </div>`).join('')}
+                    <div style="position:relative;overflow:hidden;"><img class="card-image" src="${d.image}" alt="${d.name}" loading="lazy"><button class="btn-bookmark${isInBucketList(d.id)?' saved':''}" style="position:absolute;top:8px;right:8px;z-index:2;" onclick="event.stopPropagation();toggleBucketList('${d.id}')"><i class="bi bi-bookmark${isInBucketList(d.id)?'-fill':''}" style="font-size:0.85rem;"></i></button></div>
+                    <div class="card-body"><div class="card-eyebrow">${fHtml}${d.country}</div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.desc.slice(0,70)}...</div></div>
+                  </div>`;
+                }).join('')}
               </div>${filtered.length===0?`<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-compass" style="font-size:2rem;display:block;margin-bottom:8px;"></i>No destinations found.</div>`:''}</div>
             </div></div>`;
         }
@@ -2030,10 +2155,11 @@
             if (!dest) { navigate('home'); return; }
             const inBL = isInBucketList(destId);
             const entry = getBucketEntry(destId);
+            const flagHtml = flagImgTag(dest.country, 60);
             main.innerHTML = `
             <div class="page active">
               <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:320px;">
-                <img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${dest.country}</div><div class="hero-name">${dest.name}</div><div class="hero-desc">${dest.desc}</div>
+                <img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${flagHtml}${dest.country}</div><div class="hero-name">${dest.name}</div><div class="hero-desc">${dest.desc}</div>
                 <div style="margin-top:12px;display:flex;gap:10px;pointer-events:auto;"><button class="btn btn-accent" onclick="toggleBucketList('${destId}')"><i class="bi bi-bookmark${inBL?'-fill':''}"></i>${inBL?'Saved':'Add to Bucket List'}</button>${inBL?`<button class="btn btn-ghost btn-sm" onclick="navigate('bucketlist-detail','${destId}')">View in List</button>`:''}</div></div>
               </div>
               <div class="page-content">
@@ -2061,7 +2187,8 @@
                   ${countryNames.length===0?`<div style="text-align:center;padding:60px 20px;color:var(--text-muted);"><i class="bi bi-bookmark" style="font-size:3rem;display:block;margin-bottom:12px;"></i><p class="text-body">Your bucket list is empty.</p><p class="text-meta">Start exploring and save destinations.</p></div>`:''}
                   ${countryNames.map(cn=>{
                     const dests=grouped[cn];
-                    return`<div class="bl-country" id="bl-${cn.replace(/\s+/g,'')}" onclick="toggleBLCountry('${cn.replace(/\s+/g,'')}')"><div class="bl-country-header"><span class="bl-country-name">${cn}</span><span class="bl-country-count">${dests.length} destination${dests.length>1?'s':''}</span><i class="bi bi-chevron-right" style="color:var(--text-muted);transition:transform var(--transition-fast);" id="bl-chevron-${cn.replace(/\s+/g,'')}"></i></div><div class="bl-destinations" id="bl-dests-${cn.replace(/\s+/g,'')}">${dests.map(e=>`<div class="bl-dest-item" onclick="event.stopPropagation();navigate('bucketlist-detail','${e.destinationId}')"><span class="bl-status-dot ${getStatusDotClass(e.status)}"></span><span style="flex:1;">${e.destination.name}</span><span class="text-meta" style="text-transform:capitalize;">${e.status}</span><i class="bi bi-chevron-right" style="font-size:0.7rem;color:var(--text-muted);"></i></div>`).join('')}</div></div>`;
+                    const fHtml=flagImgTag(cn,40,'flag-icon');
+                    return`<div class="bl-country" id="bl-${cn.replace(/[^a-zA-Z0-9]/g,'')}" onclick="toggleBLCountry('${cn.replace(/[^a-zA-Z0-9]/g,'')}')"><div class="bl-country-header"><span class="bl-country-name">${fHtml}${cn}</span><span class="bl-country-count">${dests.length} destination${dests.length>1?'s':''}</span><i class="bi bi-chevron-right" style="color:var(--text-muted);transition:transform var(--transition-fast);" id="bl-chevron-${cn.replace(/[^a-zA-Z0-9]/g,'')}"></i></div><div class="bl-destinations" id="bl-dests-${cn.replace(/[^a-zA-Z0-9]/g,'')}">${dests.map(e=>`<div class="bl-dest-item" onclick="event.stopPropagation();navigate('bucketlist-detail','${e.destinationId}')"><span class="bl-status-dot ${getStatusDotClass(e.status)}"></span><span style="flex:1;">${e.destination.name}</span><span class="text-meta" style="text-transform:capitalize;">${e.status}</span><i class="bi bi-chevron-right" style="font-size:0.7rem;color:var(--text-muted);"></i></div>`).join('')}</div></div>`;
                   }).join('')}
                   <div class="section-gap text-center"><button class="btn btn-accent" onclick="openAddDestinationModal()"><i class="bi bi-plus"></i>Add Destination</button></div>
                 </div>
@@ -2087,9 +2214,10 @@
             const entry = getBucketEntry(destId);
             if (!dest || !entry) { navigate('bucketlist'); return; }
             const isVisited = entry.status === 'Visited';
+            const flagHtml = flagImgTag(dest.country, 60, 'flag-icon-lg');
             main.innerHTML = `
             <div class="page active">
-              <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:280px;"><img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${dest.country}</div><div class="hero-name">${dest.name}</div></div></div>
+              <div class="hero-destination" style="border-radius:0;aspect-ratio:16/9;min-height:280px;"><img src="${dest.image}" alt="${dest.name}"><div class="hero-overlay"><div class="hero-country">${flagHtml}${dest.country}</div><div class="hero-name">${dest.name}</div></div></div>
               <div class="page-content">
                 <div class="card" style="padding:20px;">
                   <div class="flex-between mb-3"><span class="text-meta">Saved: ${new Date(entry.addedDate).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span><span class="text-meta" style="text-transform:capitalize;">Priority: ${entry.priority}</span></div>
@@ -2181,7 +2309,7 @@
                 <div class="profile-stats"><div class="profile-stat"><div class="profile-stat-num">${user.stats.places}</div><div class="profile-stat-label">Places</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.countries}</div><div class="profile-stat-label">Countries</div></div><div class="profile-stat"><div class="profile-stat-num">${user.stats.friends}</div><div class="profile-stat-label">Friends</div></div></div>
                 <button class="btn btn-ghost mt-3" onclick="navigate('settings')"><i class="bi bi-gear"></i>Settings</button>
               </div>
-              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>`<div class="card" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${cn}</strong> — ${blGrouped[cn].length} saved</div>`).join('')}</div>
+              <div class="section-gap"><h2 class="heading-md mb-3">My Bucket List (${totalDests})</h2>${Object.keys(blGrouped).length===0?'<p class="text-muted">Start adding destinations!</p>':Object.keys(blGrouped).map(cn=>{const fHtml=flagImgTag(cn,40,'flag-icon');return`<div class="card" style="padding:12px 16px;margin-bottom:8px;cursor:pointer;" onclick="navigate('bucketlist')"><strong>${fHtml} ${cn}</strong> — ${blGrouped[cn].length} saved</div>`;}).join('')}</div>
             </div></div>`;
         }
 
@@ -2194,7 +2322,7 @@
             <div class="page active"><div class="page-content">
               <h1 class="heading-xl mb-3">Search</h1>
               <div class="search-bar mb-3"><i class="bi bi-search"></i><input type="text" placeholder="Search destinations, users..." value="${state.searchQuery}" oninput="state.searchQuery=this.value;renderPage()" autofocus>${state.searchQuery?`<i class="bi bi-x" style="cursor:pointer;" onclick="state.searchQuery='';renderPage()"></i>`:''}</div>
-              ${q?`<div class="section-gap"><h2 class="heading-md mb-3">Destinations</h2>${results.destinations.length===0?'<p class="text-muted">No destinations found.</p>':results.destinations.map(d=>`<div class="card" style="margin-bottom:8px;display:flex;align-items:center;gap:12px;padding:10px 14px;" onclick="navigate('destination','${d.id}')"><img src="${d.image}" style="width:50px;height:50px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${d.country}</div></div></div>`).join('')}</div><div class="section-gap"><h2 class="heading-md mb-3">Users</h2>${results.users.length===0?'<p class="text-muted">No users found.</p>':results.users.map(u=>FriendCard(u)).join('')}</div>`:'<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Start typing to search</div>'}
+              ${q?`<div class="section-gap"><h2 class="heading-md mb-3">Destinations</h2>${results.destinations.length===0?'<p class="text-muted">No destinations found.</p>':results.destinations.map(d=>`<div class="card" style="margin-bottom:8px;display:flex;align-items:center;gap:12px;padding:10px 14px;" onclick="navigate('destination','${d.id}')"><img src="${d.image}" style="width:50px;height:50px;border-radius:var(--radius-sm);object-fit:cover;" loading="lazy"><div><div class="card-title">${d.name}</div><div class="card-subtitle">${flagImgTag(d.country,40,'flag-icon-sm')} ${d.country}</div></div></div>`).join('')}</div><div class="section-gap"><h2 class="heading-md mb-3">Users</h2>${results.users.length===0?'<p class="text-muted">No users found.</p>':results.users.map(u=>FriendCard(u)).join('')}</div>`:'<div style="text-align:center;padding:40px;color:var(--text-muted);"><i class="bi bi-search" style="font-size:2rem;display:block;margin-bottom:8px;"></i>Start typing to search</div>'}
             </div></div>`;
         }
 
@@ -2413,9 +2541,12 @@
             window.destinationsData = destinationsData;
             window.usersData = usersData;
             window.postsData = postsData;
+            window.flagImgTag = flagImgTag;
+            window.getFlagUrl = getFlagUrl;
+            window.countryCodeMap = countryCodeMap;
         }
         init();
-        console.log('Veyra — Travel Beyond. Premium frontend prototype ready.');
+        console.log('Veyra — Travel Beyond. Premium redesigned prototype ready.');
     </script>
 </body>
 </html>
